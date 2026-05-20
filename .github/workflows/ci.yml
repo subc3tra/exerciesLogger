@@ -1,0 +1,30 @@
+name: CI                          # ← shows up in the GitHub "Actions" tab
+
+on:
+  push:
+    branches: [main]              # run when code pushed to main
+  pull_request:
+    branches: [main]              # run when PR targets main
+
+jobs:
+  lint:                           # job ID — call it whatever you want
+    runs-on: ubuntu-latest        # the VM flavor — Ubuntu is the standard
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # pulls your repo into the VM
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'      # ← match the Node version you use locally
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install dependencies
+        working-directory: server # ← cd into server/ because that's where package.json lives
+        run: npm ci
+
+      - name: Run linter
+        working-directory: server
+        run: npm run lint
