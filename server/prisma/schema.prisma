@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  password  String    // bcrypt hash
+  programs  Program[]
+  sessions  Session[]
+  createdAt DateTime  @default(now())
+}
+
+enum ProgramStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+model Program {
+  id            Int            @id @default(autoincrement())
+  name          String         // e.g. "Styrka & Form"
+  status        ProgramStatus  @default(ACTIVE)
+  clonedFromId  Int?           // points to source program if this is a clone
+  clonedFrom    Program?       @relation("ProgramClones", fields: [clonedFromId], references: [id])
+  clones        Program[]      @relation("ProgramClones")
+  userId        Int
+  user          User           @relation(fields: [userId], references: [id])
+  days          ProgramDay[]
+  createdAt     DateTime       @default(now())
+}
+
+model ProgramDay {
+  id         Int               @id @default(autoincrement())
+  name       String            // e.g. "Pass A"
+  dayLabel   String?           // e.g. "Mån + Fre"
+  duration   String?           // e.g. "ca 50 min"
+  order      Int               @default(0)
+  programId  Int
+  program    Program           @relation(fields: [programId], references: [id])
+  sections   Section[]
+  sessions   Session[]
+}
+
+model Section {
+  id           Int               @id @default(autoincrement())
+  name         String            // e.g. "Superset 1 · Uppvärmning"
+  zone         String?           // e.g. "Zon 1 · TRX-stationen"
+  sets         Int?              // target sets for the whole section
+  restSecs     Int?
+  order        Int               @default(0)
+  programDayId Int
+  programDay   ProgramDay        @relation(fields: [programDayId], references: [id])
+  exercises    ProgramExercise[]
+}
+
+model ProgramExercise {
+  id               Int               @id @default(autoincrement())
+  name             String
+  targetSets       Int?              // e.g. 3
+  targetReps       String?           // flexible: "6–8", "20s", "30m"
+  targetWeight     Float?            // starting weight baseline — the "where you began"
+  unit             String?           // "reps", "s", "m"
+  notes            String?
+  order            Int               @default(0)
+  sectionId        Int
+  section          Section           @relation(fields: [sectionId], references: [id])
+  sessionExercises SessionExercise[]
+}
+
+model Session {
+  id           Int               @id @default(autoincrement())
+  date         DateTime          @default(now())
+  notes        String?           // optional free-text note for the day
+  userId       Int
+  user         User              @relation(fields: [userId], references: [id])
+  programDayId Int
+  programDay   ProgramDay        @relation(fields: [programDayId], references: [id])
+  exercises    SessionExercise[]
+  createdAt    DateTime          @default(now())
+}
+
+model SessionExercise {
+  id                Int         @id @default(autoincrement())
+  sessionId         Int
+  session           Session     @relation(fields: [sessionId], references: [id])
+  programExerciseId Int
+  programExercise   ProgramExercise @relation(fields: [programExerciseId], references: [id])
+  notes             String?
+  sets              SessionSet[]
+
+  @@unique([sessionId, programExerciseId])
+}
+
+model SessionSet {
+  id                Int             @id @default(autoincrement())
+  setNumber         Int             // 1, 2, 3...
+  reps              Int?            // actual reps performed
+  weight            Float?          // kg
+  duration          Int?            // seconds (for timed exercises)
+  distance          Float?          // meters (for carries etc)
+  notes             String?         // e.g. "felt heavy", "band-assisted"
+  sessionExerciseId Int
+  sessionExercise   SessionExercise @relation(fields: [sessionExerciseId], references: [id])
+}
