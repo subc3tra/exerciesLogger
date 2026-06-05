@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon --exec tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "lint": "eslint ."
   },
   "author": "",
