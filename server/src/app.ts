@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger';
 
 import healthRouter from './routes/health.route';
 
@@ -12,6 +14,7 @@ app.use(cors({
 }));
 
 // Routes
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', healthRouter);
 
 export default app;
