@@ -26,13 +26,13 @@ export async function login(req: Request, res: Response): Promise<void> {
   // compare password
   const user = await findUser(username);
   if (!user) {
-    res.status(401).json({ message: 'User not found'});
+    res.status(401).json({ message: 'Authentication failed'});
     return;
   }
 
   const passwordCheck = await comparePassword(password, user?.password);
   if (!passwordCheck) {
-    res.status(403).json({message: 'Authentication failed'});
+    res.status(401).json({message: 'Authentication failed'});
     return;
   }
 
