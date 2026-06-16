@@ -30,7 +30,7 @@ export async function login(req: Request, res: Response): Promise<void> {
     return;
   }
 
-  const passwordCheck = await comparePassword(password, user?.password);
+  const passwordCheck = await comparePassword(password, user.password);
   if (!passwordCheck) {
     res.status(401).json({message: 'Authentication failed'});
     return;
