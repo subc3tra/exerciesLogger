@@ -6,5 +6,5 @@ export function signToken(payload:{ id: number; username: string }): string {
 }
 
 export function verifyToken(token: string) {
-  return jwt.verify(token, jwtConfig.secret) as { id: string, username: string};
+  return jwt.verify(token, jwtConfig.secret) as { id: number, username: string};
 }
