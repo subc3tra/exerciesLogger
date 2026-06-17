@@ -85,7 +85,7 @@ export async function deleteProgram(id: number, userId: number): Promise<Program
 // get all days for a program
 export async function getDaysByProgramId(programId: number, userId: number) {
   return await prisma.programDay.findMany({
-    where: { programId, userId },
+    where: { programId, program: { userId} },
     orderBy: { order: 'asc' }
   })
 }
@@ -93,7 +93,7 @@ export async function getDaysByProgramId(programId: number, userId: number) {
 // get single day + sections + exercises (full nested)
 export async function getDayById(id: number, userId: number) {
   return await prisma.programDay.findFirst({
-    where: { id, userId },
+    where: { id, program: { userId} },
     select: {
       id: true,
       name: true,

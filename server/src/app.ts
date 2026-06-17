@@ -4,8 +4,9 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import { errorHandler } from './middleware/error.middleware';
 
-import healthRouter from './routes/health.route';
-import authRouter from './routes/auth.route';
+import healthRouter from './routes/health.routes';
+import authRouter from './routes/auth.routes';
+import programRouter from './routes/program.routes';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cors({
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', healthRouter);
 app.use('/api/auth/', authRouter);
+app.use('/api/programs', programRouter);
 
 app.use(errorHandler)
 

@@ -8,6 +8,7 @@ import {
   getDaysByProgramId,
   getDayById
 } from "../services/program.service";
+import { Prisma } from '@prisma/client';
 
 // get all programs for user
 export async function getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -58,13 +59,12 @@ export async function update(req: Request, res: Response, next: NextFunction): P
     const { name, totalWeeks, daysPerWeek, status } = req.body;
     const program = await updateProgram(id, userId, name, totalWeeks, daysPerWeek, status);
 
-    if (!program) {
+    res.status(200).json({ program });
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
       res.status(404).json({ message: "Program not found" });
       return;
     }
-
-    res.status(200).json({ program });
-  } catch (err) {
     next(err);
   }
 }
@@ -76,13 +76,12 @@ export async function remove(req: Request, res: Response, next: NextFunction): P
     const userId = req.user!.id;
     const program = await deleteProgram(id, userId);
 
-    if (!program) {
+    res.status(204).send();
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
       res.status(404).json({ message: "Program not found" });
       return;
     }
-
-    res.status(204).send();
-  } catch (err) {
     next(err);
   }
 }
