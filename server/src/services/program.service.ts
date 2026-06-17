@@ -9,9 +9,9 @@ export async function getAllPrograms(userId: number): Promise<Program[]> {
 }
 
 // get program + days + sections + exercises (full nested)
-export async function getProgramById(id: number) {
-  return await prisma.program.findUnique({
-    where: { id },
+export async function getProgramById(id: number, userId: number) {
+  return await prisma.program.findFirst({
+    where: { id, userId },
     select: {
       id: true,
       name: true,
@@ -68,32 +68,32 @@ export async function createProgram(name: string, totalWeeks: number, daysPerWee
 }
 
 // update name / week count
-export async function updateProgram(id: number, name?: string, totalWeeks?: number, daysPerWeek?: number, status?: ProgramStatus) {
+export async function updateProgram(id: number, userId: number, name?: string, totalWeeks?: number, daysPerWeek?: number, status?: ProgramStatus) {
   return await prisma.program.update({
-    where: { id },
+    where: { id, userId },
     data: { name, totalWeeks, daysPerWeek, status}
   })
 }
 
 // delete program
-export async function deleteProgram(id: number): Promise<Program> {
+export async function deleteProgram(id: number, userId: number): Promise<Program> {
   return await prisma.program.delete({
-    where: { id }
+    where: { id, userId }
   })  
 }
 
 // get all days for a program
-export async function getDaysByProgramId(programId: number) {
+export async function getDaysByProgramId(programId: number, userId: number) {
   return await prisma.programDay.findMany({
-    where: { programId },
+    where: { programId, userId },
     orderBy: { order: 'asc' }
   })
 }
 
 // get single day + sections + exercises (full nested)
-export async function getDayById(id: number) {
-  return await prisma.programDay.findUnique({
-    where: { id },
+export async function getDayById(id: number, userId: number) {
+  return await prisma.programDay.findFirst({
+    where: { id, userId },
     select: {
       id: true,
       name: true,
