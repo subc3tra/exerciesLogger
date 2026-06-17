@@ -93,11 +93,6 @@ export async function getDays(req: Request, res: Response, next: NextFunction): 
     const userId = req.user!.id;
     const days = await getDaysByProgramId(programId, userId);
 
-    if (days.length === 0) {
-      res.status(404).json({ message: "Days not found" });
-      return;
-    }
-
     res.status(200).json({ days });
   } catch (err) {
     next(err);
