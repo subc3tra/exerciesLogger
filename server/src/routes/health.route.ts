@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { requireAuth } from '../middleware/auth.middleware';
 
 const router = Router();
 
@@ -14,10 +13,8 @@ const router = Router();
  *     responses:
  *       200:
  *         description: Server is running
- *     security:
- *       - bearerAuth: []
  */
-router.get('/health', requireAuth, (_req, res) => {
+router.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
