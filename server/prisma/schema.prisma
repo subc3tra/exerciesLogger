@@ -25,21 +25,23 @@ model Program {
   id            Int            @id @default(autoincrement())
   name          String         // e.g. "Styrka & Form"
   status        ProgramStatus  @default(ACTIVE)
+  totalWeeks    Int            // e.g. 12
+  daysPerWeek   Int            // e.g. 3 — how many workout days per week
   clonedFromId  Int?           // points to source program if this is a clone
   clonedFrom    Program?       @relation("ProgramClones", fields: [clonedFromId], references: [id])
   clones        Program[]      @relation("ProgramClones")
   userId        Int
   user          User           @relation(fields: [userId], references: [id])
-  days          ProgramDay[]
+  days          ProgramDay[]   // the workout templates — count should match daysPerWeek
   createdAt     DateTime       @default(now())
 }
 
 model ProgramDay {
   id         Int               @id @default(autoincrement())
-  name       String            // e.g. "Pass A"
-  dayLabel   String?           // e.g. "Mån + Fre"
+  name       String            // e.g. "Workout 1"
+  dayLabel   String?           // optional display label e.g. "Mån + Fre"
   duration   String?           // e.g. "ca 50 min"
-  order      Int               @default(0)
+  order      Int               @default(0) // determines cycle order: 0 = first in rotation
   programId  Int
   program    Program           @relation(fields: [programId], references: [id])
   sections   Section[]
@@ -63,7 +65,7 @@ model ProgramExercise {
   name             String
   targetSets       Int?              // e.g. 3
   targetReps       String?           // flexible: "6–8", "20s", "30m"
-  targetWeight     Float?            // starting weight baseline — the "where you began"
+  targetWeight     Float?            // starting weight baseline
   unit             String?           // "reps", "s", "m"
   notes            String?
   order            Int               @default(0)
@@ -75,22 +77,24 @@ model ProgramExercise {
 model Session {
   id           Int               @id @default(autoincrement())
   date         DateTime          @default(now())
-  notes        String?           // optional free-text note for the day
+  weekNumber   Int               // derived server-side: which week of the program (1-based)
+  dayNumber    Int               // derived server-side: which day within the week (1-based)
+  completed    Boolean           @default(false) // false = in progress, true = finished
+  notes        String?
   userId       Int
   user         User              @relation(fields: [userId], references: [id])
-  programDayId Int
+  programDayId Int               // which ProgramDay template was used
   programDay   ProgramDay        @relation(fields: [programDayId], references: [id])
   exercises    SessionExercise[]
   createdAt    DateTime          @default(now())
 }
 
 model SessionExercise {
-  id                Int         @id @default(autoincrement())
+  id                Int             @id @default(autoincrement())
   sessionId         Int
-  session           Session     @relation(fields: [sessionId], references: [id])
+  session           Session         @relation(fields: [sessionId], references: [id])
   programExerciseId Int
   programExercise   ProgramExercise @relation(fields: [programExerciseId], references: [id])
-  notes             String?
   sets              SessionSet[]
 
   @@unique([sessionId, programExerciseId])
@@ -103,6 +107,7 @@ model SessionSet {
   weight            Float?          // kg
   duration          Int?            // seconds (for timed exercises)
   distance          Float?          // meters (for carries etc)
+  completed         Boolean         @default(false) // ticked off during live workout
   notes             String?         // e.g. "felt heavy", "band-assisted"
   sessionExerciseId Int
   sessionExercise   SessionExercise @relation(fields: [sessionExerciseId], references: [id])
