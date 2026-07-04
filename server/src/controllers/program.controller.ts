@@ -91,6 +91,11 @@ export async function getDays(req: Request, res: Response, next: NextFunction): 
   try {
     const programId = Number(req.params.id);
     const userId = req.user!.id;
+    if (isNaN(programId)) {
+      res.status(400).json({ message: 'Invalid id'});
+      return;
+    }   
+
     const days = await getDaysByProgramId(programId, userId);
 
     res.status(200).json({ days });
