@@ -55,6 +55,25 @@ export async function getProgramById(id: number, userId: number) {
   })
 }
 
+// how far along a program is — completed session count + the current in-progress one, if any.
+// The whole week/day schedule is derivable client-side from totalWeeks/daysPerWeek/days, so this
+// is the only piece that actually needs a live DB read.
+export async function getProgramProgress(id: number, userId: number) {
+  const program = await prisma.program.findFirst({ where: { id, userId }, select: { id: true } });
+  if (!program) return null;
+
+  const completedCount = await prisma.session.count({
+    where: { userId, completed: true, programDay: { programId: id } }
+  });
+
+  const activeSession = await prisma.session.findFirst({
+    where: { userId, completed: false, programDay: { programId: id } },
+    select: { id: true, weekNumber: true, dayNumber: true }
+  });
+
+  return { completedCount, activeSession };
+}
+
 // create program { name, totalWeeks, daysPerWeek }
 export async function createProgram(name: string, totalWeeks: number, daysPerWeek: number, userId: number, ): Promise<Program> {
   return await prisma.program.create({

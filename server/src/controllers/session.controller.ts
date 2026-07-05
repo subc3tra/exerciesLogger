@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import {
   getAllSessions,
   getSessionById,
+  getPrefillForProgramDay,
   startSession,
   updateSetById,
   removeSetRow,
@@ -33,7 +34,8 @@ export async function getById(req: Request, res: Response, next: NextFunction): 
       return;
     }
 
-    res.status(200).json({ session });
+    const prefill = await getPrefillForProgramDay(userId, session.programDayId, session.id);
+    res.status(200).json({ session, prefill });
   } catch (err) {
     next(err);
   }
@@ -49,6 +51,13 @@ export async function start(req: Request, res: Response, next: NextFunction): Pr
   } catch (err) {
     if (err instanceof Error && err.message === 'Program not found!') {
       res.status(404).json({ message: err.message });
+      return;
+    }
+    if (
+      err instanceof Error &&
+      (err.message === 'Program complete' || err.message === 'Active session in progress for a different program')
+    ) {
+      res.status(409).json({ message: err.message });
       return;
     }
     next(err);
@@ -76,8 +85,8 @@ export async function updateSet(req: Request, res: Response, next: NextFunction)
   try {
     const userId = req.user!.id;
     const setId = Number(req.params.setId);
-    const { reps, weight, duration, completed, notes } = req.body;
-    const set = await updateSetById(userId, setId, reps, weight, duration, completed, notes);
+    const { reps, weight, duration, distance, completed, notes } = req.body;
+    const set = await updateSetById(userId, setId, reps, weight, duration, distance, completed, notes);
     res.status(200).json({ set });
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
@@ -109,8 +118,8 @@ export async function addSet(req: Request, res: Response, next: NextFunction): P
   try {
     const userId = req.user!.id;
     const sessionExerciseId = Number(req.params.sessionExerciseId);
-    const { reps, weight, duration, completed, notes } = req.body;
-    const set = await addNewSetRow(userId, sessionExerciseId, reps, weight, duration, completed, notes);
+    const { reps, weight, duration, distance, completed, notes } = req.body;
+    const set = await addNewSetRow(userId, sessionExerciseId, reps, weight, duration, distance, completed, notes);
     res.status(201).json({ set });
   } catch (err) {
     if (err instanceof Error && err.message === 'No sessionExercise found!') {

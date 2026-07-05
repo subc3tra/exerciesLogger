@@ -44,6 +44,6 @@ export async function login(req: Request, res: Response): Promise<void> {
 }
 
 export function me(req: Request, res: Response): void {
-  res.status(200).json({ user: req.user });
+  res.status(200).json({ user: { id: req.user!.id, username: req.user!.username } });
 }
 
