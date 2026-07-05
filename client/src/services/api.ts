@@ -88,7 +88,14 @@ export const sessionsApi = {
   updateSet: (
     sessionId: number,
     setId: number,
-    data: Partial<{ reps: number; weight: number; duration: number; distance: number; completed: boolean; notes: string }>
+    data: Partial<{
+      reps: number | null;
+      weight: number | null;
+      duration: number | null;
+      distance: number | null;
+      completed: boolean;
+      notes: string;
+    }>
   ) =>
     apiFetch<UpdateSetResponse>(`/sessions/${sessionId}/sets/${setId}`, {
       method: 'PATCH',

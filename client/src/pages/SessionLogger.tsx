@@ -62,14 +62,22 @@ export function SessionLogger() {
     }
   }
 
-  async function handleToggleComplete(exerciseId: number, setId: number, completed: boolean) {
+  async function handleToggleComplete(
+    exerciseId: number,
+    setId: number,
+    completed: boolean,
+    fields?: Partial<Record<NumericField, number | null>>
+  ) {
     const next = !completed;
     updateExercise(exerciseId, (ex) => ({
       ...ex,
-      sets: ex.sets.map((s) => (s.id === setId ? { ...s, completed: next } : s)),
+      sets: ex.sets.map((s) => (s.id === setId ? { ...s, ...(next ? fields : undefined), completed: next } : s)),
     }));
     try {
-      await sessionsApi.updateSet(sessionId, setId, { completed: next });
+      await sessionsApi.updateSet(sessionId, setId, {
+        ...(next ? fields : undefined),
+        completed: next,
+      });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to update set');
     }
@@ -188,9 +196,10 @@ export function SessionLogger() {
                           key={set.id}
                           set={set}
                           unit={programExercise.unit}
+                          target={{ targetReps: programExercise.targetReps, targetWeight: programExercise.targetWeight }}
                           previous={prefill?.[programExercise.id]?.find((p) => p.setNumber === set.setNumber)}
                           onFieldCommit={(field, value) => handleFieldCommit(exercise.id, set.id, field, value)}
-                          onToggleComplete={() => handleToggleComplete(exercise.id, set.id, set.completed)}
+                          onToggleComplete={(fields) => handleToggleComplete(exercise.id, set.id, set.completed, fields)}
                           onRemove={() => setPendingRemove({ exerciseId: exercise.id, setId: set.id })}
                         />
                       ))}
