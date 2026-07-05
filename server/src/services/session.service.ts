@@ -97,10 +97,17 @@ export async function startSession(userId: number, programDayId: number) {
 
   // check if the is a in progress session
   const activeSession = await prisma.session.findFirst({
-    where: { userId, programDayId, completed: false },
-    select: { id: true }
+    where: { userId, completed: false },
+    select: { 
+      id: true, 
+      programDayId:true }
   });
+
   if (activeSession) {
+
+    // check if active session matches program day
+    if (activeSession.programDayId !== programDayId) throw new Error('You already have an active session, complete it before starting a new.');
+    
     return {
       session: await getSessionById(activeSession.id, userId),
       prefill: null

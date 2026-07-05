@@ -50,6 +50,10 @@ export async function start(req: Request, res: Response, next: NextFunction): Pr
       res.status(404).json({ message: err.message });
       return;
     }
+    if (err instanceof Error && err.message === 'You already have an active session, complete it before starting a new.'){
+      res.status(409).json({ message: err.message });
+      return;
+    }
     next(err);
   }
 }
