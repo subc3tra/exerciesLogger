@@ -26,6 +26,39 @@ export async function getAllSessions(userId:number) {
   });
 }
 
+// previous session's actual set values for this program day, keyed by programExerciseId — used to
+// prefill the session logger with real carry-forward numbers instead of the template again
+export async function getPrefillForProgramDay(userId: number, programDayId: number, excludeSessionId?: number) {
+  const lastCompletedSession = await prisma.session.findFirst({
+    where: {
+      userId,
+      programDayId,
+      completed: true,
+      ...(excludeSessionId ? { id: { not: excludeSessionId } } : {})
+    },
+    orderBy: { date: 'desc' },
+    select: {
+      exercises: {
+        select: {
+          programExerciseId: true,
+          sets: {
+            orderBy: { setNumber: 'asc' },
+            select: { setNumber: true, reps: true, weight: true, duration: true, distance: true }
+          }
+        }
+      }
+    }
+  });
+
+  if (!lastCompletedSession) return null;
+
+  const prefill: Record<number, typeof lastCompletedSession.exercises[number]['sets']> = {};
+  for (const exercise of lastCompletedSession.exercises) {
+    prefill[exercise.programExerciseId] = exercise.sets;
+  }
+  return prefill;
+}
+
 // get session with id
 export async function getSessionById(id: number, userId: number) {
   return await prisma.session.findFirst({
@@ -37,6 +70,7 @@ export async function getSessionById(id: number, userId: number) {
       dayNumber: true,
       completed: true,
       notes: true,
+      programDayId: true,
       exercises: {
         select: {
           id: true,
@@ -68,6 +102,7 @@ export async function startSession(userId: number, programId: number) {
       userId
     },
     select: {
+      status: true,
       daysPerWeek: true,
       days: {
         orderBy: { order: 'asc' },
@@ -99,14 +134,21 @@ export async function startSession(userId: number, programId: number) {
   // check if the is a in progress session
   const activeSession = await prisma.session.findFirst({
     where: { userId, completed: false },
-    select: { id: true }
+    select: { id: true, programDay: { select: { programId: true } } }
   });
 
   if (activeSession) {
+    if (activeSession.programDay.programId !== programId) {
+      throw new Error('Active session in progress for a different program');
+    }
     return {
       session: await getSessionById(activeSession.id, userId),
       prefill: null
     }
+  }
+
+  if (program.status === 'ARCHIVED') {
+    throw new Error('Program complete');
   }
 
   // count the number of session for that program day
@@ -122,18 +164,8 @@ export async function startSession(userId: number, programId: number) {
   const programDayId = nextProgramDay.id;
 
 
-  // get the latest session, if there isnt any get the template from the program Exercice. T
-  let prefill;
-  let lastCompletedSession = await prisma.session.findFirst({
-    where: { userId, programDayId, completed: true },
-    orderBy: { date: 'desc' }
-  })
-
-  if (!lastCompletedSession) {
-    prefill = nextProgramDay.sections;
-  } else {
-    prefill = lastCompletedSession;
-  }
+  // real carry-forward values from the last completed session on this day, or null if this is the first time
+  const prefill = await getPrefillForProgramDay(userId, programDayId);
 
   // build the session exercise rows and set rows
   const sessionExercisesData = nextProgramDay.sections.flatMap(section =>
@@ -168,13 +200,13 @@ export async function startSession(userId: number, programId: number) {
 }
 
 // update sets by id
-export async function updateSetById(userId: number, sessionSetId: number, reps: number, weight: number, duration: number, completed: boolean, notes: string) {
+export async function updateSetById(userId: number, sessionSetId: number, reps: number, weight: number, duration: number, distance: number, completed: boolean, notes: string) {
   return await prisma.sessionSet.update({
-    where: { id: sessionSetId, 
+    where: { id: sessionSetId,
       sessionExercise: {
         session: { userId }
       }},
-      data: { reps, weight, duration, completed, notes }
+      data: { reps, weight, duration, distance, completed, notes }
   })
 }
 
@@ -189,7 +221,7 @@ export async function removeSetRow(userId: number, sessionSetId: number) {
 }
 
 // add new set row
-export async function addNewSetRow(userId:number, sessionExerciseId: number, reps: number, weight: number, duration: number, completed: boolean, notes: string) {
+export async function addNewSetRow(userId:number, sessionExerciseId: number, reps: number, weight: number, duration: number, distance: number, completed: boolean, notes: string) {
   // first get the setNumber to find the max sets
   const sessionExercise = await prisma.sessionExercise.findFirst({
     where: { id: sessionExerciseId,
@@ -211,14 +243,40 @@ export async function addNewSetRow(userId:number, sessionExerciseId: number, rep
 
   // add new set row with new data
   return await prisma.sessionSet.create({
-    data: { setNumber: maxSet, reps, weight, duration, completed, notes, sessionExerciseId}
+    data: { setNumber: maxSet, reps, weight, duration, distance, completed, notes, sessionExerciseId}
   });
 }
 
-// complete session
+// complete session — auto-archives the program if this was its final scheduled session
 export async function completeSession(userId: number, sessionId: number) {
-  return await prisma.session.update({
+  const session = await prisma.session.update({
     where: { id: sessionId, userId },
-    data: { completed: true }
+    data: { completed: true },
+    select: {
+      id: true,
+      date: true,
+      weekNumber: true,
+      dayNumber: true,
+      completed: true,
+      notes: true,
+      userId: true,
+      programDayId: true,
+      createdAt: true,
+      programDay: {
+        select: {
+          program: { select: { id: true, totalWeeks: true, daysPerWeek: true } }
+        }
+      }
+    }
   });
+
+  const { programDay, ...sessionFields } = session;
+  const { program } = programDay;
+  const absoluteDayNumber = (sessionFields.weekNumber - 1) * program.daysPerWeek + sessionFields.dayNumber;
+
+  if (absoluteDayNumber >= program.totalWeeks * program.daysPerWeek) {
+    await prisma.program.update({ where: { id: program.id }, data: { status: 'ARCHIVED' } });
+  }
+
+  return sessionFields;
 }
