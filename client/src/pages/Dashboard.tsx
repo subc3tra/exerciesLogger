@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { InfoBanner } from '../components/InfoBanner';
 import { programsApi, sessionsApi, ApiError } from '../services/api';
 import type { Program, ProgramDay, ProgramDetail, ProgramProgress } from '../types';
 
@@ -53,6 +54,7 @@ export function Dashboard() {
   const [detailLoadingId, setDetailLoadingId] = useState<number | null>(null);
   const [startingId, setStartingId] = useState<number | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
+  const [expandedSlots, setExpandedSlots] = useState<Record<number, Set<string>>>({});
 
   useEffect(() => {
     programsApi
@@ -88,6 +90,15 @@ export function Dashboard() {
     }
   }
 
+  function toggleSlot(programId: number, slotKey: string) {
+    setExpandedSlots((prev) => {
+      const next = new Set(prev[programId] ?? []);
+      if (next.has(slotKey)) next.delete(slotKey);
+      else next.add(slotKey);
+      return { ...prev, [programId]: next };
+    });
+  }
+
   async function handleStart(program: Program) {
     setStartingId(program.id);
     setStartError(null);
@@ -107,6 +118,8 @@ export function Dashboard() {
 
   return (
     <div>
+      <InfoBanner />
+
       <h1 style={{ fontSize: 26, marginBottom: 4 }}>Welcome back, {user?.username}</h1>
       <p style={{ color: 'var(--muted)', marginBottom: 24, fontSize: 13 }}>Your training programs</p>
 
@@ -157,30 +170,75 @@ export function Dashboard() {
                           <div key={weekIdx} className="schedule-week">
                             <span className="schedule-week-label">Week {weekIdx + 1}</span>
                             <div className="schedule-week-days">
-                              {weekSlots.map((slot, dayIdx) => (
-                                <div key={dayIdx} className={`schedule-chip ${slot.status}`}>
-                                  <div className="schedule-chip-header">
-                                    <span className="schedule-chip-name">
-                                      {slot.status === 'done' && '✓ '}
-                                      {slot.day.name}
-                                    </span>
-                                    {(slot.status === 'next' || slot.status === 'active') && (
-                                      <button
-                                        className="schedule-continue"
-                                        onClick={() => handleStart(program)}
-                                        disabled={startingId === program.id}
-                                      >
-                                        {startingId === program.id
-                                          ? '…'
-                                          : slot.status === 'active'
-                                            ? 'Continue'
-                                            : 'Start'}
-                                      </button>
+                              {weekSlots.map((slot, dayIdx) => {
+                                const slotKey = `${slot.week}-${slot.day.id}`;
+                                const isSlotExpanded = expandedSlots[program.id]?.has(slotKey) ?? false;
+
+                                return (
+                                  <div
+                                    key={dayIdx}
+                                    className={`schedule-chip ${slot.status}`}
+                                    onClick={() => toggleSlot(program.id, slotKey)}
+                                  >
+                                    <div className="schedule-chip-header">
+                                      <span className="schedule-chip-name">
+                                        {slot.status === 'done' && '✓ '}
+                                        {slot.day.name}
+                                      </span>
+                                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                        {(slot.status === 'next' || slot.status === 'active') && (
+                                          <button
+                                            className="schedule-continue"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleStart(program);
+                                            }}
+                                            disabled={startingId === program.id}
+                                          >
+                                            {startingId === program.id
+                                              ? '…'
+                                              : slot.status === 'active'
+                                                ? 'Continue'
+                                                : 'Start'}
+                                          </button>
+                                        )}
+                                        <span className="schedule-chip-caret">{isSlotExpanded ? '▾' : '▸'}</span>
+                                      </div>
+                                    </div>
+
+                                    {isSlotExpanded ? (
+                                      <div className="schedule-chip-detail">
+                                        {slot.day.sections.map((section) => (
+                                          <div key={section.id} className="schedule-chip-section">
+                                            <div className="schedule-chip-section-name">
+                                              {section.name}
+                                              {section.zone ? ` · ${section.zone}` : ''}
+                                            </div>
+                                            {section.exercises.map((exercise) => (
+                                              <div key={exercise.id} className="exercise">
+                                                <div>
+                                                  <div className="ex-name">{exercise.name}</div>
+                                                  {exercise.notes && <div className="ex-note">{exercise.notes}</div>}
+                                                </div>
+                                                <div>
+                                                  <div className="ex-reps-num">
+                                                    {exercise.targetSets ?? '–'}×{exercise.targetReps ?? '–'}
+                                                  </div>
+                                                  <div className="ex-reps-label">
+                                                    {(exercise.unit ?? 'reps').toUpperCase()}
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : (
+                                      <p className="schedule-chip-exercises">{exerciseSummary(slot.day)}</p>
                                     )}
                                   </div>
-                                  <p className="schedule-chip-exercises">{exerciseSummary(slot.day)}</p>
-                                </div>
-                              ))}
+                                );
+                              })}
                             </div>
                           </div>
                         ))}

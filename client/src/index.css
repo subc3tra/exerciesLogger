@@ -52,7 +52,9 @@ h3,
 }
 
 button,
-input {
+input,
+textarea,
+select {
   font-family: inherit;
   color: inherit;
 }
@@ -547,6 +549,66 @@ a {
   cursor: default;
 }
 
+/* Info banner */
+.info-banner {
+  background: rgba(60, 212, 245, 0.05);
+  border: 1px solid rgba(60, 212, 245, 0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.info-banner-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.info-banner-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent2);
+}
+
+.info-banner-caret {
+  color: var(--accent2);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.info-banner-body {
+  padding: 0 14px 14px;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-banner-body p {
+  margin: 0;
+}
+
+.info-banner-body ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-banner-body strong {
+  color: var(--text);
+}
+
 /* Dashboard */
 .program-row {
   width: 100%;
@@ -626,6 +688,7 @@ a {
   border-radius: 10px;
   padding: 10px 12px;
   background: var(--surface);
+  cursor: pointer;
 }
 
 .schedule-chip.done {
@@ -668,6 +731,38 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
+}
+
+.schedule-chip-caret {
+  color: var(--muted);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.schedule-chip-detail {
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+.schedule-chip-section {
+  margin-bottom: 10px;
+}
+
+.schedule-chip-section:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-chip-section-name {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.schedule-chip-detail .exercise {
+  padding: 8px 0;
 }
 
 .schedule-continue {
