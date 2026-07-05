@@ -42,16 +42,12 @@ export async function getById(req: Request, res: Response, next: NextFunction): 
 export async function start(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = req.user!.id;
-    const { programDayId } = req.body;
-    const result = await startSession(userId, programDayId);
+    const { programId } = req.body;
+    const result = await startSession(userId, programId);
     res.status(200).json(result);
   } catch (err) {
-    if (err instanceof Error && err.message === 'Program day not found!') {
+    if (err instanceof Error && err.message === 'Program not found!') {
       res.status(404).json({ message: err.message });
-      return;
-    }
-    if (err instanceof Error && err.message === 'You already have an active session, complete it before starting a new.'){
-      res.status(409).json({ message: err.message });
       return;
     }
     next(err);

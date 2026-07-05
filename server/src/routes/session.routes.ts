@@ -30,7 +30,7 @@ router.get('/', getAll);
  *   post:
  *     tags:
  *       - Sessions
- *     summary: Start a new session for a program day, or resume an in-progress one
+ *     summary: Start the next session in a program's rotation, or resume an in-progress one
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,15 +40,15 @@ router.get('/', getAll);
  *           schema:
  *             type: object
  *             required:
- *               - programDayId
+ *               - programId
  *             properties:
- *               programDayId:
+ *               programId:
  *                 type: integer
  *     responses:
  *       200:
  *         description: Session started (or resumed), with prefill data
  *       404:
- *         description: Program day not found
+ *         description: Program not found
  *       401:
  *         description: Unauthorized
  */
