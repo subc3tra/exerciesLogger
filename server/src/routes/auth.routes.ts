@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { register, login } from "../controllers/auth.controller";
+import { register, login, me } from "../controllers/auth.controller";
+import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
 
@@ -56,5 +57,22 @@ router.post('/register', register)
  */
 
 router.post('/login', login);
+
+/**
+ * @swagger
+ * /api/auth/me:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Get the currently authenticated user
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Current user
+ *       401:
+ *         description: Unauthorized
+ */
+router.get('/me', authenticate, me);
 
 export default router;

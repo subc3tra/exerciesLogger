@@ -60,46 +60,48 @@ export async function getSessionById(id: number, userId: number) {
 }
 
 // start a new session
-export async function startSession(userId: number, programDayId: number) {
+export async function startSession(userId: number, programId: number) {
   // get the pogram day with included daysPerWeek from program
-  const programDay = await prisma.programDay.findFirst({
+  const program = await prisma.program.findFirst({
     where: {
-      id: programDayId,
-      program: { userId }
+      id: programId,
+      userId
     },
     select: {
-      program: {
+      daysPerWeek: true,
+      days: {
+        orderBy: { order: 'asc' },
         select: {
           id: true,
-          daysPerWeek: true
-        }
-      },
-      sections: {
-        select: {
-          exercises: {
+          sections: {
             select: {
-              id: true,
-              name: true,
-              targetSets: true,
-              targetReps: true,
-              targetWeight: true,
-              unit: true,
-              notes: true
+              exercises: {
+                select: {
+                id: true,
+                name: true,
+                targetSets: true,
+                targetReps: true,
+                targetWeight: true,
+                unit: true,
+                notes: true
+                }
+              }
             }
           }
         }
       }
-    }
+    }  
   });
 
   // null check for programDay
-  if (!programDay) throw new Error('Program day not found!');
+  if (!program) throw new Error('Program not found!');
 
   // check if the is a in progress session
   const activeSession = await prisma.session.findFirst({
-    where: { userId, programDayId, completed: false },
+    where: { userId, completed: false },
     select: { id: true }
   });
+
   if (activeSession) {
     return {
       session: await getSessionById(activeSession.id, userId),
@@ -109,12 +111,15 @@ export async function startSession(userId: number, programDayId: number) {
 
   // count the number of session for that program day
   const sessionCount = await prisma.session.count({
-    where: { userId, programDay: { programId: programDay.program.id } }
+    where: { userId, programDay: { programId } }
   });
 
   // calculate the weeknumber and day number
-  const weekNumber = Math.ceil((sessionCount + 1) / programDay.program.daysPerWeek);
-  const dayNumber = (sessionCount % programDay.program.daysPerWeek) + 1;
+  const weekNumber = Math.ceil((sessionCount + 1) / program.daysPerWeek);
+  const dayIndex = sessionCount % program.daysPerWeek;
+  const dayNumber = dayIndex + 1;
+  const nextProgramDay = program.days[dayIndex];
+  const programDayId = nextProgramDay.id;
 
 
   // get the latest session, if there isnt any get the template from the program Exercice. T
@@ -125,13 +130,13 @@ export async function startSession(userId: number, programDayId: number) {
   })
 
   if (!lastCompletedSession) {
-    prefill = programDay.sections;
+    prefill = nextProgramDay.sections;
   } else {
     prefill = lastCompletedSession;
   }
 
   // build the session exercise rows and set rows
-  const sessionExercisesData = programDay.sections.flatMap(section =>
+  const sessionExercisesData = nextProgramDay.sections.flatMap(section =>
     section.exercises.map(exercise => ({
       programExerciseId: exercise.id,
       sets: {
@@ -207,5 +212,13 @@ export async function addNewSetRow(userId:number, sessionExerciseId: number, rep
   // add new set row with new data
   return await prisma.sessionSet.create({
     data: { setNumber: maxSet, reps, weight, duration, completed, notes, sessionExerciseId}
-  })
+  });
+}
+
+// complete session
+export async function completeSession(userId: number, sessionId: number) {
+  return await prisma.session.update({
+    where: { id: sessionId, userId },
+    data: { completed: true }
+  });
 }

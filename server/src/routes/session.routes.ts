@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAll, getById, start, updateSet, removeSet, addSet } from "../controllers/session.controller";
+import { getAll, getById, start, complete, updateSet, removeSet, addSet } from "../controllers/session.controller";
 import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
@@ -30,7 +30,7 @@ router.get('/', getAll);
  *   post:
  *     tags:
  *       - Sessions
- *     summary: Start a new session for a program day, or resume an in-progress one
+ *     summary: Start the next session in a program's rotation, or resume an in-progress one
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,15 +40,15 @@ router.get('/', getAll);
  *           schema:
  *             type: object
  *             required:
- *               - programDayId
+ *               - programId
  *             properties:
- *               programDayId:
+ *               programId:
  *                 type: integer
  *     responses:
  *       200:
  *         description: Session started (or resumed), with prefill data
  *       404:
- *         description: Program day not found
+ *         description: Program not found
  *       401:
  *         description: Unauthorized
  */
@@ -78,6 +78,31 @@ router.post('/start', start);
  *         description: Unauthorized
  */
 router.get('/:id', getById);
+
+/**
+ * @swagger
+ * /api/sessions/{id}/complete:
+ *   post:
+ *     tags:
+ *       - Sessions
+ *     summary: Mark a session as completed
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Session marked completed
+ *       404:
+ *         description: Session not found
+ *       401:
+ *         description: Unauthorized
+ */
+router.post('/:id/complete', complete);
 
 /**
  * @swagger
