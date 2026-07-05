@@ -569,6 +569,96 @@ a {
   cursor: default;
 }
 
+/* Program progress schedule */
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schedule-week {
+  display: flex;
+  gap: 12px;
+}
+
+.schedule-week-label {
+  width: 52px;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 12px;
+}
+
+.schedule-week-days {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.schedule-chip {
+  flex: 1;
+  min-width: 160px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+}
+
+.schedule-chip.done {
+  border-color: rgba(212, 245, 60, 0.25);
+  opacity: 0.65;
+}
+
+.schedule-chip.upcoming {
+  opacity: 0.5;
+}
+
+.schedule-chip.next,
+.schedule-chip.active {
+  border-color: var(--accent);
+  background: rgba(212, 245, 60, 0.06);
+}
+
+.schedule-chip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.schedule-chip-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.schedule-chip-exercises {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.schedule-continue {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.schedule-continue:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 /* Session logger */
 .target-line {
   font-size: 14px;

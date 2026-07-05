@@ -140,6 +140,12 @@ export interface ProgramResponse {
   program: ProgramDetail;
 }
 
+// GET /api/programs/:id/progress
+export interface ProgramProgress {
+  completedCount: number;
+  activeSession: { id: number; weekNumber: number; dayNumber: number } | null;
+}
+
 export interface SessionResponse {
   session: SessionDetail;
   prefill: Prefill;

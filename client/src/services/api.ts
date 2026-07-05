@@ -3,6 +3,7 @@ import type {
   MeResponse,
   ProgramsResponse,
   ProgramResponse,
+  ProgramProgress,
   StartSessionResponse,
   SessionResponse,
   CompleteSessionResponse,
@@ -72,6 +73,7 @@ export const authApi = {
 export const programsApi = {
   getAll: () => apiFetch<ProgramsResponse>('/programs'),
   getById: (id: number) => apiFetch<ProgramResponse>(`/programs/${id}`),
+  getProgress: (id: number) => apiFetch<ProgramProgress>(`/programs/${id}/progress`),
 };
 
 export const sessionsApi = {
