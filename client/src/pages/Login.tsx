@@ -1,0 +1,72 @@
+import { useState, type FormEvent } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { ApiError } from '../services/api';
+
+export function Login() {
+  const { user, isLoading, login } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (!isLoading && user) {
+    return <Navigate to="/" replace />;
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      await login(username, password);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="login-page">
+      <div className="login-glow" />
+      <form className="login-card" onSubmit={handleSubmit}>
+        <h1 className="login-title">NordCore</h1>
+        <p className="login-subtitle">Log in to your training log</p>
+
+        <label className="login-label" htmlFor="username">
+          Username
+        </label>
+        <input
+          id="username"
+          className="login-input"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          autoComplete="username"
+          required
+        />
+
+        <label className="login-label" htmlFor="password">
+          Password
+        </label>
+        <input
+          id="password"
+          className="login-input"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
+          required
+        />
+
+        {error && <p className="login-error">{error}</p>}
+
+        <button className="login-button" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Logging in…' : 'Log in'}
+        </button>
+      </form>
+    </div>
+  );
+}
