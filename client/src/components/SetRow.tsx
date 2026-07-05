@@ -33,6 +33,7 @@ export function SetRow({ set, unit, previous, onFieldCommit, onToggleComplete, o
         <input
           className="set-input"
           type="number"
+          inputMode="numeric"
           placeholder={previous?.duration != null ? `${previous.duration}s last time` : 'sec'}
           value={duration}
           onChange={(e) => setDuration(e.target.value)}
@@ -42,6 +43,7 @@ export function SetRow({ set, unit, previous, onFieldCommit, onToggleComplete, o
         <input
           className="set-input"
           type="number"
+          inputMode="decimal"
           placeholder={previous?.distance != null ? `${previous.distance}m last time` : 'meters'}
           value={distance}
           onChange={(e) => setDistance(e.target.value)}
@@ -52,6 +54,7 @@ export function SetRow({ set, unit, previous, onFieldCommit, onToggleComplete, o
           <input
             className="set-input"
             type="number"
+            inputMode="numeric"
             placeholder={previous?.reps != null ? `${previous.reps} last time` : 'reps'}
             value={reps}
             onChange={(e) => setReps(e.target.value)}
@@ -60,6 +63,7 @@ export function SetRow({ set, unit, previous, onFieldCommit, onToggleComplete, o
           <input
             className="set-input"
             type="number"
+            inputMode="decimal"
             placeholder={previous?.weight != null ? `${previous.weight}kg last time` : 'kg'}
             value={weight}
             onChange={(e) => setWeight(e.target.value)}

@@ -22,6 +22,8 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -33,6 +35,11 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 h1,
@@ -242,6 +249,7 @@ a {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  padding: 20px;
 }
 
 .login-glow {
@@ -258,7 +266,8 @@ a {
 .login-card {
   position: relative;
   z-index: 1;
-  width: 340px;
+  width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -293,8 +302,8 @@ a {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: 12px;
+  font-size: 16px;
   margin-top: 6px;
   outline: none;
 }
@@ -338,45 +347,55 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 28px;
+  gap: 8px;
+  padding: 14px 16px;
+  padding-top: calc(14px + env(safe-area-inset-top));
   border-bottom: 1px solid var(--border);
   position: relative;
 }
 
 .navbar-title {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 22px;
   color: var(--accent);
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+  min-width: 0;
   position: relative;
   z-index: 1;
 }
 
 .navbar-user {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90px;
 }
 
 .navbar-logout {
   background: transparent;
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 6px 14px;
+  padding: 8px 14px;
   font-size: 12px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .app-content {
   flex: 1;
-  padding: 32px 28px;
-  max-width: 860px;
+  padding: 20px 16px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  max-width: 520px;
   width: 100%;
   margin: 0 auto;
 }
@@ -389,6 +408,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
   z-index: 100;
 }
 
@@ -397,7 +417,8 @@ a {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 24px;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .dialog-title {
@@ -419,7 +440,7 @@ a {
 
 .dialog-button {
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   font-size: 13px;
   cursor: pointer;
   border: 1px solid var(--border);
@@ -440,8 +461,8 @@ a {
 /* Feedback widget */
 .feedback-bubble {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  left: calc(16px + env(safe-area-inset-left));
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -455,9 +476,11 @@ a {
 
 .feedback-panel {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 260px;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  left: calc(16px + env(safe-area-inset-left));
+  right: 16px;
+  width: auto;
+  max-width: 280px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -498,8 +521,8 @@ a {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 13px;
+  padding: 10px;
+  font-size: 16px;
   resize: none;
   outline: none;
 }
@@ -514,7 +537,7 @@ a {
   font-weight: 700;
   border: none;
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   font-size: 13px;
   cursor: pointer;
 }
@@ -578,27 +601,27 @@ a {
 
 .schedule-week {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .schedule-week-label {
-  width: 52px;
-  flex-shrink: 0;
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--muted);
-  padding-top: 12px;
 }
 
 .schedule-week-days {
-  flex: 1;
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
 }
 
 .schedule-chip {
-  flex: 1;
-  min-width: 160px;
+  width: 100%;
+  min-width: 0;
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px 12px;
@@ -626,11 +649,16 @@ a {
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 4px;
+  min-width: 0;
 }
 
 .schedule-chip-name {
   font-size: 13px;
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .schedule-chip-exercises {
@@ -648,8 +676,8 @@ a {
   font-weight: 700;
   border: none;
   border-radius: 6px;
-  padding: 4px 10px;
-  font-size: 11px;
+  padding: 8px 12px;
+  font-size: 12px;
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -674,13 +702,13 @@ a {
 
 .set-row {
   display: grid;
-  grid-template-columns: 32px 1fr 1fr auto auto;
+  grid-template-columns: 22px 1fr 1fr auto auto;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 8px;
 }
 
 .set-row.completed {
@@ -696,10 +724,11 @@ a {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 8px;
-  font-size: 13px;
+  padding: 6px 4px;
+  font-size: 16px;
   outline: none;
   width: 100%;
+  min-width: 0;
 }
 
 .set-input:focus {
@@ -710,8 +739,9 @@ a {
   background: transparent;
   border: 1px solid var(--border);
   border-radius: 6px;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
   cursor: pointer;
   color: var(--muted);
 }
@@ -726,8 +756,9 @@ a {
   background: transparent;
   border: 1px solid var(--border);
   border-radius: 6px;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
   cursor: pointer;
   color: var(--accent3);
 }
