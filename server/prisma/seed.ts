@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 async function main() {
   // --- User ---
   const user = await prisma.user.findFirst({
-    where: { username: 'Mattias' },
+    where: { username: 'testUser' },
   });
 
   if (!user) throw new Error('User not found. Create the user first.');
