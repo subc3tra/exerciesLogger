@@ -5,7 +5,8 @@ import {
   startSession,
   updateSetById,
   removeSetRow,
-  addNewSetRow
+  addNewSetRow,
+  completeSession
 } from "../services/session.service";
 import { Prisma } from '@prisma/client';
 
@@ -48,6 +49,22 @@ export async function start(req: Request, res: Response, next: NextFunction): Pr
   } catch (err) {
     if (err instanceof Error && err.message === 'Program not found!') {
       res.status(404).json({ message: err.message });
+      return;
+    }
+    next(err);
+  }
+}
+
+// complete a session
+export async function complete(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const userId = req.user!.id;
+    const id = Number(req.params.id);
+    const session = await completeSession(userId, id);
+    res.status(200).json({ session });
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
+      res.status(404).json({ message: "Session not found" });
       return;
     }
     next(err);

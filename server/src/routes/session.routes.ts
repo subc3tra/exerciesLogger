@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAll, getById, start, updateSet, removeSet, addSet } from "../controllers/session.controller";
+import { getAll, getById, start, complete, updateSet, removeSet, addSet } from "../controllers/session.controller";
 import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
@@ -78,6 +78,31 @@ router.post('/start', start);
  *         description: Unauthorized
  */
 router.get('/:id', getById);
+
+/**
+ * @swagger
+ * /api/sessions/{id}/complete:
+ *   post:
+ *     tags:
+ *       - Sessions
+ *     summary: Mark a session as completed
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Session marked completed
+ *       404:
+ *         description: Session not found
+ *       401:
+ *         description: Unauthorized
+ */
+router.post('/:id/complete', complete);
 
 /**
  * @swagger
