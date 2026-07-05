@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { findUser, createUser } from '../services/auth.service';
 import { hashPassword, comparePassword } from '../utils/hash';
 import { signToken } from '../utils/jwt';
+import { logLogin } from '../utils/log';
 
 export async function register(req: Request, res: Response): Promise<void> {
   const { username, password } = req.body;
@@ -37,7 +38,12 @@ export async function login(req: Request, res: Response): Promise<void> {
   }
 
   const token = signToken({ id: user.id, username: user.username});
+  logLogin(user.username);
   res.status(200).json({ message: 'Login successfull', token});
   return;
+}
+
+export function me(req: Request, res: Response): void {
+  res.status(200).json({ user: req.user });
 }
 
