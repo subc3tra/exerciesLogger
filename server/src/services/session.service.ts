@@ -178,3 +178,30 @@ export async function removeSetRow(userId: number, sessionSetId: number) {
     }}
   })
 }
+
+// add new set row
+export async function addNewSetRow(userId:number, sessionExerciseId: number, reps: number, weight: number, duration: number, completed: boolean, notes: string) {
+  // first get the setNumber to find the max sets
+  const sessionExercise = await prisma.sessionExercise.findFirst({
+    where: { id: sessionExerciseId,
+      session: { userId }
+    },
+    select: {
+      sets: {
+        select: {
+          setNumber: true
+        }
+      }
+    }
+  });
+
+  if (!sessionExercise) throw new Error('No sessionExercise found!');
+
+  const setNumbers = sessionExercise.sets.map(set => set.setNumber);
+  const maxSet = Math.max(0, ...setNumbers) + 1;
+
+  // add new set row with new data
+  return await prisma.sessionSet.create({
+    data: { setNumber: maxSet, reps, weight, duration, completed, notes, sessionExerciseId}
+  })
+}
