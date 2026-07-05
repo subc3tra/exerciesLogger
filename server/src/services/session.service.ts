@@ -7,8 +7,10 @@ export async function getAllSessions(userId:number) {
     select: {
       exercises: {
         select: {
+          id: true,
           sets: {
             select: {
+              id: true,
               setNumber: true,
               reps: true,
               weight: true,
@@ -37,9 +39,11 @@ export async function getSessionById(id: number, userId: number) {
       notes: true,
       exercises: {
         select: {
+          id: true,
           programExercise: true,
           sets: {
           select: {
+            id: true,
             setNumber: true,
             reps: true,
             weight: true,
