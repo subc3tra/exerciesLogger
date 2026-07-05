@@ -126,10 +126,17 @@ export async function startSession(userId: number, programDayId: number) {
     prefill = lastCompletedSession;
   }
 
-  // build the session exercise rows
+  // build the session exercise rows and set rows
   const sessionExercisesData = programDay.sections.flatMap(section =>
     section.exercises.map(exercise => ({
-      programExerciseId: exercise.id
+      programExerciseId: exercise.id,
+      sets: {
+        create: Array.from({ length: exercise.targetSets ?? 0 }, (_, i) =>
+        ({ 
+          setNumber: i + 1,
+          completed: false
+        }))
+      }
     }))
   );
 
@@ -143,10 +150,15 @@ export async function startSession(userId: number, programDayId: number) {
         create: sessionExercisesData
       }
     }
-  })
+  });
+
+  // create the pre fixed rows for each exercise
+
   
   return { 
     session: await getSessionById(draftSession.id, userId),
     prefill
   };
 }
+
+// 
