@@ -164,9 +164,17 @@ export async function updateSetById(userId: number, sessionSetId: number, reps: 
     where: { id: sessionSetId, 
       sessionExercise: {
         session: { userId }
-      } },
+      }},
       data: { reps, weight, duration, completed, notes }
   })
 }
 
 // remove set row
+export async function removeSetRow(userId: number, sessionSetId: number) {
+  return await prisma.sessionSet.delete({
+    where: { id: sessionSetId,
+    sessionExercise: {
+      session: { userId }
+    }}
+  })
+}
