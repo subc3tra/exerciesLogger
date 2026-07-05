@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAll, getById, create, update, remove, getDays, getDay } from "../controllers/program.controller";
+import { getAll, getById, getProgress, create, update, remove, getDays, getDay } from "../controllers/program.controller";
 import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
@@ -82,6 +82,31 @@ router.post('/', create);
  *         description: Unauthorized
  */
 router.get('/:id', getById);
+
+/**
+ * @swagger
+ * /api/programs/{id}/progress:
+ *   get:
+ *     tags:
+ *       - Programs
+ *     summary: Get completed session count and current active session for a program
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Program progress
+ *       404:
+ *         description: Program not found
+ *       401:
+ *         description: Unauthorized
+ */
+router.get('/:id/progress', getProgress);
 
 /**
  * @swagger

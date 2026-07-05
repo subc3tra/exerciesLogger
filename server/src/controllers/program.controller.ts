@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import {
   getAllPrograms,
   getProgramById,
+  getProgramProgress,
   createProgram,
   updateProgram,
   deleteProgram,
@@ -34,6 +35,24 @@ export async function getById(req: Request, res: Response, next: NextFunction): 
     }
 
     res.status(200).json({ program });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// get program progress (completed session count + current active session, if any)
+export async function getProgress(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const id = Number(req.params.id);
+    const userId = req.user!.id;
+    const progress = await getProgramProgress(id, userId);
+
+    if (!progress) {
+      res.status(404).json({ message: "Program not found" });
+      return;
+    }
+
+    res.status(200).json(progress);
   } catch (err) {
     next(err);
   }
