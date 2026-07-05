@@ -212,5 +212,13 @@ export async function addNewSetRow(userId:number, sessionExerciseId: number, rep
   // add new set row with new data
   return await prisma.sessionSet.create({
     data: { setNumber: maxSet, reps, weight, duration, completed, notes, sessionExerciseId}
-  })
+  });
+}
+
+// complete session
+export async function completeSession(userId: number, sessionId: number) {
+  return await prisma.session.update({
+    where: { id: sessionId, userId },
+    data: { completed: true }
+  });
 }
