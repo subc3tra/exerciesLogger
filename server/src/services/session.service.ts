@@ -151,9 +151,6 @@ export async function startSession(userId: number, programDayId: number) {
       }
     }
   });
-
-  // create the pre fixed rows for each exercise
-
   
   return { 
     session: await getSessionById(draftSession.id, userId),
@@ -161,4 +158,15 @@ export async function startSession(userId: number, programDayId: number) {
   };
 }
 
-// 
+// update sets by id
+export async function updateSetById(userId: number, sessionSetId: number, reps: number, weight: number, duration: number, completed: boolean, notes: string) {
+  return await prisma.sessionSet.update({
+    where: { id: sessionSetId, 
+      sessionExercise: {
+        session: { userId }
+      } },
+      data: { reps, weight, duration, completed, notes }
+  })
+}
+
+// remove set row
