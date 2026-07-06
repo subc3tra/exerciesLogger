@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { FeedbackWidget } from './FeedbackWidget';
+import { WhatsNewModal } from './WhatsNewModal';
 
 export function AppShell() {
   return (
@@ -10,6 +11,7 @@ export function AppShell() {
         <Outlet />
       </main>
       <FeedbackWidget />
+      <WhatsNewModal />
     </div>
   );
 }
