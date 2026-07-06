@@ -23,8 +23,8 @@ import { deleteProgramCascade } from './lib/deleteProgram';
 const prisma = new PrismaClient();
 
 // ---- EDIT ME ----
-const USERNAME = 'REPLACE_ME';
-const PASSWORD = 'REPLACE_ME';
+const USERNAME: string = 'miAmor';
+const PASSWORD: string = 'test';
 const WIPE_EXISTING_DATA = false; // true = also delete all their programs + session history
 // -----------------
 
