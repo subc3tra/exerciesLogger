@@ -1,0 +1,265 @@
+/**
+ * PROGRAM TEMPLATE — describes one full training program (days, sections, exercises)
+ * as a plain data object, then creates it in the database.
+ *
+ * ============================================================================
+ * FOR MATTIAS
+ * ============================================================================
+ * Workflow:
+ *   1. Copy this file (e.g. `alice-strength.ts`) so you keep a record of what
+ *      you generated for each user.
+ *   2. Hand the copy to an AI along with the user's preferences (goals, days
+ *      per week, equipment, injuries, etc). Tell it to fill in PROGRAM_DATA
+ *      only, following the rules in the "FOR THE AI" block below.
+ *   3. Set `username` to the target user (the AI won't know this — it's your job).
+ *   4. Sanity-check the filled-in file, then run it from server/:
+ *        npx tsx prisma/seeds/<your-file>.ts
+ *   5. Made a mistake or the user wants a redo? See delete-program.ts — it wipes
+ *      one program cleanly (grab the id from `npx prisma studio` first).
+ *
+ * ============================================================================
+ * FOR THE AI FILLING THIS IN
+ * ============================================================================
+ * - Only edit the PROGRAM_DATA object below. Everything after the
+ *   "DO NOT EDIT BELOW THIS LINE" marker talks to the database directly —
+ *   changing it risks writing to the wrong table or the wrong user.
+ * - Do not set `username` — leave it as-is. Mattias fills that in himself.
+ * - `daysPerWeek` MUST equal `days.length`, exactly. The app picks which day to
+ *   run next as `days[sessionCount % daysPerWeek]`, so a mismatch either skips
+ *   a day forever or crashes the app when it indexes past the end of the array.
+ * - `targetReps` is always a STRING, even for a single number: write '8', not 8.
+ *   It supports ranges ('6-8') and unit-suffixed values ('30s', '20m') for
+ *   timed/distance work.
+ * - `unit` must be exactly one of: 'reps', 's', 'm' — nothing else.
+ *     'reps' -> normal strength work, logged as reps + weight.
+ *     's'    -> timed work (plank, sprint), logged as a duration in seconds.
+ *     'm'    -> distance work (farmer's carry), logged as a distance in meters.
+ *   Match `targetReps`'s suffix to `unit`, e.g. unit: 's' with targetReps: '30s'.
+ * - Every field can be `null` except `name` fields and `unit`/`targetSets` on an
+ *   exercise. Use `null`, not an empty string or a placeholder like "TBD".
+ * - Don't add fields beyond what's shown here — anything extra is silently
+ *   ignored, it won't error, so a typo'd field name just quietly does nothing.
+ * - Don't set `order` anywhere — it's computed automatically from each item's
+ *   position in its array, so the array order IS the workout order.
+ * ============================================================================
+ */
+
+const PROGRAM_DATA = {
+  username: 'subc3tra' as string | null, // MATTIAS: set this — the AI leaves it null on purpose
+
+  name: 'Styrka 3-dagar',
+  totalWeeks: 2,
+  daysPerWeek: 3,
+
+  days: [
+    {
+      name: 'Mandag - Ben + Overkropp',
+      dayLabel: 'Man',
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Zercher Squat',
+              targetSets: 3,
+              targetReps: '5',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Bankpress',
+              targetSets: 3,
+              targetReps: '6',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Face Pulls',
+              targetSets: 3,
+              targetReps: '15',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Triceps Pushdown',
+              targetSets: 3,
+              targetReps: '10-12',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Onsdag - Push + Rygg',
+      dayLabel: 'Ons',
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Bankpress',
+              targetSets: 3,
+              targetReps: '6-8',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Militarpress',
+              targetSets: 3,
+              targetReps: '6-8',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Underarmscurl',
+              targetSets: 3,
+              targetReps: '10-12',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: 'Hammer eller wrist curl',
+            },
+            {
+              name: 'Back Extension',
+              targetSets: 3,
+              targetReps: '10',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Fredag - Ben + Drag',
+      dayLabel: 'Fre',
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Zercher Deadlift',
+              targetSets: 3,
+              targetReps: '5',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Militarpress',
+              targetSets: 3,
+              targetReps: '6-8',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Face Pulls',
+              targetSets: 3,
+              targetReps: '15',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Lat Pulldown',
+              targetSets: 3,
+              targetReps: '10',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+// ============================================================================
+// DO NOT EDIT BELOW THIS LINE
+// ============================================================================
+
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+async function main() {
+  if (!PROGRAM_DATA.username) {
+    throw new Error('Set PROGRAM_DATA.username to the target user before running this.');
+  }
+
+  if (PROGRAM_DATA.days.length !== PROGRAM_DATA.daysPerWeek) {
+    throw new Error(
+      `daysPerWeek (${PROGRAM_DATA.daysPerWeek}) must equal days.length (${PROGRAM_DATA.days.length}).`
+    );
+  }
+
+  const user = await prisma.user.findFirst({ where: { username: PROGRAM_DATA.username } });
+  if (!user) {
+    throw new Error(`User "${PROGRAM_DATA.username}" not found — create them first with user.template.ts.`);
+  }
+
+  const program = await prisma.program.create({
+    data: {
+      name: PROGRAM_DATA.name,
+      totalWeeks: PROGRAM_DATA.totalWeeks,
+      daysPerWeek: PROGRAM_DATA.daysPerWeek,
+      userId: user.id,
+      days: {
+        create: PROGRAM_DATA.days.map((day, dayIndex) => ({
+          name: day.name,
+          dayLabel: day.dayLabel,
+          duration: day.duration,
+          order: dayIndex,
+          sections: {
+            create: day.sections.map((section, sectionIndex) => ({
+              name: section.name,
+              zone: section.zone,
+              sets: section.sets,
+              restSecs: section.restSecs,
+              order: sectionIndex,
+              exercises: {
+                create: section.exercises.map((exercise, exerciseIndex) => ({
+                  name: exercise.name,
+                  targetSets: exercise.targetSets,
+                  targetReps: exercise.targetReps,
+                  targetWeight: exercise.targetWeight,
+                  unit: exercise.unit,
+                  notes: exercise.notes,
+                  order: exerciseIndex,
+                })),
+              },
+            })),
+          },
+        })),
+      },
+    },
+  });
+
+  console.log(`✅ Created program "${program.name}" (id ${program.id}) for "${PROGRAM_DATA.username}"`);
+}
+
+main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());
