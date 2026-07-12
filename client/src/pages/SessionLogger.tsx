@@ -8,6 +8,15 @@ import { ConfirmDialog } from '../components/ConfirmDialog';
 type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
 type CompleteStage = 'closed' | 'confirm' | 'incomplete-warning';
 
+// mm:ss, or h:mm:ss once it runs past an hour
+function formatElapsed(totalSeconds: number): string {
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
+}
+
 export function SessionLogger() {
   const { id } = useParams<{ id: string }>();
   const sessionId = Number(id);
@@ -23,6 +32,7 @@ export function SessionLogger() {
   const [pendingRemove, setPendingRemove] = useState<{ exerciseId: number; setId: number } | null>(null);
   const [completeStage, setCompleteStage] = useState<CompleteStage>('closed');
   const [isCompleting, setIsCompleting] = useState(false);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   useEffect(() => {
     sessionsApi
@@ -34,6 +44,17 @@ export function SessionLogger() {
       .catch((err) => setError(err instanceof ApiError ? err.message : 'Failed to load session'))
       .finally(() => setIsLoading(false));
   }, [sessionId]);
+
+  // anchored to session.date (set server-side at start/resume) rather than component-mount time,
+  // so the timer shows real elapsed time and survives a refresh instead of resetting to zero
+  useEffect(() => {
+    if (!session) return;
+    const startTime = new Date(session.date).getTime();
+    const tick = () => setElapsedSeconds(Math.max(0, Math.floor((Date.now() - startTime) / 1000)));
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [session?.date]);
 
   function updateExercise(exerciseId: number, updater: (ex: SessionExerciseDetail) => SessionExerciseDetail) {
     setSession((prev) =>
@@ -152,6 +173,8 @@ export function SessionLogger() {
 
   return (
     <div>
+      <div className="session-timer-label">Time elapsed</div>
+      <div className="session-timer">{formatElapsed(elapsedSeconds)}</div>
       <h1 style={{ fontSize: 24, marginBottom: 4 }}>
         Week {session.weekNumber} · Day {session.dayNumber}
       </h1>
@@ -173,7 +196,7 @@ export function SessionLogger() {
                 onClick={() => toggleExpand(exercise.id)}
                 aria-expanded={isExpanded}
               >
-                <span className="program-row-name">{programExercise.name}</span>
+                <span className="program-row-name">{programExercise.exercise.name}</span>
                 <span className={`badge ${doneCount === total && total > 0 ? 'green' : 'grey'}`}>
                   {doneCount}/{total}
                 </span>
@@ -181,6 +204,12 @@ export function SessionLogger() {
 
               {isExpanded && (
                 <div className="program-expanded">
+                  {prefill?.[programExercise.id] && (
+                    <p className="prefill-notice">Prefilled from your last session — check before marking done</p>
+                  )}
+                  {programExercise.exercise.description && (
+                    <p className="ex-description">{programExercise.exercise.description}</p>
+                  )}
                   <p className="target-line">
                     Target: {programExercise.targetSets ?? '–'}×{programExercise.targetReps ?? '–'}
                     {programExercise.targetWeight ? ` @ ${programExercise.targetWeight}kg` : ''}

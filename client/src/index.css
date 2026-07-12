@@ -112,6 +112,13 @@ a {
   font-weight: 300;
 }
 
+.ex-description {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
 .ex-reps-num {
   font-family: var(--font-display);
   font-size: 22px;
@@ -829,6 +836,29 @@ a {
 }
 
 /* Session logger */
+.session-timer-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.session-timer {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.prefill-notice {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: 8px;
+}
+
 .target-line {
   font-size: 14px;
   margin-bottom: 4px;
@@ -847,18 +877,32 @@ a {
   align-items: center;
   gap: 6px;
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px;
 }
 
 .set-row.completed {
-  border-color: rgba(212, 245, 60, 0.3);
+  background: rgba(212, 245, 60, 0.06);
 }
 
 .set-number {
   font-size: 11px;
   color: var(--muted);
+}
+
+.set-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.set-field-label {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 2px;
 }
 
 .set-input {

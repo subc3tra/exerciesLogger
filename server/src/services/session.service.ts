@@ -74,7 +74,22 @@ export async function getSessionById(id: number, userId: number) {
       exercises: {
         select: {
           id: true,
-          programExercise: true,
+          programExercise: {
+            select: {
+              id: true,
+              exerciseId: true,
+              targetSets: true,
+              targetReps: true,
+              targetWeight: true,
+              unit: true,
+              notes: true,
+              order: true,
+              sectionId: true,
+              exercise: {
+                select: { id: true, name: true, category: true, description: true }
+              }
+            }
+          },
           sets: {
           select: {
             id: true,
@@ -113,7 +128,6 @@ export async function startSession(userId: number, programId: number) {
               exercises: {
                 select: {
                 id: true,
-                name: true,
                 targetSets: true,
                 targetReps: true,
                 targetWeight: true,

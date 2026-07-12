@@ -9,7 +9,18 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
-    version: '1.0.0',
+    version: '0.1.1',
+    date: '2026-07-12',
+    title: "Update: 0.1.2",
+    changes: [
+      'Exercises now come from a shared library with clear names and descriptions.',
+      'Added a timer showing how long your session has been going.',
+      "Last session's numbers now prefill for real, not just as a hint.",
+      'Cleaner set rows with labels on reps, weight, and duration.',
+    ],
+  },
+  {
+    version: '0.1.0',
     date: '2026-07-06',
     title: "What's new",
     changes: [

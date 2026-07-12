@@ -41,57 +41,20 @@
  *   ignored, it won't error, so a typo'd field name just quietly does nothing.
  * - Don't set `order` anywhere — it's computed automatically from each item's
  *   position in its array, so the array order IS the workout order.
- * - An exercise's `name` must match an entry in `server/docs/exercise-list.md`
- *   (the seeded global exercise bank) exactly, case-insensitive — the script
- *   resolves each name to its `Exercise.id` before writing anything. If a name
- *   doesn't match, it fails fast and lists every unmatched name, rather than
- *   creating a partial program. If the exercise genuinely doesn't exist yet,
- *   add it to `add.exercises.ts` and re-run that seed first.
  * ============================================================================
  */
 
 const PROGRAM_DATA = {
-  username: null as string | null, // MATTIAS: set this — the AI leaves it null on purpose
+  username: 'subc3tra' as string | null, // MATTIAS: set this — the AI leaves it null on purpose
 
-  name: 'Example Program', // e.g. "Styrka & Form"
-  totalWeeks: 4, // how many weeks this program runs before it's considered complete
-  daysPerWeek: 2, // MUST equal days.length below
+  name: 'Styrka 3-dagar',
+  totalWeeks: 2,
+  daysPerWeek: 3,
 
   days: [
     {
-      name: 'Day A', // e.g. "Push Day", "Workout 1"
-      dayLabel: null as string | null, // optional short label, e.g. "Mån + Fre"
-      duration: null as string | null, // optional, e.g. "ca 50 min"
-      sections: [
-        {
-          name: 'Main Workout', // e.g. "Superset 1 - Uppvärmning"
-          zone: null as string | null, // optional, e.g. "Zon 1 - TRX-stationen"
-          sets: null as number | null, // optional target sets for the whole section
-          restSecs: null as number | null, // optional rest between sets, in seconds
-          exercises: [
-            {
-              name: 'Barbell Squat',
-              targetSets: 3,
-              targetReps: '8', // string — see rules above
-              targetWeight: null as number | null, // starting weight baseline, or null
-              unit: 'reps' as 'reps' | 's' | 'm',
-              notes: null as string | null, // optional coaching note, e.g. "go slow on the way down"
-            },
-            {
-              name: 'Plank',
-              targetSets: 3,
-              targetReps: '30s',
-              targetWeight: null as number | null,
-              unit: 's' as 'reps' | 's' | 'm',
-              notes: null as string | null,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Day B',
-      dayLabel: null as string | null,
+      name: 'Mandag - Ben + Overkropp',
+      dayLabel: 'Man',
       duration: null as string | null,
       sections: [
         {
@@ -101,9 +64,127 @@ const PROGRAM_DATA = {
           restSecs: null as number | null,
           exercises: [
             {
-              name: 'Deadlift',
+              name: 'Zercher Squat',
+              targetSets: 3,
+              targetReps: '5',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Bench Press',
               targetSets: 3,
               targetReps: '6',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Face Pulls',
+              targetSets: 3,
+              targetReps: '15',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Triceps Pushdown',
+              targetSets: 3,
+              targetReps: '10-12',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Onsdag - Push + Rygg',
+      dayLabel: 'Ons',
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Bench Press',
+              targetSets: 3,
+              targetReps: '6-8',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Overhead Press',
+              targetSets: 3,
+              targetReps: '6-8',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Barbell Bicep Curl',
+              targetSets: 3,
+              targetReps: '10-12',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: 'Hammer eller wrist curl',
+            },
+            {
+              name: 'Back Extension',
+              targetSets: 3,
+              targetReps: '10',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Fredag - Ben + Drag',
+      dayLabel: 'Fre',
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Zercher Deadlift',
+              targetSets: 3,
+              targetReps: '5',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Overhead Press',
+              targetSets: 3,
+              targetReps: '6-8',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Face Pulls',
+              targetSets: 3,
+              targetReps: '15',
+              targetWeight: null as number | null,
+              unit: 'reps' as 'reps' | 's' | 'm',
+              notes: null as string | null,
+            },
+            {
+              name: 'Lat Pulldown',
+              targetSets: 3,
+              targetReps: '10',
               targetWeight: null as number | null,
               unit: 'reps' as 'reps' | 's' | 'm',
               notes: null as string | null,

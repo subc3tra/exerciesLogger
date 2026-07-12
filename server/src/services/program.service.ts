@@ -38,13 +38,15 @@ export async function getProgramById(id: number, userId: number) {
                 orderBy: { order: 'asc' },
                 select: {
                   id: true,
-                  name: true,
                   targetSets: true,
                   targetReps: true,
                   targetWeight: true,
                   unit: true,
                   notes: true,
-                  order: true
+                  order: true,
+                  exercise: {
+                    select: { id: true, name: true, category: true }
+                  }
                 }
               }
             }
@@ -131,13 +133,15 @@ export async function getDayById(id: number, userId: number) {
             orderBy: { order: 'asc' },
             select: {
               id: true,
-              name: true,
               targetSets: true,
               targetReps: true,
               targetWeight: true,
               unit: true,
               notes: true,
-              order: true
+              order: true,
+              exercise: {
+                select: { id: true, name: true, category: true }
+              }
             }
           }
         }

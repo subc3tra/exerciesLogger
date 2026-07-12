@@ -37,7 +37,7 @@ function buildSchedule(detail: ProgramDetail, progress: ProgramProgress): Schedu
 }
 
 function exerciseSummary(day: ProgramDay): string {
-  return day.sections.flatMap((s) => s.exercises.map((e) => e.name)).join(', ');
+  return day.sections.flatMap((s) => s.exercises.map((e) => e.exercise.name)).join(', ');
 }
 
 export function Dashboard() {
@@ -217,7 +217,7 @@ export function Dashboard() {
                                             {section.exercises.map((exercise) => (
                                               <div key={exercise.id} className="exercise">
                                                 <div>
-                                                  <div className="ex-name">{exercise.name}</div>
+                                                  <div className="ex-name">{exercise.exercise.name}</div>
                                                   {exercise.notes && <div className="ex-note">{exercise.notes}</div>}
                                                 </div>
                                                 <div>

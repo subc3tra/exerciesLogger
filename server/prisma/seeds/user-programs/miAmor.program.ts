@@ -47,7 +47,7 @@ const PROGRAM_DATA = {
           restSecs: 150,
           exercises: [
             {
-              name: 'Marklyft',
+              name: 'Deadlift',
               targetSets: 4,
               targetReps: '4',
               targetWeight: null,
@@ -63,12 +63,12 @@ const PROGRAM_DATA = {
           restSecs: 90,
           exercises: [
             {
-              name: 'Back Extension (viktad)',
+              name: 'Back Extension',
               targetSets: 3,
               targetReps: '10',
               targetWeight: null,
               unit: 'reps' as 'reps' | 's' | 'm',
-              notes: 'Håll 2s i topp. Kontrollerat ned. Öka vikt när alla reps känns lätta.',
+              notes: 'Viktad. Håll 2s i topp. Kontrollerat ned. Öka vikt när alla reps känns lätta.',
             },
             {
               name: 'Face Pulls',
@@ -126,7 +126,7 @@ const PROGRAM_DATA = {
           restSecs: 120,
           exercises: [
             {
-              name: 'Bänkpress',
+              name: 'Bench Press',
               targetSets: 4,
               targetReps: '5',
               targetWeight: null,
@@ -142,7 +142,7 @@ const PROGRAM_DATA = {
           restSecs: 75,
           exercises: [
             {
-              name: 'DB / Cable Row (enarms)',
+              name: 'Single-Arm Dumbbell Row',
               targetSets: 3,
               targetReps: '10',
               targetWeight: null,
@@ -150,12 +150,12 @@ const PROGRAM_DATA = {
               notes: 'Balanserar bänken. Full ROM. Skulderblad ihop i topp.',
             },
             {
-              name: 'Close Grip Bänkpress / Skull Crusher',
+              name: 'Skull Crusher',
               targetSets: 3,
               targetReps: '10',
               targetWeight: null,
               unit: 'reps' as 'reps' | 's' | 'm',
-              notes: 'Triceps accessory. Välj det som känns bättre för armbågarna.',
+              notes: 'Triceps accessory.',
             },
             {
               name: 'Face Pulls',
@@ -205,7 +205,7 @@ const PROGRAM_DATA = {
           restSecs: 120,
           exercises: [
             {
-              name: 'Militärpress (stående)',
+              name: 'Overhead Press',
               targetSets: 4,
               targetReps: '5',
               targetWeight: null,
@@ -237,12 +237,12 @@ const PROGRAM_DATA = {
               notes: 'Lätt–medel vikt. Kontrollerat ned. Armbågen lätt böjd.',
             },
             {
-              name: 'Back Extension (viktad)',
+              name: 'Back Extension',
               targetSets: 3,
               targetReps: '10',
               targetWeight: null,
               unit: 'reps' as 'reps' | 's' | 'm',
-              notes: 'Samma som Pass A. Håll konsistent vikt för att spåra progression.',
+              notes: 'Viktad. Samma som Pass A. Håll konsistent vikt för att spåra progression.',
             },
           ],
         },
@@ -275,6 +275,24 @@ async function main() {
     throw new Error(`User "${PROGRAM_DATA.username}" not found — create them first with user.template.ts.`);
   }
 
+  // resolve every exercise name to its global bank id — fail fast, before writing anything,
+  // if any name doesn't match the seeded exercise bank exactly (case-insensitive)
+  const allNames = PROGRAM_DATA.days.flatMap((day) =>
+    day.sections.flatMap((section) => section.exercises.map((exercise) => exercise.name))
+  );
+  const bankExercises = await prisma.exercise.findMany({
+    where: { userId: null },
+    select: { id: true, name: true },
+  });
+  const exerciseIdByName = new Map(bankExercises.map((e) => [e.name.toLowerCase(), e.id]));
+
+  const missing = [...new Set(allNames)].filter((name) => !exerciseIdByName.has(name.toLowerCase()));
+  if (missing.length > 0) {
+    throw new Error(
+      `Exercise(s) not found in the bank: ${missing.join(', ')}. Add them to add.exercises.ts and re-run that seed first, or fix the name to match exactly.`
+    );
+  }
+
   const program = await prisma.program.create({
     data: {
       name: PROGRAM_DATA.name,
@@ -296,7 +314,7 @@ async function main() {
               order: sectionIndex,
               exercises: {
                 create: section.exercises.map((exercise, exerciseIndex) => ({
-                  name: exercise.name,
+                  exerciseId: exerciseIdByName.get(exercise.name.toLowerCase())!,
                   targetSets: exercise.targetSets,
                   targetReps: exercise.targetReps,
                   targetWeight: exercise.targetWeight,

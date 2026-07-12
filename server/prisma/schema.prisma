@@ -13,6 +13,7 @@ model User {
   password  String    // bcrypt hash
   programs  Program[]
   sessions  Session[]
+  exercise  Exercise[]
   createdAt DateTime  @default(now())
 }
 
@@ -62,7 +63,8 @@ model Section {
 
 model ProgramExercise {
   id               Int               @id @default(autoincrement())
-  name             String
+  exerciseId       Int
+  exercise         Exercise          @relation(fields: [exerciseId], references: [id])
   targetSets       Int?              // e.g. 3
   targetReps       String?           // flexible: "6–8", "20s", "30m"
   targetWeight     Float?            // starting weight baseline
@@ -72,6 +74,28 @@ model ProgramExercise {
   sectionId        Int
   section          Section           @relation(fields: [sectionId], references: [id])
   sessionExercises SessionExercise[]
+}
+
+enum ExerciseCategory {
+  CHEST
+  BACK
+  LEGS
+  SHOULDERS
+  ARMS
+  CORE
+  CARDIO
+}
+
+model Exercise {
+  id               Int               @id @default(autoincrement())
+  name             String            // stored in swedish, no translation layer
+  description      String?           // description of exercise like steps and tips
+  link             String?           // link to instruction video, youtube etc
+  category         ExerciseCategory  // English code; front end maps to swedish for display
+  userId           Int?              // null = global (admin-seed), set = user-private custom
+  user             User?             @relation(fields: [userId], references: [id])
+  programExercises ProgramExercise[] 
+  createdAt        DateTime          @default(now())
 }
 
 model Session {
