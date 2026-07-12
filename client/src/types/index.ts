@@ -9,6 +9,7 @@ export interface ExerciseRef {
   id: number;
   name: string;
   category: ExerciseCategory;
+  description: string | null;
 }
 
 export interface User {

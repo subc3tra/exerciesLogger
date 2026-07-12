@@ -86,7 +86,7 @@ export async function getSessionById(id: number, userId: number) {
               order: true,
               sectionId: true,
               exercise: {
-                select: { id: true, name: true, category: true }
+                select: { id: true, name: true, category: true, description: true }
               }
             }
           },

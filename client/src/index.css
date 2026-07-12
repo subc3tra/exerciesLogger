@@ -112,6 +112,13 @@ a {
   font-weight: 300;
 }
 
+.ex-description {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
 .ex-reps-num {
   font-family: var(--font-display);
   font-size: 22px;

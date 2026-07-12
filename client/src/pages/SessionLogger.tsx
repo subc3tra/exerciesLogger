@@ -207,6 +207,9 @@ export function SessionLogger() {
                   {prefill?.[programExercise.id] && (
                     <p className="prefill-notice">Prefilled from your last session — check before marking done</p>
                   )}
+                  {programExercise.exercise.description && (
+                    <p className="ex-description">{programExercise.exercise.description}</p>
+                  )}
                   <p className="target-line">
                     Target: {programExercise.targetSets ?? '–'}×{programExercise.targetReps ?? '–'}
                     {programExercise.targetWeight ? ` @ ${programExercise.targetWeight}kg` : ''}
