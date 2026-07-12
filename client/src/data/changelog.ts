@@ -17,6 +17,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Added a timer showing how long your session has been going.',
       "Last session's numbers now prefill for real, not just as a hint.",
       'Cleaner set rows with labels on reps, weight, and duration.',
+      'Added description for each exercise.'
     ],
   },
   {
