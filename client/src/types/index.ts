@@ -3,6 +3,14 @@
 
 export type ProgramStatus = 'ACTIVE' | 'ARCHIVED';
 
+export type ExerciseCategory = 'CHEST' | 'BACK' | 'LEGS' | 'SHOULDERS' | 'ARMS' | 'CORE' | 'CARDIO';
+
+export interface ExerciseRef {
+  id: number;
+  name: string;
+  category: ExerciseCategory;
+}
+
 export interface User {
   id: number;
   username: string;
@@ -22,7 +30,7 @@ export interface Program {
 
 export interface ProgramExerciseTemplate {
   id: number;
-  name: string;
+  exercise: ExerciseRef;
   targetSets: number | null;
   targetReps: string | null;
   targetWeight: number | null;
@@ -70,8 +78,9 @@ export interface SessionSet {
   notes: string | null;
 }
 
-// full ProgramExercise model — this is what comes back unselected via SessionExercise.programExercise
+// ProgramExercise + nested exercise — what comes back via SessionExercise.programExercise
 export interface ProgramExerciseFull extends ProgramExerciseTemplate {
+  exerciseId: number;
   sectionId: number;
 }
 

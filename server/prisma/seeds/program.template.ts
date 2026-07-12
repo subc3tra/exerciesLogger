@@ -41,6 +41,12 @@
  *   ignored, it won't error, so a typo'd field name just quietly does nothing.
  * - Don't set `order` anywhere — it's computed automatically from each item's
  *   position in its array, so the array order IS the workout order.
+ * - An exercise's `name` must match an entry in `server/docs/exercise-list.md`
+ *   (the seeded global exercise bank) exactly, case-insensitive — the script
+ *   resolves each name to its `Exercise.id` before writing anything. If a name
+ *   doesn't match, it fails fast and lists every unmatched name, rather than
+ *   creating a partial program. If the exercise genuinely doesn't exist yet,
+ *   add it to `add.exercises.ts` and re-run that seed first.
  * ============================================================================
  */
 
@@ -64,7 +70,7 @@ const PROGRAM_DATA = {
           restSecs: null as number | null, // optional rest between sets, in seconds
           exercises: [
             {
-              name: 'Back Squat',
+              name: 'Barbell Squat',
               targetSets: 3,
               targetReps: '8', // string — see rules above
               targetWeight: null as number | null, // starting weight baseline, or null
@@ -133,6 +139,24 @@ async function main() {
     throw new Error(`User "${PROGRAM_DATA.username}" not found — create them first with user.template.ts.`);
   }
 
+  // resolve every exercise name to its global bank id — fail fast, before writing anything,
+  // if any name doesn't match the seeded exercise bank exactly (case-insensitive)
+  const allNames = PROGRAM_DATA.days.flatMap((day) =>
+    day.sections.flatMap((section) => section.exercises.map((exercise) => exercise.name))
+  );
+  const bankExercises = await prisma.exercise.findMany({
+    where: { userId: null },
+    select: { id: true, name: true },
+  });
+  const exerciseIdByName = new Map(bankExercises.map((e) => [e.name.toLowerCase(), e.id]));
+
+  const missing = [...new Set(allNames)].filter((name) => !exerciseIdByName.has(name.toLowerCase()));
+  if (missing.length > 0) {
+    throw new Error(
+      `Exercise(s) not found in the bank: ${missing.join(', ')}. Add them to add.exercises.ts and re-run that seed first, or fix the name to match exactly.`
+    );
+  }
+
   const program = await prisma.program.create({
     data: {
       name: PROGRAM_DATA.name,
@@ -154,7 +178,7 @@ async function main() {
               order: sectionIndex,
               exercises: {
                 create: section.exercises.map((exercise, exerciseIndex) => ({
-                  name: exercise.name,
+                  exerciseId: exerciseIdByName.get(exercise.name.toLowerCase())!,
                   targetSets: exercise.targetSets,
                   targetReps: exercise.targetReps,
                   targetWeight: exercise.targetWeight,

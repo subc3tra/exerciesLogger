@@ -72,7 +72,7 @@ const PROGRAM_DATA = {
               notes: null as string | null,
             },
             {
-              name: 'Bankpress',
+              name: 'Bench Press',
               targetSets: 3,
               targetReps: '6',
               targetWeight: null as number | null,
@@ -111,7 +111,7 @@ const PROGRAM_DATA = {
           restSecs: null as number | null,
           exercises: [
             {
-              name: 'Bankpress',
+              name: 'Bench Press',
               targetSets: 3,
               targetReps: '6-8',
               targetWeight: null as number | null,
@@ -119,7 +119,7 @@ const PROGRAM_DATA = {
               notes: null as string | null,
             },
             {
-              name: 'Militarpress',
+              name: 'Overhead Press',
               targetSets: 3,
               targetReps: '6-8',
               targetWeight: null as number | null,
@@ -127,7 +127,7 @@ const PROGRAM_DATA = {
               notes: null as string | null,
             },
             {
-              name: 'Underarmscurl',
+              name: 'Barbell Bicep Curl',
               targetSets: 3,
               targetReps: '10-12',
               targetWeight: null as number | null,
@@ -166,7 +166,7 @@ const PROGRAM_DATA = {
               notes: null as string | null,
             },
             {
-              name: 'Militarpress',
+              name: 'Overhead Press',
               targetSets: 3,
               targetReps: '6-8',
               targetWeight: null as number | null,
@@ -220,6 +220,24 @@ async function main() {
     throw new Error(`User "${PROGRAM_DATA.username}" not found — create them first with user.template.ts.`);
   }
 
+  // resolve every exercise name to its global bank id — fail fast, before writing anything,
+  // if any name doesn't match the seeded exercise bank exactly (case-insensitive)
+  const allNames = PROGRAM_DATA.days.flatMap((day) =>
+    day.sections.flatMap((section) => section.exercises.map((exercise) => exercise.name))
+  );
+  const bankExercises = await prisma.exercise.findMany({
+    where: { userId: null },
+    select: { id: true, name: true },
+  });
+  const exerciseIdByName = new Map(bankExercises.map((e) => [e.name.toLowerCase(), e.id]));
+
+  const missing = [...new Set(allNames)].filter((name) => !exerciseIdByName.has(name.toLowerCase()));
+  if (missing.length > 0) {
+    throw new Error(
+      `Exercise(s) not found in the bank: ${missing.join(', ')}. Add them to add.exercises.ts and re-run that seed first, or fix the name to match exactly.`
+    );
+  }
+
   const program = await prisma.program.create({
     data: {
       name: PROGRAM_DATA.name,
@@ -241,7 +259,7 @@ async function main() {
               order: sectionIndex,
               exercises: {
                 create: section.exercises.map((exercise, exerciseIndex) => ({
-                  name: exercise.name,
+                  exerciseId: exerciseIdByName.get(exercise.name.toLowerCase())!,
                   targetSets: exercise.targetSets,
                   targetReps: exercise.targetReps,
                   targetWeight: exercise.targetWeight,

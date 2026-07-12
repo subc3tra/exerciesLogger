@@ -173,7 +173,7 @@ export function SessionLogger() {
                 onClick={() => toggleExpand(exercise.id)}
                 aria-expanded={isExpanded}
               >
-                <span className="program-row-name">{programExercise.name}</span>
+                <span className="program-row-name">{programExercise.exercise.name}</span>
                 <span className={`badge ${doneCount === total && total > 0 ? 'green' : 'grey'}`}>
                   {doneCount}/{total}
                 </span>
