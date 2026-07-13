@@ -29,7 +29,8 @@ const router = Router();
  *         description: User already exists
  */
 
-router.post('/register', register)
+// commented out this route for now under testing phase
+// router.post('/register', register)
 
 /**
  * @swagger
