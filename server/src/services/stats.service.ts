@@ -41,5 +41,15 @@ export async function getStatsOverview(userId:number) {
       };
     }
     return heaviest;
-  }, null as { weight: number, exerciseName: string, date: Date } | null)
+  }, null as { weight: number, exerciseName: string, date: Date } | null);
+
+  const totalSessionCompleted = await prisma.session.count({
+    where: { userId, completed: true}
+  });
+
+  return {
+    totalVolumeKg,
+    heaviestLift,
+    totalSessionCompleted
+  }
 }
