@@ -18,6 +18,10 @@
 **Category:** CHEST
 **Description:** Unilateral or bilateral horizontal press using a cable machine, typically set at chest height. Provides constant tension throughout the range of motion, making it effective for chest hypertrophy with less joint loading than a barbell.
 
+### Scapular Push Up
+**Category:** CHEST
+**Description:** Bodyweight movement performed from a push-up or plank position, moving only through the shoulder blades — elbows stay locked while the scapula protracts and retracts. Isolates the serratus anterior and lower trapezius; commonly used as a warm-up or corrective drill to build scapular control and shoulder stability, especially useful for overhead athletes or as injury-prevention work.
+
 ---
 
 ## BACK
