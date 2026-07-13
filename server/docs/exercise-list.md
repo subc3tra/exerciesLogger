@@ -2,15 +2,15 @@
 
 ## CHEST
 
-### Bänkpress
+### Bench Press
 **Category:** CHEST
 **Description:** Barbell bench press performed flat, targeting the pectorals, anterior deltoids, and triceps. Set up with shoulder-blade retraction and a slight arch; lower the bar to mid-chest with control before pressing. A foundational horizontal push movement.
 
-### Close Grip Bänkpress
+### Close-Grip Bench Press
 **Category:** CHEST
 **Description:** Barbell bench press with a narrower grip (roughly shoulder-width), shifting emphasis toward the triceps while still engaging the chest and anterior deltoid. Keep elbows closer to the body than a standard bench press to protect the wrists and maximize tricep recruitment.
 
-### Incline Dumbbell Chest Press (neutral grip, ~30°)
+### Incline Dumbbell Chest Press
 **Category:** CHEST
 **Description:** Dumbbell press on a bench set to approximately 30 degrees, with palms facing each other. The incline angle increases upper chest and anterior deltoid involvement; neutral grip reduces shoulder stress compared to a pronated grip.
 
@@ -22,7 +22,7 @@
 
 ## BACK
 
-### Marklyft
+### Deadlift
 **Category:** BACK
 **Description:** Conventional barbell deadlift from the floor, training the entire posterior chain — erectors, glutes, hamstrings, and upper back. Brace hard, maintain a neutral spine, and drive the floor away rather than pulling the bar up.
 
@@ -66,7 +66,7 @@
 
 ## LEGS
 
-### Knäböj (Barbell Squat)
+### Barbell Squat
 **Category:** LEGS
 **Description:** Hip-width barbell back squat, the cornerstone lower-body strength movement targeting quads, glutes, and adductors. Brace the core, sit into the hips, and drive the knees out over the toes; depth should reach at least parallel.
 
@@ -128,7 +128,7 @@
 
 ## SHOULDERS
 
-### Militärpress
+### Overhead Press
 **Category:** SHOULDERS
 **Description:** Standing overhead barbell press targeting the deltoids, triceps, and upper pectorals, with significant core and full-body stabilization demand. Press the bar in a straight vertical path; squeeze glutes and brace the core to avoid lumbar hyperextension.
 
@@ -152,7 +152,7 @@
 
 ## ARMS
 
-### Underarmscurl (Bicep Curl)
+### Barbell Bicep Curl
 **Category:** ARMS
 **Description:** Standard barbell or dumbbell curl targeting the biceps and brachialis. Keep the elbows fixed at the sides and avoid swinging; a full range of motion including the bottom stretch maximizes hypertrophy stimulus.
 
@@ -196,15 +196,15 @@
 
 ## CARDIO
 
-### Roddmaskin (Rowing Machine)
+### Rowing Machine
 **Category:** CARDIO
 **Description:** Full-body cardiovascular exercise on an ergometer, engaging the legs, core, and upper body in sequence. Low impact on the joints; excellent for conditioning and active recovery. Drive with the legs first, then lean back and pull the handle to the lower chest.
 
-### Cykel (Stationary Bike)
+### Stationary Bike
 **Category:** CARDIO
 **Description:** Low-impact cardiovascular exercise performed on an upright or recumbent stationary bike. Allows sustained aerobic work with minimal joint stress; useful as a warm-up, LISS, or interval training tool.
 
-### Löpband (Treadmill)
+### Treadmill
 **Category:** CARDIO
 **Description:** Walking or running on a motorized belt at a controlled speed and incline. Versatile for warm-ups, steady-state cardio, or interval sessions; incline walking is a joint-friendly alternative to running for lower-body conditioning.
 

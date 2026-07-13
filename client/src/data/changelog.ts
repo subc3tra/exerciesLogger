@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.1.3',
+    date: '2026-07-13',
+    title: 'Update: 0.1.3',
+    changes: [
+      'Added a rest timer — starts counting down the moment you tick a set done, with a sound (and vibration on Android) when time is up.',
+      'Rest timer length is editable at the top of your session and remembers your setting next time.',
+      'Timed exercises now have a Start button: 3s countdown, then times you live and logs the result when you hit Stop.',
+    ],
+  },
+  {
     version: '0.1.1',
     date: '2026-07-12',
     title: "Update: 0.1.2",
