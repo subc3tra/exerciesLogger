@@ -172,3 +172,10 @@ export interface UpdateSetResponse {
 export interface ApiErrorResponse {
   message: string;
 }
+
+// GET /api/stats/overview
+export interface StatsOverview {
+  totalVolumeKg: number;
+  heaviestLift: { weight: number; exerciseName: string; date: string } | null;
+  totalSessionsCompleted: number;
+}

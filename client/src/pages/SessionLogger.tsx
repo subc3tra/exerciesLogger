@@ -4,6 +4,8 @@ import { sessionsApi, ApiError } from '../services/api';
 import type { Prefill, SessionDetail, SessionExerciseDetail } from '../types';
 import { SetRow } from '../components/SetRow';
 import { ConfirmDialog } from '../components/ConfirmDialog';
+import { RestTimer } from '../components/RestTimer';
+import { useRestTimer } from '../hooks/useRestTimer';
 
 type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
 type CompleteStage = 'closed' | 'confirm' | 'incomplete-warning';
@@ -33,6 +35,7 @@ export function SessionLogger() {
   const [completeStage, setCompleteStage] = useState<CompleteStage>('closed');
   const [isCompleting, setIsCompleting] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const restTimer = useRestTimer();
 
   useEffect(() => {
     sessionsApi
@@ -94,6 +97,7 @@ export function SessionLogger() {
       ...ex,
       sets: ex.sets.map((s) => (s.id === setId ? { ...s, ...(next ? fields : undefined), completed: next } : s)),
     }));
+    if (next) restTimer.start();
     try {
       await sessionsApi.updateSet(sessionId, setId, {
         ...(next ? fields : undefined),
@@ -175,6 +179,27 @@ export function SessionLogger() {
     <div>
       <div className="session-timer-label">Time elapsed</div>
       <div className="session-timer">{formatElapsed(elapsedSeconds)}</div>
+
+      <div className="rest-duration-editor">
+        <label className="rest-duration-label" htmlFor="rest-duration-input">
+          Rest timer
+        </label>
+        <input
+          id="rest-duration-input"
+          className="rest-duration-input"
+          type="number"
+          inputMode="numeric"
+          min={5}
+          step={5}
+          value={restTimer.duration}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            if (Number.isFinite(value) && value > 0) restTimer.setDuration(value);
+          }}
+        />
+        <span className="rest-duration-suffix">sec</span>
+      </div>
+
       <h1 style={{ fontSize: 24, marginBottom: 4 }}>
         Week {session.weekNumber} · Day {session.dayNumber}
       </h1>
@@ -288,6 +313,8 @@ export function SessionLogger() {
         onConfirm={handleMarkAllAndComplete}
         onCancel={() => setCompleteStage('closed')}
       />
+
+      {restTimer.isRunning && <RestTimer secondsLeft={restTimer.secondsLeft} onDismiss={restTimer.dismiss} />}
     </div>
   );
 }

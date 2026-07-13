@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { PrefillSetEntry, SessionSet } from '../types';
 
 type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
 type FieldValues = Partial<Record<NumericField, number | null>>;
+type TimerPhase = 'idle' | 'countdown' | 'running';
+
+function formatTimerSeconds(total: number): string {
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return m > 0 ? `${m}:${s.toString().padStart(2, '0')}` : `${s}s`;
+}
 
 interface SetRowProps {
   set: SessionSet;
@@ -38,11 +45,54 @@ export function SetRow({ set, unit, target, previous, onFieldCommit, onToggleCom
   const [duration, setDuration] = useState(initialValue(set.duration, previous?.duration ?? null, targetNumber));
   const [distance, setDistance] = useState(initialValue(set.distance, previous?.distance ?? null, targetNumber));
 
+  const [timerPhase, setTimerPhase] = useState<TimerPhase>('idle');
+  const [countdownValue, setCountdownValue] = useState(3);
+  const [timerElapsed, setTimerElapsed] = useState(0);
+  const timerStartRef = useRef<number | null>(null);
+
   function commit(field: NumericField, raw: string) {
     const current = set[field];
     const parsed = raw === '' ? null : Number(raw);
     if (parsed === current) return;
     onFieldCommit(field, parsed);
+  }
+
+  useEffect(() => {
+    if (timerPhase === 'countdown') {
+      if (countdownValue <= 0) {
+        timerStartRef.current = Date.now();
+        setTimerPhase('running');
+        return;
+      }
+      const timeout = setTimeout(() => setCountdownValue((v) => v - 1), 1000);
+      return () => clearTimeout(timeout);
+    }
+    if (timerPhase === 'running') {
+      const interval = setInterval(() => {
+        if (timerStartRef.current) {
+          setTimerElapsed(Math.floor((Date.now() - timerStartRef.current) / 1000));
+        }
+      }, 250);
+      return () => clearInterval(interval);
+    }
+  }, [timerPhase, countdownValue]);
+
+  function handleTimerClick() {
+    if (timerPhase === 'idle') {
+      setCountdownValue(3);
+      setTimerElapsed(0);
+      setTimerPhase('countdown');
+      return;
+    }
+    if (timerPhase === 'countdown') {
+      setTimerPhase('idle');
+      return;
+    }
+    // running -> stop, log the measured time into the field
+    timerStartRef.current = null;
+    setTimerPhase('idle');
+    setDuration(String(timerElapsed));
+    commit('duration', String(timerElapsed));
   }
 
   function handleTick() {
@@ -73,9 +123,19 @@ export function SetRow({ set, unit, target, previous, onFieldCommit, onToggleCom
             type="number"
             inputMode="numeric"
             value={duration}
+            disabled={timerPhase !== 'idle'}
             onChange={(e) => setDuration(e.target.value)}
             onBlur={() => commit('duration', duration)}
           />
+          <button
+            type="button"
+            className={`set-timer-button ${timerPhase}`}
+            onClick={handleTimerClick}
+          >
+            {timerPhase === 'idle' && 'Start'}
+            {timerPhase === 'countdown' && countdownValue}
+            {timerPhase === 'running' && `Stop · ${formatTimerSeconds(timerElapsed)}`}
+          </button>
         </div>
       ) : unit === 'm' ? (
         <div className="set-field">
