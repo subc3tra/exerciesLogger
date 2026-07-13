@@ -78,7 +78,7 @@ const PROGRAM_DATA = {
               notes: null as string | null, // optional coaching note, e.g. "go slow on the way down"
             },
             {
-              name: 'Plank',
+              name: 'Treadmill',
               targetSets: 3,
               targetReps: '30s',
               targetWeight: null as number | null,
