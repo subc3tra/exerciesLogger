@@ -8,6 +8,7 @@ import type {
   SessionResponse,
   CompleteSessionResponse,
   UpdateSetResponse,
+  StatsOverview,
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
@@ -112,6 +113,10 @@ export const sessionsApi = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+};
+
+export const statsApi = {
+  getOverview: () => apiFetch<StatsOverview>('/stats/overview'),
 };
 
 export const feedbackApi = {

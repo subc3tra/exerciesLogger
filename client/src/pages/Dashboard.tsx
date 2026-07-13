@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { InfoBanner } from '../components/InfoBanner';
+import { StatsSummary } from '../components/StatsSummary';
 import { programsApi, sessionsApi, ApiError } from '../services/api';
 import type { Program, ProgramDay, ProgramDetail, ProgramProgress } from '../types';
 
@@ -120,8 +121,13 @@ export function Dashboard() {
     <div>
       <InfoBanner />
 
-      <h1 style={{ fontSize: 26, marginBottom: 4 }}>Welcome back, {user?.username}</h1>
-      <p style={{ color: 'var(--muted)', marginBottom: 24, fontSize: 13 }}>Your training programs</p>
+      <h1 style={{ fontSize: 26, marginBottom: 20 }}>Welcome back, {user?.username}</h1>
+
+      <div style={{ marginBottom: 28 }}>
+        <StatsSummary />
+      </div>
+
+      <h2 className="section-heading">Your Programs</h2>
 
       {isLoading && <p style={{ color: 'var(--muted)' }}>Loading programs…</p>}
       {error && <p style={{ color: 'var(--accent3)' }}>{error}</p>}

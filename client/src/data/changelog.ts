@@ -16,6 +16,9 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Added a rest timer — starts counting down the moment you tick a set done, with a sound (and vibration on Android) when time is up.',
       'Rest timer length is editable at the top of your session and remembers your setting next time.',
       'Timed exercises now have a Start button: 3s countdown, then times you live and logs the result when you hit Stop.',
+      'Dashboard now shows a stats summary: total weight lifted, your heaviest lift, and sessions completed.',
+      'Moved the feedback chat bubble to the bottom-right so it no longer overlaps the Complete Session button.',
+      'Cleaned up the Dashboard layout with clear section headers for Stats and Programs.',
     ],
   },
   {
