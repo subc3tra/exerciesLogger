@@ -1,22 +1,27 @@
-import { PrismaClient, ExerciseCategory } from '@prisma/client';
+import { PrismaClient, ExerciseCategory, TrackField } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 // ============================================================================
-// FROZEN (2026-07-13) — historical record of the original 45-exercise bootstrap.
-// Do not add to this array. New exercises and edits go through sync-exercises.ts.
+// EXERCISE DATA — this array is the source of truth. Edit docs/exercise-list.md
+// first, then mirror the change here, then run this script against whichever
+// environment needs it. Safe to rerun anytime, anywhere — matches by name
+// (case-insensitive) and updates in place rather than duplicating.
 // ============================================================================
 const EXERCISES: {
   name: string;
   category: ExerciseCategory;
   description?: string;
   link?: string;
+  trackedFields?: TrackField[]; // omit to use the category default below
 }[] = [
   // CHEST
   { name: 'Bench Press', category: 'CHEST', description: 'Barbell bench press performed flat, targeting the pectorals, anterior deltoids, and triceps. Set up with shoulder-blade retraction and a slight arch; lower the bar to mid-chest with control before pressing. A foundational horizontal push movement.' },
   { name: 'Close-Grip Bench Press', category: 'CHEST', description: 'Barbell bench press with a narrower grip (roughly shoulder-width), shifting emphasis toward the triceps while still engaging the chest and anterior deltoid. Keep elbows closer to the body than a standard bench press to protect the wrists and maximize tricep recruitment.' },
   { name: 'Incline Dumbbell Chest Press', category: 'CHEST', description: 'Dumbbell press on a bench set to approximately 30 degrees, with palms facing each other. The incline angle increases upper chest and anterior deltoid involvement; neutral grip reduces shoulder stress compared to a pronated grip.' },
   { name: 'Cable Chest Press', category: 'CHEST', description: 'Unilateral or bilateral horizontal press using a cable machine, typically set at chest height. Provides constant tension throughout the range of motion, making it effective for chest hypertrophy with less joint loading than a barbell.' },
+  { name: 'Scapular Push Up', category: 'CHEST', description: 'Bodyweight movement performed from a push-up or plank position, moving only through the shoulder blades — elbows stay locked while the scapula protracts and retracts. Isolates the serratus anterior and lower trapezius; commonly used as a warm-up or corrective drill to build scapular control and shoulder stability, especially useful for overhead athletes or as injury-prevention work.' },
+  { name: 'Dips', category: 'CHEST', description: 'Bodyweight or weighted dip performed on parallel bars, lowering the body until the upper arms are roughly parallel to the floor before pressing back up. Leaning the torso forward shifts emphasis toward the chest and front deltoids; staying upright targets the triceps more directly.' },
 
   // BACK
   { name: 'Deadlift', category: 'BACK', description: 'Conventional barbell deadlift from the floor, training the entire posterior chain — erectors, glutes, hamstrings, and upper back. Brace hard, maintain a neutral spine, and drive the floor away rather than pulling the bar up.' },
@@ -29,6 +34,8 @@ const EXERCISES: {
   { name: 'Single-Arm Dumbbell Row', category: 'BACK', description: 'Unilateral row with one knee and hand braced on a bench, pulling a dumbbell from a hanging position to the hip. Allows a large range of motion and heavy loading; targets the lats, rhomboids, and rear deltoid with reduced compensation from the opposite side.' },
   { name: 'Back Extension', category: 'BACK', description: 'Hyperextension movement performed on a back extension bench or GHD, training the erector spinae, glutes, and hamstrings. Can be loaded with a plate or kept bodyweight; hinge at the hips rather than rounding the spine.' },
   { name: 'Nordic Curl', category: 'BACK', description: 'Eccentric-dominant hamstring exercise where the feet are anchored and the body lowers toward the floor under control. One of the most effective exercises for hamstring injury prevention; extremely demanding — beginners typically need bands for assistance.' },
+  { name: 'Chin-Up', category: 'BACK', description: 'Bodyweight pull-up performed with an underhand (supinated) grip, emphasizing the lats and biceps more than a standard overhand pull-up. Pull until the chin clears the bar; add weight via a dip belt once bodyweight reps are no longer challenging.' },
+  { name: 'Shrugs', category: 'BACK', description: 'Barbell or dumbbell shrug lifting the shoulders straight up toward the ears to target the upper trapezius. Avoid rolling the shoulders — a straight vertical path keeps tension on the traps and reduces shoulder-joint strain.' },
 
   // LEGS
   { name: 'Barbell Squat', category: 'LEGS', description: 'Hip-width barbell back squat, the cornerstone lower-body strength movement targeting quads, glutes, and adductors. Brace the core, sit into the hips, and drive the knees out over the toes; depth should reach at least parallel.' },
@@ -44,6 +51,9 @@ const EXERCISES: {
   { name: 'Cable Hip Abduction', category: 'LEGS', description: 'Standing hip abduction using a low cable attachment, isolating the glutes (primarily gluteus medius) and hip abductors. Keep the torso upright and control the return to avoid compensating with the lower back.' },
   { name: 'Banded Lateral Walk', category: 'LEGS', description: 'Lateral stepping with a resistance band around the ankles or knees, activating the glute medius and hip abductors. Commonly used in warm-ups and rehab; maintain a slight squat position and level hips throughout.' },
   { name: 'Banded Clamshells', category: 'LEGS', description: 'Side-lying hip external rotation with a resistance band above the knees. Isolates the glute medius and external rotators; commonly used in warm-ups and injury prevention programs for the hip and knee.' },
+  { name: 'Leg Press', category: 'LEGS', description: 'Machine-based compound leg exercise pressing a weighted platform away from the body while seated in a reclined position. Allows heavy loading of the quads and glutes with less spinal loading and balance demand than a free-weight squat.' },
+  { name: 'Seated Leg Curl', category: 'LEGS', description: 'Hamstring isolation exercise performed seated on a machine, curling the lower legs down and back against resistance. The seated angle changes hip position relative to a lying leg curl, shifting the stretch and loading slightly higher in the hamstring.' },
+  { name: 'Sled Push/Pull', category: 'LEGS', description: 'Loaded sled driven forward (push) or dragged backward (pull) across a set distance, combining leg drive with a significant conditioning demand. Low eccentric loading makes it a joint-friendly way to build leg power and work capacity; distance and added weight are both easy to progress.', trackedFields: ['DISTANCE', 'WEIGHT'] },
 
   // SHOULDERS
   { name: 'Overhead Press', category: 'SHOULDERS', description: 'Standing overhead barbell press targeting the deltoids, triceps, and upper pectorals, with significant core and full-body stabilization demand. Press the bar in a straight vertical path; squeeze glutes and brace the core to avoid lumbar hyperextension.' },
@@ -57,6 +67,7 @@ const EXERCISES: {
   { name: 'Dumbbell Bicep Curl', category: 'ARMS', description: 'Unilateral or bilateral dumbbell curl allowing supination through the range of motion to fully engage the biceps. Dumbbells expose left-right strength imbalances and allow a natural wrist rotation compared to a fixed barbell grip.' },
   { name: 'Skull Crusher', category: 'ARMS', description: 'Lying tricep extension with a barbell or EZ-bar, lowering the weight toward the forehead by hinging at the elbows. Targets the long head of the triceps effectively; keep the elbows stable and pointed toward the ceiling throughout.' },
   { name: 'Triceps Pushdown', category: 'ARMS', description: 'Cable pushdown with a bar or rope attachment, isolating the triceps through elbow extension. The rope variant allows the hands to separate at the bottom for a stronger contraction; keep the elbows pinned to the sides.' },
+  { name: 'Hammer Curl', category: 'ARMS', description: 'Dumbbell curl performed with a neutral (palms-facing-in) grip throughout, shifting emphasis toward the brachialis and brachioradialis alongside the biceps. The neutral grip is also easier on the wrists than a standard curl for lifters with wrist discomfort.' },
 
   // CORE
   { name: 'Deadbug', category: 'CORE', description: 'Supine core stability exercise alternately lowering opposite arm and leg while maintaining a flat lower back against the floor. Trains deep anterior core (transverse abdominis) and anti-extension strength; slow and controlled reps are more effective than speed.' },
@@ -64,40 +75,56 @@ const EXERCISES: {
   { name: '90/90 Hip Rotation', category: 'CORE', description: 'Mobility drill in a seated 90/90 position rotating the pelvis and hips to transition between internal and external rotation. Targets hip joint mobility and the deep hip rotators; commonly used in warm-ups or between heavy compound sets.' },
   { name: 'Hip CARs (Controlled Articular Rotations)', category: 'CORE', description: 'Active mobility exercise moving the hip through its full available range of motion in a controlled circle. Used to build and maintain hip mobility and neuromuscular control; typically performed on hands and knees, keeping the spine still.' },
   { name: 'KB Swing', category: 'CORE', description: 'Hip-hinge power exercise with a kettlebell, driving through the glutes and hamstrings to project the bell forward. Trains explosive hip extension, posterior chain strength, and anti-flexion core stability; technique is critical — this is a hinge, not a squat.' },
+  { name: 'Farmers Carry', category: 'CORE', description: 'Loaded carry holding a heavy weight in each hand while walking a set distance, training grip, trunk stability, and total-body tension under load. Keep the ribcage stacked over the pelvis and avoid leaning to either side.', trackedFields: ['DISTANCE', 'WEIGHT'] },
+  { name: 'Plank', category: 'CORE', description: 'Isometric hold in a forearm or high-plank position, bracing the core to keep a straight line from shoulders to ankles. A foundational anti-extension exercise for core stability; hold duration is the primary progression.', trackedFields: ['DURATION'] },
+  { name: 'Cable Crunch', category: 'CORE', description: 'Kneeling cable crunch flexing the spine against resistance from a high pulley, isolating the rectus abdominis through a full range of motion. Curl through the spine rather than just bending at the hips to keep tension on the abs.' },
 
   // CARDIO
   { name: 'Rowing Machine', category: 'CARDIO', description: 'Full-body cardiovascular exercise on an ergometer, engaging the legs, core, and upper body in sequence. Low impact on the joints; excellent for conditioning and active recovery. Drive with the legs first, then lean back and pull the handle to the lower chest.' },
   { name: 'Stationary Bike', category: 'CARDIO', description: 'Low-impact cardiovascular exercise performed on an upright or recumbent stationary bike. Allows sustained aerobic work with minimal joint stress; useful as a warm-up, LISS, or interval training tool.' },
   { name: 'Treadmill', category: 'CARDIO', description: 'Walking or running on a motorized belt at a controlled speed and incline. Versatile for warm-ups, steady-state cardio, or interval sessions; incline walking is a joint-friendly alternative to running for lower-body conditioning.' },
   { name: 'Stepmaster / Stairclimber', category: 'CARDIO', description: 'Cardiovascular machine simulating stair climbing, loading the glutes, quads, and calves while elevating the heart rate. Higher glute recruitment than flat walking; intensity can be adjusted by speed and step height.' },
+  { name: 'Cardio (Walk/Bike/Swim)', category: 'CARDIO', description: "Generic low-to-moderate intensity steady-state cardio for general conditioning and active recovery — walking, cycling, or swimming, whichever's convenient. Intensity/pace is a program-specific note, not baked into the exercise itself." },
+
+  // RECOVERY
+  { name: 'Mobility & Stretching', category: 'RECOVERY', description: 'General mobility and stretching work — no fixed movement list, just time spent on joint mobility and flexibility. Track total duration only.', trackedFields: ['DURATION'] },
 ];
+
+function resolveTrackedFields(exercise: (typeof EXERCISES)[number]): TrackField[] {
+  if (exercise.trackedFields) return exercise.trackedFields;
+  return exercise.category === 'CARDIO' ? ['DURATION', 'DISTANCE'] : ['REPS', 'WEIGHT'];
+}
 
 // ============================================================================
 // DO NOT EDIT BELOW THIS LINE
 // ============================================================================
 async function main() {
-  let created: number = 0;
-  let skipped: number = 0;
-  for (const ex of EXERCISES) {
-    const exists = await prisma.exercise.findFirst({
-      where: { userId: null, name: { equals: ex.name, mode : 'insensitive'} }
+  let created = 0;
+  let updated = 0;
+
+  for (const exercise of EXERCISES) {
+    const existing = await prisma.exercise.findFirst({
+      where: { userId: null, name: { equals: exercise.name, mode: 'insensitive' } },
     });
-    if (exists) {
-      skipped ++;
-      continue;
+
+    const data = {
+      name: exercise.name,
+      category: exercise.category,
+      description: exercise.description,
+      link: exercise.link,
+      trackedFields: resolveTrackedFields(exercise),
+    };
+
+    if (existing) {
+      await prisma.exercise.update({ where: { id: existing.id }, data });
+      updated++;
     } else {
-      await prisma.exercise.create({
-        data: {
-          ...ex,
-          userId: null,
-          // same category-based default the migration backfill used
-          trackedFields: ex.category === 'CARDIO' ? ['DURATION', 'DISTANCE'] : ['REPS', 'WEIGHT'],
-        },
-      });
+      await prisma.exercise.create({ data: { ...data, userId: null } });
       created++;
     }
   }
-  console.log(`created: ${created}, skipped: ${skipped}`);
+
+  console.log(`Sync complete: ${created} created, ${updated} updated.`);
 }
 
 main()

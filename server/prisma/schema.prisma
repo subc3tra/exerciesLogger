@@ -95,7 +95,7 @@ enum TrackField {
 
 model Exercise {
   id               Int               @id @default(autoincrement())
-  name             String            // stored in swedish, no translation layer
+  name             String            @unique // stored in swedish, no translation layer
   description      String?           // description of exercise like steps and tips
   link             String?           // link to instruction video, youtube etc
   category         ExerciseCategory  // English code; front end maps to swedish for display

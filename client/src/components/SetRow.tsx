@@ -108,12 +108,10 @@ function Stepper({ value, step, min = 0, disabled, format, parse, onChange, onCo
         className="set-stepper-btn"
         disabled={disabled}
         aria-label="Decrease"
-        onMouseDown={() => startHold(-step)}
-        onMouseUp={stopHold}
-        onMouseLeave={stopHold}
-        onTouchStart={(e) => { e.preventDefault(); startHold(-step); }}
-        onTouchEnd={stopHold}
-        onTouchCancel={stopHold}
+        onPointerDown={() => startHold(-step)}
+        onPointerUp={stopHold}
+        onPointerLeave={stopHold}
+        onPointerCancel={stopHold}
       >
         −
       </button>
@@ -146,12 +144,10 @@ function Stepper({ value, step, min = 0, disabled, format, parse, onChange, onCo
         className="set-stepper-btn"
         disabled={disabled}
         aria-label="Increase"
-        onMouseDown={() => startHold(step)}
-        onMouseUp={stopHold}
-        onMouseLeave={stopHold}
-        onTouchStart={(e) => { e.preventDefault(); startHold(step); }}
-        onTouchEnd={stopHold}
-        onTouchCancel={stopHold}
+        onPointerDown={() => startHold(step)}
+        onPointerUp={stopHold}
+        onPointerLeave={stopHold}
+        onPointerCancel={stopHold}
       >
         +
       </button>
@@ -315,18 +311,20 @@ export function SetRow({ set, trackedFields, target, previous, onFieldCommit, on
     <div className={`set-row ${set.completed ? 'completed' : ''}`}>
       <span className="set-number">#{set.setNumber}</span>
 
-      {trackedFields.map((field) => renderField(field))}
+      <div className="set-fields">{trackedFields.map((field) => renderField(field))}</div>
 
-      <button
-        className={`set-tick ${set.completed ? 'active' : ''}`}
-        onClick={handleTick}
-        aria-label="Mark set complete"
-      >
-        ✓
-      </button>
-      <button className="set-remove" onClick={onRemove} aria-label="Remove set">
-        −
-      </button>
+      <div className="set-actions">
+        <button
+          className={`set-tick ${set.completed ? 'active' : ''}`}
+          onClick={handleTick}
+          aria-label="Mark set complete"
+        >
+          ✓
+        </button>
+        <button className="set-remove" onClick={onRemove} aria-label="Remove set">
+          −
+        </button>
+      </div>
     </div>
   );
 }

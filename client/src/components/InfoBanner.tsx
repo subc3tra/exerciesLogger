@@ -27,7 +27,7 @@ export function InfoBanner() {
 
       {expanded && (
         <div className="info-banner-body">
-          <p>You're using an early test version of NordCore — things may still change or break as it's refined.</p>
+          <p>You're using an early test version of Ironset — things may still change or break as it's refined.</p>
           <ul>
             <li>Tap a program to see its week-by-week schedule.</li>
             <li>Tap a day to see what it's made of before you start.</li>

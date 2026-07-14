@@ -153,6 +153,13 @@ a {
   font-weight: 500;
 }
 
+.ex-note-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
 .ex-note {
   font-size: 12px;
   color: var(--muted);
@@ -160,11 +167,34 @@ a {
   font-weight: 300;
 }
 
+.ex-description-block {
+  margin-bottom: 8px;
+}
+
+.ex-description-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ex-description-caret {
+  color: var(--muted);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
 .ex-description {
   font-size: 12px;
   color: var(--muted);
   font-weight: 300;
-  margin-bottom: 8px;
+  margin-top: 6px;
 }
 
 .ex-reps-num {
@@ -334,10 +364,11 @@ a {
   padding: 32px 28px;
 }
 
-.login-title {
-  font-size: 40px;
-  color: var(--accent);
-  text-align: center;
+.login-logo {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  display: block;
 }
 
 .login-subtitle {
@@ -412,12 +443,17 @@ a {
 }
 
 .navbar-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--accent);
   position: relative;
   z-index: 1;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .navbar-right {
@@ -1004,10 +1040,9 @@ a {
 }
 
 .set-row {
-  display: grid;
-  grid-template-columns: 22px 1fr 1fr auto auto;
-  align-items: start;
-  gap: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   background: var(--surface);
   border-radius: 8px;
   padding: 8px;
@@ -1017,11 +1052,9 @@ a {
   background: rgba(212, 245, 60, 0.06);
 }
 
-/* label line-height + .set-field's gap below, so these line up with the input row
-   itself rather than whatever's below it (e.g. the duration timer button) */
 .set-number,
-.set-tick,
-.set-remove {
+.set-actions {
+  flex-shrink: 0;
   margin-top: 14px;
 }
 
@@ -1030,11 +1063,30 @@ a {
   color: var(--muted);
 }
 
+.set-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.set-fields {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 340px) {
+  .set-fields {
+    flex-direction: column;
+  }
+}
+
 .set-field {
   display: flex;
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  flex: 1;
 }
 
 .set-field-label {
@@ -1049,16 +1101,22 @@ a {
 .set-stepper {
   display: flex;
   align-items: stretch;
-  gap: 4px;
-}
-
-.set-stepper-btn {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  width: 30px;
+  overflow: hidden;
+}
+
+.set-stepper:focus-within {
+  border-color: var(--accent);
+}
+
+.set-stepper-btn {
+  background: transparent;
+  border: none;
+  width: 26px;
   flex-shrink: 0;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
   color: var(--muted);
   cursor: pointer;
@@ -1068,9 +1126,8 @@ a {
 }
 
 .set-stepper-btn:active {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(212, 245, 60, 0.08);
 }
 
 .set-stepper-btn:disabled {
@@ -1082,15 +1139,14 @@ a {
 .set-stepper-input {
   flex: 1;
   min-width: 0;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 15px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 2px;
+  padding: 8px 2px;
   cursor: text;
 }
 
