@@ -258,3 +258,15 @@
 ### Stepmaster / Stairclimber
 **Category:** CARDIO
 **Description:** Cardiovascular machine simulating stair climbing, loading the glutes, quads, and calves while elevating the heart rate. Higher glute recruitment than flat walking; intensity can be adjusted by speed and step height.
+
+### Cardio (Walk/Bike/Swim)
+**Category:** CARDIO
+**Description:** Generic low-to-moderate intensity steady-state cardio for general conditioning and active recovery — walking, cycling, or swimming, whichever's convenient. Intensity/pace is a program-specific note, not baked into the exercise itself.
+**Tracked fields:** DURATION (not the CARDIO default of DURATION+DISTANCE)
+
+## RECOVERY
+
+### Mobility & Stretching
+**Category:** RECOVERY
+**Description:** General mobility and stretching work — no fixed movement list, just time spent on joint mobility and flexibility. Track total duration only.
+**Tracked fields:** DURATION
