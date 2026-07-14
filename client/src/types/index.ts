@@ -178,8 +178,15 @@ export interface ApiErrorResponse {
 }
 
 // GET /api/stats/overview
+export type StatsRange = 'week' | 'month' | 'lifetime';
+
 export interface StatsOverview {
   totalVolumeKg: number;
   heaviestLift: { weight: number; exerciseName: string; date: string } | null;
   totalSessionsCompleted: number;
+}
+
+// GET /api/exercises
+export interface ExercisesResponse {
+  exercises: ExerciseRef[];
 }

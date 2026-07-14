@@ -4,6 +4,7 @@ import { AppShell } from './components/AppShell';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { SessionLogger } from './pages/SessionLogger';
+import { Progression } from './pages/Progression';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       >
         <Route path="/" element={<Dashboard />} />
         <Route path="/session/:id" element={<SessionLogger />} />
+        <Route path="/progression" element={<Progression />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -9,6 +9,8 @@ import type {
   CompleteSessionResponse,
   UpdateSetResponse,
   StatsOverview,
+  StatsRange,
+  ExercisesResponse,
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
@@ -116,7 +118,12 @@ export const sessionsApi = {
 };
 
 export const statsApi = {
-  getOverview: () => apiFetch<StatsOverview>('/stats/overview'),
+  getOverview: (range: StatsRange, exerciseId?: number) =>
+    apiFetch<StatsOverview>(`/stats/overview?range=${range}${exerciseId ? `&exerciseId=${exerciseId}` : ''}`),
+};
+
+export const exercisesApi = {
+  list: () => apiFetch<ExercisesResponse>('/exercises'),
 };
 
 export const feedbackApi = {
