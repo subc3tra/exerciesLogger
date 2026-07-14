@@ -9,6 +9,16 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.2.0',
+    date: '2026-07-14',
+    title: 'Update: 0.2.0',
+    changes: [
+      'Your Stats card on the Dashboard can now be filtered by Week, Month, or Lifetime using the small tabs in its top-right corner.',
+      'New Progression page (see the navbar) — pick any exercise from the dropdown to see your total weight lifted, heaviest lift, and sessions completed for just that exercise.',
+      'Added a navbar so you can jump between Dashboard and Progression.',
+    ],
+  },
+  {
     version: '0.1.5',
     date: '2026-07-14',
     title: 'Update: 0.1.5',
