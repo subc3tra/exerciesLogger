@@ -1046,23 +1046,61 @@ a {
   padding-left: 2px;
 }
 
-.set-input {
+.set-stepper {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.set-stepper-btn {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 4px;
+  width: 30px;
+  flex-shrink: 0;
   font-size: 16px;
-  outline: none;
-  width: 100%;
-  min-width: 0;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.set-input:focus {
+.set-stepper-btn:active {
+  background: var(--accent);
+  color: var(--bg);
   border-color: var(--accent);
 }
 
-.set-input:disabled {
+.set-stepper-btn:disabled {
   opacity: 0.5;
+  cursor: default;
+}
+
+.set-stepper-value,
+.set-stepper-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 2px;
+  cursor: text;
+}
+
+.set-stepper-input {
+  outline: none;
+  font-family: inherit;
+}
+
+.set-stepper-input:focus {
+  border-color: var(--accent);
 }
 
 .set-timer-button {

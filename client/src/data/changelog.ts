@@ -17,6 +17,10 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Cardio machines (Rowing Machine, Stationary Bike, Treadmill, Stairclimber) now log distance alongside duration.',
       'Added Sled Push/Pull, tracked by distance and weight together.',
       'Exercise library grew by 10: Dips, Leg Press, Seated Leg Curl, Farmers Carry, Plank, Cable Crunch, Chin-Up, Shrugs, and Hammer Curl.',
+      'Added a Recovery category, plus Mobility & Stretching and a general Cardio (Walk/Bike/Swim) entry for tracking active recovery days.',
+      'Farmers Carry now tracks weight alongside distance.',
+      'Timed sets now show as minutes:seconds (e.g. 1:10) instead of raw seconds.',
+      'Reps, weight, duration, and distance now have +/- buttons for quick adjustments on mobile — tap the number to type an exact value instead.',
     ],
   },
   {
