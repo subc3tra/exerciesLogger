@@ -81,12 +81,11 @@ export async function getSessionById(id: number, userId: number) {
               targetSets: true,
               targetReps: true,
               targetWeight: true,
-              unit: true,
               notes: true,
               order: true,
               sectionId: true,
               exercise: {
-                select: { id: true, name: true, category: true, description: true }
+                select: { id: true, name: true, category: true, description: true, trackedFields: true }
               }
             }
           },
@@ -131,7 +130,6 @@ export async function startSession(userId: number, programId: number) {
                 targetSets: true,
                 targetReps: true,
                 targetWeight: true,
-                unit: true,
                 notes: true
                 }
               }
