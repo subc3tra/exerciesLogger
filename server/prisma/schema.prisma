@@ -83,6 +83,7 @@ enum ExerciseCategory {
   ARMS
   CORE
   CARDIO
+  RECOVERY
 }
 
 enum TrackField {
