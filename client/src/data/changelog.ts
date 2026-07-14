@@ -9,6 +9,18 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.1.5',
+    date: '2026-07-14',
+    title: 'Update: 0.1.5',
+    changes: [
+      "NordCore is now Ironset — new logo on the login page and navbar, and a new tab title.",
+      'Exercise descriptions are now tucked behind a small "Description" toggle instead of always showing, so exercise cards take up less space.',
+      'Notes now have their own small label and show right after your sets instead of at the top, so you see your working sets first.',
+      'Redesigned the set rows for a cleaner, easier-to-tap layout on mobile.',
+      'Fixed a bug where quickly tapping +/- on reps or weight could occasionally double up and land on the wrong number.',
+    ],
+  },
+  {
     version: '0.1.4',
     date: '2026-07-14',
     title: 'Update: 0.1.4',
