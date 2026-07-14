@@ -11,6 +11,27 @@ function formatTimerSeconds(total: number): string {
   return m > 0 ? `${m}:${s.toString().padStart(2, '0')}` : `${s}s`;
 }
 
+// display-only formatting for the duration input — "40" stays "40s", "900" becomes "15:00"
+function formatDurationDisplay(raw: string): string {
+  if (raw === '') return '';
+  const n = Number(raw);
+  return Number.isNaN(n) ? raw : formatTimerSeconds(n);
+}
+
+// accepts what the user actually typed — plain seconds ("70") or "m:ss" ("1:10") — and
+// normalizes it back to a total-seconds string for storage
+function parseDurationInput(raw: string): string {
+  if (raw.trim() === '') return '';
+  if (raw.includes(':')) {
+    const [m, s] = raw.split(':');
+    const minutes = Number(m) || 0;
+    const seconds = Number(s) || 0;
+    return String(minutes * 60 + seconds);
+  }
+  const n = Number(raw);
+  return Number.isNaN(n) ? '' : String(n);
+}
+
 interface SetRowProps {
   set: SessionSet;
   trackedFields: TrackField[];
@@ -44,6 +65,8 @@ export function SetRow({ set, trackedFields, target, previous, onFieldCommit, on
   const [weight, setWeight] = useState(initialValue(set.weight, previous?.weight ?? null, target.targetWeight));
   const [duration, setDuration] = useState(initialValue(set.duration, previous?.duration ?? null, targetNumber));
   const [distance, setDistance] = useState(initialValue(set.distance, previous?.distance ?? null, targetNumber));
+
+  const [durationFocused, setDurationFocused] = useState(false);
 
   const [timerPhase, setTimerPhase] = useState<TimerPhase>('idle');
   const [countdownValue, setCountdownValue] = useState(3);
@@ -104,7 +127,10 @@ export function SetRow({ set, trackedFields, target, previous, onFieldCommit, on
     const fields: FieldValues = {};
     if (trackedFields.includes('REPS')) fields.reps = reps === '' ? null : Number(reps);
     if (trackedFields.includes('WEIGHT')) fields.weight = weight === '' ? null : Number(weight);
-    if (trackedFields.includes('DURATION')) fields.duration = duration === '' ? null : Number(duration);
+    if (trackedFields.includes('DURATION')) {
+      const normalized = parseDurationInput(duration);
+      fields.duration = normalized === '' ? null : Number(normalized);
+    }
     if (trackedFields.includes('DISTANCE')) fields.distance = distance === '' ? null : Number(distance);
 
     onToggleComplete(fields);
@@ -114,15 +140,21 @@ export function SetRow({ set, trackedFields, target, previous, onFieldCommit, on
     if (field === 'DURATION') {
       return (
         <div className="set-field" key={field}>
-          <label className="set-field-label">sec</label>
+          <label className="set-field-label">min:sec</label>
           <input
             className="set-input"
-            type="number"
+            type="text"
             inputMode="numeric"
-            value={duration}
+            value={durationFocused ? duration : formatDurationDisplay(duration)}
             disabled={timerPhase !== 'idle'}
+            onFocus={() => setDurationFocused(true)}
             onChange={(e) => setDuration(e.target.value)}
-            onBlur={() => commit('duration', duration)}
+            onBlur={() => {
+              const normalized = parseDurationInput(duration);
+              setDuration(normalized);
+              setDurationFocused(false);
+              commit('duration', normalized);
+            }}
           />
           <button
             type="button"

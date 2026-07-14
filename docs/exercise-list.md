@@ -228,7 +228,7 @@
 ### Farmers Carry
 **Category:** CORE
 **Description:** Loaded carry holding a heavy weight in each hand while walking a set distance, training grip, trunk stability, and total-body tension under load. Keep the ribcage stacked over the pelvis and avoid leaning to either side.
-**Tracked fields:** DISTANCE (not the CORE default of REPS+WEIGHT)
+**Tracked fields:** DISTANCE, WEIGHT (not the CORE default of REPS+WEIGHT)
 
 ### Plank
 **Category:** CORE
@@ -262,7 +262,6 @@
 ### Cardio (Walk/Bike/Swim)
 **Category:** CARDIO
 **Description:** Generic low-to-moderate intensity steady-state cardio for general conditioning and active recovery — walking, cycling, or swimming, whichever's convenient. Intensity/pace is a program-specific note, not baked into the exercise itself.
-**Tracked fields:** DURATION (not the CARDIO default of DURATION+DISTANCE)
 
 ## RECOVERY
 

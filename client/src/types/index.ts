@@ -3,7 +3,7 @@
 
 export type ProgramStatus = 'ACTIVE' | 'ARCHIVED';
 
-export type ExerciseCategory = 'CHEST' | 'BACK' | 'LEGS' | 'SHOULDERS' | 'ARMS' | 'CORE' | 'CARDIO';
+export type ExerciseCategory = 'CHEST' | 'BACK' | 'LEGS' | 'SHOULDERS' | 'ARMS' | 'CORE' | 'CARDIO' | 'RECOVERY';
 
 export type TrackField = 'REPS' | 'WEIGHT' | 'DURATION' | 'DISTANCE';
 

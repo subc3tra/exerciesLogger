@@ -53,7 +53,7 @@
  */
 
 const PROGRAM_DATA = {
-  username: null as string | null, // MATTIAS: set this — the AI leaves it null on purpose
+  username: "rene" as string | null, // MATTIAS: set this — the AI leaves it null on purpose
 
   name: 'Styrka & Kondition 5-dagar', // ADJUST if you want a different display name
   totalWeeks: 4, // ADJUST — not specified in rene.program.md, defaulted to match the base template
