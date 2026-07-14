@@ -22,6 +22,10 @@
 **Category:** CHEST
 **Description:** Bodyweight movement performed from a push-up or plank position, moving only through the shoulder blades — elbows stay locked while the scapula protracts and retracts. Isolates the serratus anterior and lower trapezius; commonly used as a warm-up or corrective drill to build scapular control and shoulder stability, especially useful for overhead athletes or as injury-prevention work.
 
+### Dips
+**Category:** CHEST
+**Description:** Bodyweight or weighted dip performed on parallel bars, lowering the body until the upper arms are roughly parallel to the floor before pressing back up. Leaning the torso forward shifts emphasis toward the chest and front deltoids; staying upright targets the triceps more directly.
+
 ---
 
 ## BACK
@@ -65,6 +69,14 @@
 ### Nordic Curl
 **Category:** BACK
 **Description:** Eccentric-dominant hamstring exercise where the feet are anchored and the body lowers toward the floor under control. One of the most effective exercises for hamstring injury prevention; extremely demanding — beginners typically need bands for assistance.
+
+### Chin-Up
+**Category:** BACK
+**Description:** Bodyweight pull-up performed with an underhand (supinated) grip, emphasizing the lats and biceps more than a standard overhand pull-up. Pull until the chin clears the bar; add weight via a dip belt once bodyweight reps are no longer challenging.
+
+### Shrugs
+**Category:** BACK
+**Description:** Barbell or dumbbell shrug lifting the shoulders straight up toward the ears to target the upper trapezius. Avoid rolling the shoulders — a straight vertical path keeps tension on the traps and reduces shoulder-joint strain.
 
 ---
 
@@ -128,6 +140,19 @@
 **Category:** LEGS
 **Description:** Side-lying hip external rotation with a resistance band above the knees. Isolates the glute medius and external rotators; commonly used in warm-ups and injury prevention programs for the hip and knee.
 
+### Leg Press
+**Category:** LEGS
+**Description:** Machine-based compound leg exercise pressing a weighted platform away from the body while seated in a reclined position. Allows heavy loading of the quads and glutes with less spinal loading and balance demand than a free-weight squat.
+
+### Seated Leg Curl
+**Category:** LEGS
+**Description:** Hamstring isolation exercise performed seated on a machine, curling the lower legs down and back against resistance. The seated angle changes hip position relative to a lying leg curl, shifting the stretch and loading slightly higher in the hamstring.
+
+### Sled Push/Pull
+**Category:** LEGS
+**Description:** Loaded sled driven forward (push) or dragged backward (pull) across a set distance, combining leg drive with a significant conditioning demand. Low eccentric loading makes it a joint-friendly way to build leg power and work capacity; distance and added weight are both easy to progress.
+**Tracked fields:** DISTANCE, WEIGHT (not the LEGS default of REPS+WEIGHT)
+
 ---
 
 ## SHOULDERS
@@ -172,6 +197,10 @@
 **Category:** ARMS
 **Description:** Cable pushdown with a bar or rope attachment, isolating the triceps through elbow extension. The rope variant allows the hands to separate at the bottom for a stronger contraction; keep the elbows pinned to the sides.
 
+### Hammer Curl
+**Category:** ARMS
+**Description:** Dumbbell curl performed with a neutral (palms-facing-in) grip throughout, shifting emphasis toward the brachialis and brachioradialis alongside the biceps. The neutral grip is also easier on the wrists than a standard curl for lifters with wrist discomfort.
+
 ---
 
 ## CORE
@@ -195,6 +224,20 @@
 ### KB Swing
 **Category:** CORE
 **Description:** Hip-hinge power exercise with a kettlebell, driving through the glutes and hamstrings to project the bell forward. Trains explosive hip extension, posterior chain strength, and anti-flexion core stability; technique is critical — this is a hinge, not a squat.
+
+### Farmers Carry
+**Category:** CORE
+**Description:** Loaded carry holding a heavy weight in each hand while walking a set distance, training grip, trunk stability, and total-body tension under load. Keep the ribcage stacked over the pelvis and avoid leaning to either side.
+**Tracked fields:** DISTANCE (not the CORE default of REPS+WEIGHT)
+
+### Plank
+**Category:** CORE
+**Description:** Isometric hold in a forearm or high-plank position, bracing the core to keep a straight line from shoulders to ankles. A foundational anti-extension exercise for core stability; hold duration is the primary progression.
+**Tracked fields:** DURATION (not the CORE default of REPS+WEIGHT)
+
+### Cable Crunch
+**Category:** CORE
+**Description:** Kneeling cable crunch flexing the spine against resistance from a high pulley, isolating the rectus abdominis through a full range of motion. Curl through the spine rather than just bending at the hips to keep tension on the abs.
 
 ---
 
