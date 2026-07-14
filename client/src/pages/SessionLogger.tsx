@@ -30,6 +30,7 @@ export function SessionLogger() {
   const [error, setError] = useState<string | null>(null);
 
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
+  const [descExpanded, setDescExpanded] = useState<Set<number>>(new Set());
   const [pendingAddFor, setPendingAddFor] = useState<number | null>(null);
   const [pendingRemove, setPendingRemove] = useState<{ exerciseId: number; setId: number } | null>(null);
   const [completeStage, setCompleteStage] = useState<CompleteStage>('closed');
@@ -67,6 +68,15 @@ export function SessionLogger() {
 
   function toggleExpand(exerciseId: number) {
     setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(exerciseId)) next.delete(exerciseId);
+      else next.add(exerciseId);
+      return next;
+    });
+  }
+
+  function toggleDescription(exerciseId: number) {
+    setDescExpanded((prev) => {
       const next = new Set(prev);
       if (next.has(exerciseId)) next.delete(exerciseId);
       else next.add(exerciseId);
@@ -226,6 +236,7 @@ export function SessionLogger() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {session.exercises.map((exercise) => {
           const isExpanded = expanded.has(exercise.id);
+          const isDescExpanded = descExpanded.has(exercise.id);
           const doneCount = exercise.sets.filter((s) => s.completed).length;
           const total = exercise.sets.length;
           const { programExercise } = exercise;
@@ -249,13 +260,24 @@ export function SessionLogger() {
                     <p className="prefill-notice">Prefilled from your last session — check before marking done</p>
                   )}
                   {programExercise.exercise.description && (
-                    <p className="ex-description">{programExercise.exercise.description}</p>
+                    <div className="ex-description-block">
+                      <button
+                        className="ex-description-toggle"
+                        onClick={() => toggleDescription(exercise.id)}
+                        aria-expanded={isDescExpanded}
+                      >
+                        <span className="block-label">Description</span>
+                        <span className="ex-description-caret">{isDescExpanded ? '▾' : '▸'}</span>
+                      </button>
+                      {isDescExpanded && (
+                        <p className="ex-description">{programExercise.exercise.description}</p>
+                      )}
+                    </div>
                   )}
                   <p className="target-line">
                     Target: {programExercise.targetSets ?? '–'}×{programExercise.targetReps ?? '–'}
                     {programExercise.targetWeight ? ` @ ${programExercise.targetWeight}kg` : ''}
                   </p>
-                  {programExercise.notes && <p className="ex-note">{programExercise.notes}</p>}
 
                   <div className="set-list">
                     {exercise.sets
@@ -274,6 +296,13 @@ export function SessionLogger() {
                         />
                       ))}
                   </div>
+
+                  {programExercise.notes && (
+                    <div className="ex-note-block">
+                      <span className="block-label">Notes</span>
+                      <p className="ex-note">{programExercise.notes}</p>
+                    </div>
+                  )}
 
                   <button className="add-set-button" onClick={() => setPendingAddFor(exercise.id)}>
                     + Add set
