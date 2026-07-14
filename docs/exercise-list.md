@@ -1,5 +1,8 @@
 # Exercise Seed List
 
+> Source of truth for the exercise bank. Update this file first, then mirror the change into
+> `server/prisma/seeds/sync-exercises.ts`'s `EXERCISES` array, then run that script.
+
 ## CHEST
 
 ### Bench Press

@@ -3,8 +3,8 @@ import { PrismaClient, ExerciseCategory } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // ============================================================================
-// EXERCISE DATA — append new entries here over time, never delete old ones.
-// Pull the first batch straight out of mattias.program.ts / miAmor.program.ts.
+// FROZEN (2026-07-13) — historical record of the original 45-exercise bootstrap.
+// Do not add to this array. New exercises and edits go through sync-exercises.ts.
 // ============================================================================
 const EXERCISES: {
   name: string;
