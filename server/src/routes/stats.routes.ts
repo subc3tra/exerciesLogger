@@ -19,11 +19,12 @@ router.use(authenticate);
  *     parameters:
  *       - in: query
  *         name: range
- *         required: true
+ *         required: false
  *         schema:
  *           type: string
  *           enum: [week, month, lifetime]
- *         description: Rolling date window to compute stats over (week = last 7 days, month = last 30 days, lifetime = no date filter)
+ *           default: week
+ *         description: Rolling date window to compute stats over (week = last 7 days, month = last 30 days, lifetime = no date filter). Defaults to week if omitted.
  *     responses:
  *       200:
  *         description: Stats overview

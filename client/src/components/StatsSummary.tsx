@@ -1,22 +1,29 @@
 import { useEffect, useState } from 'react';
 import { statsApi } from '../services/api';
-import type { StatsOverview } from '../types';
+import type { StatsOverview, StatsRange } from '../types';
+
+const RANGES: { value: StatsRange; label: string }[] = [
+  { value: 'week', label: 'Week' },
+  { value: 'month', label: 'Month' },
+  { value: 'lifetime', label: 'Lifetime' },
+];
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
 }
 
 export function StatsSummary() {
+  const [range, setRange] = useState<StatsRange>('week');
   const [stats, setStats] = useState<StatsOverview | null>(null);
 
   useEffect(() => {
     statsApi
-      .getOverview()
+      .getOverview(range)
       .then(setStats)
       .catch(() => {
         // stats are a nice-to-have — a failure here shouldn't block the rest of the dashboard
       });
-  }, []);
+  }, [range]);
 
   if (!stats) return null;
 
@@ -24,6 +31,17 @@ export function StatsSummary() {
     <div className="block stats-block">
       <div className="block-header">
         <span className="block-label">Your Stats</span>
+        <div className="tab-nav tab-nav-sm">
+          {RANGES.map((r) => (
+            <button
+              key={r.value}
+              className={r.value === range ? 'active' : ''}
+              onClick={() => setRange(r.value)}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="stats-body">
         <div className="stat-row">

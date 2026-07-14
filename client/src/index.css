@@ -323,6 +323,11 @@ a {
   font-weight: 700;
 }
 
+.tab-nav-sm button {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
 /* Header radial glow */
 .header-glow {
   background: radial-gradient(circle, rgba(212, 245, 60, 0.12) 0%, transparent 70%);
