@@ -5,7 +5,7 @@ const STORAGE_KEY = 'nordcore_last_seen_version';
 
 export function WhatsNewModal() {
   const latest = CHANGELOG[0];
-  const recent = CHANGELOG.slice(0, 5);
+  const recent = CHANGELOG.slice(0, 2);
   const [open, setOpen] = useState(() => localStorage.getItem(STORAGE_KEY) !== latest.version);
 
   function dismiss() {

@@ -9,6 +9,17 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.1.4',
+    date: '2026-07-14',
+    title: 'Update: 0.1.4',
+    changes: [
+      'Exercises that need two numbers at once (like duration + distance, or distance + weight) now support both — no more picking just one.',
+      'Cardio machines (Rowing Machine, Stationary Bike, Treadmill, Stairclimber) now log distance alongside duration.',
+      'Added Sled Push/Pull, tracked by distance and weight together.',
+      'Exercise library grew by 10: Dips, Leg Press, Seated Leg Curl, Farmers Carry, Plank, Cable Crunch, Chin-Up, Shrugs, and Hammer Curl.',
+    ],
+  },
+  {
     version: '0.1.3',
     date: '2026-07-13',
     title: 'Update: 0.1.3',
@@ -22,7 +33,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     ],
   },
   {
-    version: '0.1.1',
+    version: '0.1.2',
     date: '2026-07-12',
     title: "Update: 0.1.2",
     changes: [
