@@ -21,6 +21,9 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Farmers Carry now tracks weight alongside distance.',
       'Timed sets now show as minutes:seconds (e.g. 1:10) instead of raw seconds.',
       'Reps, weight, duration, and distance now have +/- buttons for quick adjustments on mobile — tap the number to type an exact value instead.',
+      'Fixed a bug where finishing a workout without ticking every set individually could leave reps blank, throwing off your total weight lifted stat.',
+      'Untouched weight, reps, duration, and distance fields now default to 0 instead of staying blank, so a completed set always saves a real number.',
+      "Added a 'See full changelog' option to the What's new popup.",
     ],
   },
   {
