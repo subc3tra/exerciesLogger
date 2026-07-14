@@ -30,18 +30,13 @@
  * - `targetReps` is always a STRING, even for a single number: write '8', not 8.
  *   It supports ranges ('6-8') and unit-suffixed values ('30s', '20m') for
  *   timed/distance work.
- * - `unit` must be exactly one of: 'reps', 's', 'm' — nothing else.
- *     'reps' -> normal strength work, logged as reps + weight.
- *     's'    -> timed work (plank, sprint), logged as a duration in seconds.
- *     'm'    -> distance work (farmer's carry), logged as a distance in meters.
- *   Match `targetReps`'s suffix to `unit`, e.g. unit: 's' with targetReps: '30s'.
- * - Every field can be `null` except `name` fields and `unit`/`targetSets` on an
+ * - Every field can be `null` except `name` fields and `targetSets` on an
  *   exercise. Use `null`, not an empty string or a placeholder like "TBD".
  * - Don't add fields beyond what's shown here — anything extra is silently
  *   ignored, it won't error, so a typo'd field name just quietly does nothing.
  * - Don't set `order` anywhere — it's computed automatically from each item's
  *   position in its array, so the array order IS the workout order.
- * - An exercise's `name` must match an entry in `server/docs/exercise-list.md`
+ * - An exercise's `name` must match an entry in `docs/exercise-list.md`
  *   (the seeded global exercise bank) exactly, case-insensitive — the script
  *   resolves each name to its `Exercise.id` before writing anything. If a name
  *   doesn't match, it fails fast and lists every unmatched name, rather than
@@ -74,7 +69,6 @@ const PROGRAM_DATA = {
               targetSets: 3,
               targetReps: '8', // string — see rules above
               targetWeight: null as number | null, // starting weight baseline, or null
-              unit: 'reps' as 'reps' | 's' | 'm',
               notes: null as string | null, // optional coaching note, e.g. "go slow on the way down"
             },
             {
@@ -82,7 +76,6 @@ const PROGRAM_DATA = {
               targetSets: 3,
               targetReps: '30s',
               targetWeight: null as number | null,
-              unit: 's' as 'reps' | 's' | 'm',
               notes: null as string | null,
             },
           ],
@@ -105,7 +98,6 @@ const PROGRAM_DATA = {
               targetSets: 3,
               targetReps: '6',
               targetWeight: null as number | null,
-              unit: 'reps' as 'reps' | 's' | 'm',
               notes: null as string | null,
             },
           ],
@@ -182,7 +174,6 @@ async function main() {
                   targetSets: exercise.targetSets,
                   targetReps: exercise.targetReps,
                   targetWeight: exercise.targetWeight,
-                  unit: exercise.unit,
                   notes: exercise.notes,
                   order: exerciseIndex,
                 })),
