@@ -12,7 +12,16 @@ export async function getOverview(req: Request, res: Response, next: NextFunctio
       return;
     }
 
-    const stats = await getStatsOverview(userId, range);
+    let exerciseId: number | undefined;
+    if (req.query.exerciseId !== undefined) {
+      exerciseId = Number(req.query.exerciseId);
+      if (isNaN(exerciseId)) {
+        res.status(400).json({ message: 'Invalid exerciseId' });
+        return;
+      }
+    }
+
+    const stats = await getStatsOverview(userId, range, exerciseId);
     res.status(200).json(stats);
   } catch (err) {
     next(err);

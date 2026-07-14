@@ -1,7 +1,7 @@
 import prisma from "../lib/prisma";
 
 // get stats overview
-export async function getStatsOverview(userId:number, range: 'week' | 'month' | 'lifetime') {
+export async function getStatsOverview(userId:number, range: 'week' | 'month' | 'lifetime', exerciseId?: number) {
   let fromDate: Date | undefined;
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
 
@@ -19,7 +19,10 @@ export async function getStatsOverview(userId:number, range: 'week' | 'month' | 
   const sets = await prisma.sessionSet.findMany({
     where: {
       completed: true,
-      sessionExercise: { session: { userId, completed: true, ...(fromDate && { date: { gte: fromDate } })} },
+      sessionExercise: {
+        session: { userId, completed: true, ...(fromDate && { date: { gte: fromDate } })},
+        ...(exerciseId && { programExercise: { exerciseId } }),
+      },
     },
     select: {
       weight: true,
@@ -58,7 +61,12 @@ export async function getStatsOverview(userId:number, range: 'week' | 'month' | 
   }, null as { weight: number, exerciseName: string, date: Date } | null);
 
   const totalSessionsCompleted = await prisma.session.count({
-    where: { userId, completed: true}
+    where: {
+      userId,
+      completed: true,
+      ...(fromDate && { date: { gte: fromDate } }),
+      ...(exerciseId && { exercises: { some: { programExercise: { exerciseId } } } }),
+    },
   });
 
   return {

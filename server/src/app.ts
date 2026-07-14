@@ -10,6 +10,7 @@ import programRouter from './routes/program.routes';
 import sessionRouter from './routes/session.routes';
 import feedbackRouter from './routes/feedback.routes';
 import statsRouter from './routes/stats.routes';
+import exerciseRouter from './routes/exercise.routes';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/programs', programRouter);
 app.use('/api/sessions', sessionRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/stats', statsRouter);
+app.use('/api/exercises', exerciseRouter);
 
 app.use(errorHandler)
 

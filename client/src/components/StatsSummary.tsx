@@ -12,18 +12,22 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
 }
 
-export function StatsSummary() {
+interface StatsSummaryProps {
+  exerciseId?: number;
+}
+
+export function StatsSummary({ exerciseId }: StatsSummaryProps = {}) {
   const [range, setRange] = useState<StatsRange>('week');
   const [stats, setStats] = useState<StatsOverview | null>(null);
 
   useEffect(() => {
     statsApi
-      .getOverview(range)
+      .getOverview(range, exerciseId)
       .then(setStats)
       .catch(() => {
         // stats are a nice-to-have — a failure here shouldn't block the rest of the dashboard
       });
-  }, [range]);
+  }, [range, exerciseId]);
 
   if (!stats) return null;
 

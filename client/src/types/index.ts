@@ -185,3 +185,8 @@ export interface StatsOverview {
   heaviestLift: { weight: number; exerciseName: string; date: string } | null;
   totalSessionsCompleted: number;
 }
+
+// GET /api/exercises
+export interface ExercisesResponse {
+  exercises: ExerciseRef[];
+}
