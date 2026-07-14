@@ -1,7 +1,10 @@
 /**
- * TEST PROGRAM for subc3tra — covers all three `unit` types (reps, s, m) in one
- * day so the rest timer / duration Start-Stop timer / session logger can all be
- * exercised without touching real program data. Copied from program.template.ts.
+ * TEST PROGRAM for subc3tra — covers reps+weight, duration, and distance tracked
+ * fields in one day so the rest timer / duration Start-Stop timer / session logger
+ * can all be exercised without touching real program data. Which fields an exercise
+ * tracks is now determined by the shared Exercise's `trackedFields` (not a per-program
+ * `unit` — that field was removed from ProgramExercise in the v0.1.4 schema change).
+ * Copied from program.template.ts.
  *
  * Run from server/:
  *   npx tsx prisma/seeds/user-programs/subc3tra-test-all-types.program.ts
@@ -33,7 +36,6 @@ const PROGRAM_DATA = {
               targetSets: 3,
               targetReps: '8',
               targetWeight: 60,
-              unit: 'reps' as 'reps' | 's' | 'm',
               notes: null as string | null,
             },
             {
@@ -41,7 +43,6 @@ const PROGRAM_DATA = {
               targetSets: 3,
               targetReps: '8',
               targetWeight: 40,
-              unit: 'reps' as 'reps' | 's' | 'm',
               notes: null as string | null,
             },
             {
@@ -49,15 +50,13 @@ const PROGRAM_DATA = {
               targetSets: 1,
               targetReps: '300s',
               targetWeight: null as number | null,
-              unit: 's' as 'reps' | 's' | 'm',
-              notes: 'Duration-type test exercise — use the Start/Stop timer here.',
+              notes: 'Duration-type test exercise — use the Start/Stop timer here (Treadmill tracks duration + distance).',
             },
             {
               name: 'Rowing Machine',
               targetSets: 1,
               targetReps: '500m',
               targetWeight: null as number | null,
-              unit: 'm' as 'reps' | 's' | 'm',
               notes: 'Distance-type test exercise.',
             },
           ],
@@ -134,7 +133,6 @@ async function main() {
                   targetSets: exercise.targetSets,
                   targetReps: exercise.targetReps,
                   targetWeight: exercise.targetWeight,
-                  unit: exercise.unit,
                   notes: exercise.notes,
                   order: exerciseIndex,
                 })),
