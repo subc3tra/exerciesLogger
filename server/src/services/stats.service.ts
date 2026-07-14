@@ -24,7 +24,7 @@ export async function getStatsOverview(userId:number) {
     if (set.weight == null || set.reps == null) {
       return total;
     }
-    return total + set.weight * set.reps; 
+    return total + set.weight * set.reps;
   }, 0)
 
   // calculate the heaviest lift

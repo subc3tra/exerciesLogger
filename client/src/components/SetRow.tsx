@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import type { PrefillSetEntry, SessionSet, TrackField } from '../types';
+import type { NumericField, PrefillSetEntry, SessionSet, TrackField } from '../types';
+import { parseTargetNumber, resolveFieldDefault } from '../utils/setDefaults';
 
-type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
 type FieldValues = Partial<Record<NumericField, number | null>>;
 type TimerPhase = 'idle' | 'countdown' | 'running';
 
@@ -169,29 +169,13 @@ interface SetRowProps {
   onRemove: () => void;
 }
 
-// targetReps is a flexible display string ("6–8", "20s", "30m") — pull the first number out of it
-function parseTargetNumber(value: string | null): number | null {
-  if (!value) return null;
-  const match = value.match(/\d+(\.\d+)?/);
-  return match ? Number(match[0]) : null;
-}
-
-// default the input to a real, editable value instead of leaving it blank: the actual value already
-// saved for this set, else last session's actual number for this same set, else the plan's target.
-// Always a real value the user consciously confirms or edits — never a silent placeholder-only guess.
-function initialValue(actual: number | null, previousValue: number | null, target: number | null): string {
-  if (actual != null) return actual.toString();
-  if (previousValue != null) return previousValue.toString();
-  return target != null ? target.toString() : '';
-}
-
 export function SetRow({ set, trackedFields, target, previous, onFieldCommit, onToggleComplete, onRemove }: SetRowProps) {
   const targetNumber = parseTargetNumber(target.targetReps);
 
-  const [reps, setReps] = useState(initialValue(set.reps, previous?.reps ?? null, targetNumber));
-  const [weight, setWeight] = useState(initialValue(set.weight, previous?.weight ?? null, target.targetWeight));
-  const [duration, setDuration] = useState(initialValue(set.duration, previous?.duration ?? null, targetNumber));
-  const [distance, setDistance] = useState(initialValue(set.distance, previous?.distance ?? null, targetNumber));
+  const [reps, setReps] = useState(String(resolveFieldDefault(set.reps, previous?.reps ?? null, targetNumber)));
+  const [weight, setWeight] = useState(String(resolveFieldDefault(set.weight, previous?.weight ?? null, target.targetWeight)));
+  const [duration, setDuration] = useState(String(resolveFieldDefault(set.duration, previous?.duration ?? null, targetNumber)));
+  const [distance, setDistance] = useState(String(resolveFieldDefault(set.distance, previous?.distance ?? null, targetNumber)));
 
   const [timerPhase, setTimerPhase] = useState<TimerPhase>('idle');
   const [countdownValue, setCountdownValue] = useState(3);

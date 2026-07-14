@@ -7,6 +7,8 @@ export type ExerciseCategory = 'CHEST' | 'BACK' | 'LEGS' | 'SHOULDERS' | 'ARMS' 
 
 export type TrackField = 'REPS' | 'WEIGHT' | 'DURATION' | 'DISTANCE';
 
+export type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
+
 export interface ExerciseRef {
   id: number;
   name: string;
