@@ -231,7 +231,9 @@ export function Dashboard() {
                                                     {exercise.targetSets ?? '–'}×{exercise.targetReps ?? '–'}
                                                   </div>
                                                   <div className="ex-reps-label">
-                                                    {(exercise.unit ?? 'reps').toUpperCase()}
+                                                    {exercise.exercise.trackedFields.length > 0
+                                                      ? exercise.exercise.trackedFields.join(' + ')
+                                                      : 'REPS'}
                                                   </div>
                                                 </div>
                                               </div>

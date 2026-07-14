@@ -249,7 +249,7 @@ export function SessionLogger() {
                         <SetRow
                           key={set.id}
                           set={set}
-                          unit={programExercise.unit}
+                          trackedFields={programExercise.exercise.trackedFields}
                           target={{ targetReps: programExercise.targetReps, targetWeight: programExercise.targetWeight }}
                           previous={prefill?.[programExercise.id]?.find((p) => p.setNumber === set.setNumber)}
                           onFieldCommit={(field, value) => handleFieldCommit(exercise.id, set.id, field, value)}

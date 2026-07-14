@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { PrefillSetEntry, SessionSet } from '../types';
+import type { PrefillSetEntry, SessionSet, TrackField } from '../types';
 
 type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
 type FieldValues = Partial<Record<NumericField, number | null>>;
@@ -13,7 +13,7 @@ function formatTimerSeconds(total: number): string {
 
 interface SetRowProps {
   set: SessionSet;
-  unit: string | null;
+  trackedFields: TrackField[];
   target: { targetReps: string | null; targetWeight: number | null };
   previous?: PrefillSetEntry;
   onFieldCommit: (field: NumericField, value: number | null) => void;
@@ -37,7 +37,7 @@ function initialValue(actual: number | null, previousValue: number | null, targe
   return target != null ? target.toString() : '';
 }
 
-export function SetRow({ set, unit, target, previous, onFieldCommit, onToggleComplete, onRemove }: SetRowProps) {
+export function SetRow({ set, trackedFields, target, previous, onFieldCommit, onToggleComplete, onRemove }: SetRowProps) {
   const targetNumber = parseTargetNumber(target.targetReps);
 
   const [reps, setReps] = useState(initialValue(set.reps, previous?.reps ?? null, targetNumber));
@@ -101,22 +101,19 @@ export function SetRow({ set, unit, target, previous, onFieldCommit, onToggleCom
       return;
     }
 
-    const fields: FieldValues =
-      unit === 's'
-        ? { duration: duration === '' ? null : Number(duration) }
-        : unit === 'm'
-          ? { distance: distance === '' ? null : Number(distance) }
-          : { reps: reps === '' ? null : Number(reps), weight: weight === '' ? null : Number(weight) };
+    const fields: FieldValues = {};
+    if (trackedFields.includes('REPS')) fields.reps = reps === '' ? null : Number(reps);
+    if (trackedFields.includes('WEIGHT')) fields.weight = weight === '' ? null : Number(weight);
+    if (trackedFields.includes('DURATION')) fields.duration = duration === '' ? null : Number(duration);
+    if (trackedFields.includes('DISTANCE')) fields.distance = distance === '' ? null : Number(distance);
 
     onToggleComplete(fields);
   }
 
-  return (
-    <div className={`set-row ${set.completed ? 'completed' : ''}`}>
-      <span className="set-number">#{set.setNumber}</span>
-
-      {unit === 's' ? (
-        <div className="set-field">
+  function renderField(field: TrackField) {
+    if (field === 'DURATION') {
+      return (
+        <div className="set-field" key={field}>
           <label className="set-field-label">sec</label>
           <input
             className="set-input"
@@ -137,8 +134,12 @@ export function SetRow({ set, unit, target, previous, onFieldCommit, onToggleCom
             {timerPhase === 'running' && `Stop · ${formatTimerSeconds(timerElapsed)}`}
           </button>
         </div>
-      ) : unit === 'm' ? (
-        <div className="set-field">
+      );
+    }
+
+    if (field === 'DISTANCE') {
+      return (
+        <div className="set-field" key={field}>
           <label className="set-field-label">meters</label>
           <input
             className="set-input"
@@ -149,32 +150,46 @@ export function SetRow({ set, unit, target, previous, onFieldCommit, onToggleCom
             onBlur={() => commit('distance', distance)}
           />
         </div>
-      ) : (
-        <>
-          <div className="set-field">
-            <label className="set-field-label">reps</label>
-            <input
-              className="set-input"
-              type="number"
-              inputMode="numeric"
-              value={reps}
-              onChange={(e) => setReps(e.target.value)}
-              onBlur={() => commit('reps', reps)}
-            />
-          </div>
-          <div className="set-field">
-            <label className="set-field-label">kg</label>
-            <input
-              className="set-input"
-              type="number"
-              inputMode="decimal"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-              onBlur={() => commit('weight', weight)}
-            />
-          </div>
-        </>
-      )}
+      );
+    }
+
+    if (field === 'WEIGHT') {
+      return (
+        <div className="set-field" key={field}>
+          <label className="set-field-label">kg</label>
+          <input
+            className="set-input"
+            type="number"
+            inputMode="decimal"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            onBlur={() => commit('weight', weight)}
+          />
+        </div>
+      );
+    }
+
+    // REPS
+    return (
+      <div className="set-field" key={field}>
+        <label className="set-field-label">reps</label>
+        <input
+          className="set-input"
+          type="number"
+          inputMode="numeric"
+          value={reps}
+          onChange={(e) => setReps(e.target.value)}
+          onBlur={() => commit('reps', reps)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`set-row ${set.completed ? 'completed' : ''}`}>
+      <span className="set-number">#{set.setNumber}</span>
+
+      {trackedFields.map((field) => renderField(field))}
 
       <button
         className={`set-tick ${set.completed ? 'active' : ''}`}

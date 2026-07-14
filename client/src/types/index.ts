@@ -5,11 +5,14 @@ export type ProgramStatus = 'ACTIVE' | 'ARCHIVED';
 
 export type ExerciseCategory = 'CHEST' | 'BACK' | 'LEGS' | 'SHOULDERS' | 'ARMS' | 'CORE' | 'CARDIO';
 
+export type TrackField = 'REPS' | 'WEIGHT' | 'DURATION' | 'DISTANCE';
+
 export interface ExerciseRef {
   id: number;
   name: string;
   category: ExerciseCategory;
   description: string | null;
+  trackedFields: TrackField[];
 }
 
 export interface User {
@@ -35,7 +38,6 @@ export interface ProgramExerciseTemplate {
   targetSets: number | null;
   targetReps: string | null;
   targetWeight: number | null;
-  unit: string | null;
   notes: string | null;
   order: number;
 }
