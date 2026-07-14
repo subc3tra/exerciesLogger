@@ -86,7 +86,14 @@ async function main() {
       skipped ++;
       continue;
     } else {
-      await prisma.exercise.create({ data: { ...ex, userId: null }});
+      await prisma.exercise.create({
+        data: {
+          ...ex,
+          userId: null,
+          // same category-based default the migration backfill used
+          trackedFields: ex.category === 'CARDIO' ? ['DURATION', 'DISTANCE'] : ['REPS', 'WEIGHT'],
+        },
+      });
       created++;
     }
   }

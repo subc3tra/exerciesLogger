@@ -1006,7 +1006,7 @@ a {
 .set-row {
   display: grid;
   grid-template-columns: 22px 1fr 1fr auto auto;
-  align-items: center;
+  align-items: start;
   gap: 6px;
   background: var(--surface);
   border-radius: 8px;
@@ -1015,6 +1015,14 @@ a {
 
 .set-row.completed {
   background: rgba(212, 245, 60, 0.06);
+}
+
+/* label line-height + .set-field's gap below, so these line up with the input row
+   itself rather than whatever's below it (e.g. the duration timer button) */
+.set-number,
+.set-tick,
+.set-remove {
+  margin-top: 14px;
 }
 
 .set-number {
@@ -1031,29 +1039,68 @@ a {
 
 .set-field-label {
   font-size: 9px;
+  line-height: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
   padding-left: 2px;
 }
 
-.set-input {
+.set-stepper {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.set-stepper-btn {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 4px;
+  width: 30px;
+  flex-shrink: 0;
   font-size: 16px;
-  outline: none;
-  width: 100%;
-  min-width: 0;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.set-input:focus {
+.set-stepper-btn:active {
+  background: var(--accent);
+  color: var(--bg);
   border-color: var(--accent);
 }
 
-.set-input:disabled {
+.set-stepper-btn:disabled {
   opacity: 0.5;
+  cursor: default;
+}
+
+.set-stepper-value,
+.set-stepper-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 2px;
+  cursor: text;
+}
+
+.set-stepper-input {
+  outline: none;
+  font-family: inherit;
+}
+
+.set-stepper-input:focus {
+  border-color: var(--accent);
 }
 
 .set-timer-button {

@@ -41,11 +41,10 @@ export async function getProgramById(id: number, userId: number) {
                   targetSets: true,
                   targetReps: true,
                   targetWeight: true,
-                  unit: true,
                   notes: true,
                   order: true,
                   exercise: {
-                    select: { id: true, name: true, category: true }
+                    select: { id: true, name: true, category: true, trackedFields: true }
                   }
                 }
               }
@@ -136,11 +135,10 @@ export async function getDayById(id: number, userId: number) {
               targetSets: true,
               targetReps: true,
               targetWeight: true,
-              unit: true,
               notes: true,
               order: true,
               exercise: {
-                select: { id: true, name: true, category: true }
+                select: { id: true, name: true, category: true, trackedFields: true }
               }
             }
           }

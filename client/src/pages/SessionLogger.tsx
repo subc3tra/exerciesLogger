@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { sessionsApi, ApiError } from '../services/api';
-import type { Prefill, SessionDetail, SessionExerciseDetail } from '../types';
+import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail } from '../types';
 import { SetRow } from '../components/SetRow';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { RestTimer } from '../components/RestTimer';
 import { useRestTimer } from '../hooks/useRestTimer';
+import { resolveSetDefaults } from '../utils/setDefaults';
 
-type NumericField = 'reps' | 'weight' | 'duration' | 'distance';
 type CompleteStage = 'closed' | 'confirm' | 'incomplete-warning';
 
 // mm:ss, or h:mm:ss once it runs past an hour
@@ -148,10 +148,26 @@ export function SessionLogger() {
     if (!session) return;
     setIsCompleting(true);
     try {
+      // sets finished via the individual checkmark already carry their real values (see SetRow's
+      // handleTick) — but a set left untouched here has nothing on it beyond what's pre-created, so
+      // resolve the same actual/previous/target default SetRow is currently displaying for it,
+      // rather than saving `completed: true` with everything else still null.
       const incomplete = session.exercises.flatMap((ex) =>
-        ex.sets.filter((s) => !s.completed).map((s) => ({ exerciseId: ex.id, setId: s.id }))
+        ex.sets
+          .filter((s) => !s.completed)
+          .map((s) => ({
+            setId: s.id,
+            fields: resolveSetDefaults(
+              ex.programExercise.exercise.trackedFields,
+              s,
+              prefill?.[ex.programExercise.id]?.find((p) => p.setNumber === s.setNumber),
+              { targetReps: ex.programExercise.targetReps, targetWeight: ex.programExercise.targetWeight }
+            ),
+          }))
       );
-      await Promise.all(incomplete.map(({ setId }) => sessionsApi.updateSet(sessionId, setId, { completed: true })));
+      await Promise.all(
+        incomplete.map(({ setId, fields }) => sessionsApi.updateSet(sessionId, setId, { ...fields, completed: true }))
+      );
       await finishSession();
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to complete session');
@@ -249,7 +265,7 @@ export function SessionLogger() {
                         <SetRow
                           key={set.id}
                           set={set}
-                          unit={programExercise.unit}
+                          trackedFields={programExercise.exercise.trackedFields}
                           target={{ targetReps: programExercise.targetReps, targetWeight: programExercise.targetWeight }}
                           previous={prefill?.[programExercise.id]?.find((p) => p.setNumber === set.setNumber)}
                           onFieldCommit={(field, value) => handleFieldCommit(exercise.id, set.id, field, value)}

@@ -68,7 +68,6 @@ model ProgramExercise {
   targetSets       Int?              // e.g. 3
   targetReps       String?           // flexible: "6–8", "20s", "30m"
   targetWeight     Float?            // starting weight baseline
-  unit             String?           // "reps", "s", "m"
   notes            String?
   order            Int               @default(0)
   sectionId        Int
@@ -84,6 +83,14 @@ enum ExerciseCategory {
   ARMS
   CORE
   CARDIO
+  RECOVERY
+}
+
+enum TrackField {
+  REPS
+  WEIGHT
+  DURATION
+  DISTANCE
 }
 
 model Exercise {
@@ -92,6 +99,7 @@ model Exercise {
   description      String?           // description of exercise like steps and tips
   link             String?           // link to instruction video, youtube etc
   category         ExerciseCategory  // English code; front end maps to swedish for display
+  trackedFields    TrackField[]      // which SessionSet fields this exercise uses, e.g [DURATION, DISTANCE]
   userId           Int?              // null = global (admin-seed), set = user-private custom
   user             User?             @relation(fields: [userId], references: [id])
   programExercises ProgramExercise[] 

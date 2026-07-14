@@ -9,6 +9,24 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.1.4',
+    date: '2026-07-14',
+    title: 'Update: 0.1.4',
+    changes: [
+      'Exercises that need two numbers at once (like duration + distance, or distance + weight) now support both — no more picking just one.',
+      'Cardio machines (Rowing Machine, Stationary Bike, Treadmill, Stairclimber) now log distance alongside duration.',
+      'Added Sled Push/Pull, tracked by distance and weight together.',
+      'Exercise library grew by 10: Dips, Leg Press, Seated Leg Curl, Farmers Carry, Plank, Cable Crunch, Chin-Up, Shrugs, and Hammer Curl.',
+      'Added a Recovery category, plus Mobility & Stretching and a general Cardio (Walk/Bike/Swim) entry for tracking active recovery days.',
+      'Farmers Carry now tracks weight alongside distance.',
+      'Timed sets now show as minutes:seconds (e.g. 1:10) instead of raw seconds.',
+      'Reps, weight, duration, and distance now have +/- buttons for quick adjustments on mobile — tap the number to type an exact value instead.',
+      'Fixed a bug where finishing a workout without ticking every set individually could leave reps blank, throwing off your total weight lifted stat.',
+      'Untouched weight, reps, duration, and distance fields now default to 0 instead of staying blank, so a completed set always saves a real number.',
+      "Added a 'See full changelog' option to the What's new popup.",
+    ],
+  },
+  {
     version: '0.1.3',
     date: '2026-07-13',
     title: 'Update: 0.1.3',
@@ -22,7 +40,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     ],
   },
   {
-    version: '0.1.1',
+    version: '0.1.2',
     date: '2026-07-12',
     title: "Update: 0.1.2",
     changes: [
