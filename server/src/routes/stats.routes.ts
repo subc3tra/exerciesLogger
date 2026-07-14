@@ -13,12 +13,22 @@ router.use(authenticate);
  *   get:
  *     tags:
  *       - Stats
- *     summary: Get lifetime stats overview for the logged-in user (total volume, heaviest lift, sessions completed)
+ *     summary: Get stats overview for the logged-in user (total volume, heaviest lift, sessions completed), optionally filtered by date range
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: range
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [week, month, lifetime]
+ *         description: Rolling date window to compute stats over (week = last 7 days, month = last 30 days, lifetime = no date filter)
  *     responses:
  *       200:
  *         description: Stats overview
+ *       400:
+ *         description: Invalid or missing range value
  *       401:
  *         description: Unauthorized
  */

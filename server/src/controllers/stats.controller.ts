@@ -5,7 +5,14 @@ import { getStatsOverview } from '../services/stats.service';
 export async function getOverview(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userId = req.user!.id;
-    const stats = await getStatsOverview(userId);
+    const range = req.query.range;
+
+    if (range != 'week' && range != 'month' && range != 'lifetime') {
+      res.status(400).json({ message: 'Wrong range used' });
+      return;
+    }
+
+    const stats = await getStatsOverview(userId, range);
     res.status(200).json(stats);
   } catch (err) {
     next(err);

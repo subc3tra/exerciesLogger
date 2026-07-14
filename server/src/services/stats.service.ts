@@ -1,11 +1,25 @@
 import prisma from "../lib/prisma";
 
 // get stats overview
-export async function getStatsOverview(userId:number) {
+export async function getStatsOverview(userId:number, range: 'week' | 'month' | 'lifetime') {
+  let fromDate: Date | undefined;
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+  switch (range) {
+    case 'week':
+      fromDate = new Date(Date.now() - 7 * millisecondsPerDay);
+      break;
+    case 'month':
+      fromDate = new Date(Date.now() - 30 * millisecondsPerDay);
+      break;
+    case 'lifetime':
+      break;
+  }
+
   const sets = await prisma.sessionSet.findMany({
     where: {
       completed: true,
-      sessionExercise: { session: { userId, completed: true} },
+      sessionExercise: { session: { userId, completed: true, ...(fromDate && { date: { gte: fromDate } })} },
     },
     select: {
       weight: true,
