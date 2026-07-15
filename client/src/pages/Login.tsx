@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
-import logo from '../assets/logo/ironset-logo.png';
+import logo from '../assets/logo/rune-ring.svg';
 
 export function Login() {
   const { user, isLoading, login } = useAuth();
@@ -34,6 +34,8 @@ export function Login() {
       <div className="login-glow" />
       <form className="login-card" onSubmit={handleSubmit}>
         <img src={logo} alt="Ironset" className="login-logo" />
+        <h1 className="login-title">Ironset</h1>
+        <p className="login-slogan">Every rep counts</p>
         <p className="login-subtitle">Log in to your training log</p>
 
         <label className="login-label" htmlFor="username">

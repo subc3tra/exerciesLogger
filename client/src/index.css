@@ -381,9 +381,28 @@ a {
 
 .login-logo {
   width: 100%;
-  max-width: 260px;
+  max-width: 160px;
   margin: 0 auto;
   display: block;
+}
+
+.login-title {
+  font-family: 'MedievalSharp', var(--font-display);
+  text-align: center;
+  font-size: 32px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin: 12px 0 0;
+}
+
+.login-slogan {
+  font-family: 'Cinzel', var(--font-display);
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin: 4px 0 0;
 }
 
 .login-subtitle {
