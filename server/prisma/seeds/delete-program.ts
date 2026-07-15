@@ -7,22 +7,23 @@
  *     browser — click the Program table, find the row, copy its id.
  *   - Or: log in as that user in the app / Swagger UI and call GET /api/programs.
  *
- * How to run:
- *   1. Set PROGRAM_ID below to the real id.
- *   2. From server/:  npx tsx prisma/seeds/delete-program.ts
+ * How to run (from server/):
+ *   npx tsx prisma/seeds/delete-program.ts <programId>
  */
+
+// ---- DO NOT EDIT ANYTHING BELLOW THIS LINE ----
 
 import { PrismaClient } from '@prisma/client';
 import { deleteProgramCascade } from './lib/deleteProgram';
 
 const prisma = new PrismaClient();
 
-// ---- EDIT ME ----
-const PROGRAM_ID = 0; // replace with the program's real id
-// -----------------
+const PROGRAM_ID = Number(process.argv[2]);
 
 async function main() {
-  if (!PROGRAM_ID) throw new Error('Set PROGRAM_ID at the top of this file to the program you want to delete.');
+  if (!PROGRAM_ID) {
+    throw new Error('Usage: npx tsx prisma/seeds/delete-program.ts <programId>');
+  }
 
   const program = await prisma.program.findUnique({ where: { id: PROGRAM_ID } });
   if (!program) {
