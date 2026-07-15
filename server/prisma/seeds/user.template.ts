@@ -3,18 +3,18 @@
  * optionally wipe their data too).
  *
  * How to run (from server/):
- *   1. Fill in USERNAME / PASSWORD below.
- *   2. npx tsx prisma/seeds/user.template.ts
+ *   npx tsx prisma/seeds/user.template.ts <username> <password> [wipeExistingData=true|false]
  *
- * Safe to keep a filled-in copy of this file lying around for your own records —
- * the plaintext PASSWORD only ever exists in this file and your terminal; it's
- * bcrypt-hashed before anything is written to the database.
+ * wipeExistingData is optional — omit it (or pass anything other than "true") to leave
+ * the user's existing programs and session history untouched.
+ *
+ * The plaintext password only ever exists on your command line/terminal history;
+ * it's bcrypt-hashed before anything is written to the database.
  *
  * If the username already exists, this resets their password instead of erroring.
- * Set WIPE_EXISTING_DATA = true if you also want to delete every program and all
- * session history for that user (full reset). Leave it false for a plain password
- * reset that keeps their programs and history intact.
  */
+
+// ---- DO NOT EDIT ANYTHING BELLOW THIS LINE ----
 
 import { PrismaClient } from '@prisma/client';
 import { hashPassword } from '../../src/utils/hash';
@@ -22,15 +22,15 @@ import { deleteProgramCascade } from './lib/deleteProgram';
 
 const prisma = new PrismaClient();
 
-// ---- EDIT ME ----
-const USERNAME: string = 'miAmor';
-const PASSWORD: string = 'test';
-const WIPE_EXISTING_DATA = false; // true = also delete all their programs + session history
-// -----------------
+const USERNAME: string = process.argv[2];
+const PASSWORD: string = process.argv[3];
+const WIPE_EXISTING_DATA = process.argv[4] === 'true'; // true = also delete all their programs + session history
 
 async function main() {
-  if (USERNAME === 'REPLACE_ME' || PASSWORD === 'REPLACE_ME') {
-    throw new Error('Set USERNAME and PASSWORD at the top of this file first.');
+  if (USERNAME === undefined || PASSWORD === undefined) {
+    throw new Error(
+      'Usage: npx tsx prisma/seeds/user.template.ts <username> <password> [wipeExistingData=true|false]'
+    );
   }
 
   const hashed = await hashPassword(PASSWORD);
