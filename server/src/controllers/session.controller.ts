@@ -69,8 +69,8 @@ export async function complete(req: Request, res: Response, next: NextFunction):
   try {
     const userId = req.user!.id;
     const id = Number(req.params.id);
-    const session = await completeSession(userId, id);
-    res.status(200).json({ session });
+    const result = await completeSession(userId, id);
+    res.status(200).json(result);
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
       res.status(404).json({ message: "Session not found" });

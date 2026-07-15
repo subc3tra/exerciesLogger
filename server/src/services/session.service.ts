@@ -259,6 +259,63 @@ export async function addNewSetRow(userId:number, sessionExerciseId: number, rep
   });
 }
 
+// for each exercise done this session, compare this session's max completed-set weight against
+// the user's best from every OTHER completed session — only a genuine beat counts as a PR, a
+// first-time exercise has nothing to beat yet so it's not flagged
+async function getSessionPRs(
+  userId: number,
+  sessionId: number,
+  exercises: { programExercise: { exerciseId: number; exercise: { name: string } }; sets: { weight: number | null }[] }[]
+) {
+  const thisSessionMax = new Map<number, { weight: number; exerciseName: string }>();
+  for (const se of exercises) {
+    const exerciseId = se.programExercise.exerciseId;
+    for (const set of se.sets) {
+      if (set.weight == null) continue;
+      const existing = thisSessionMax.get(exerciseId);
+      if (!existing || set.weight > existing.weight) {
+        thisSessionMax.set(exerciseId, { weight: set.weight, exerciseName: se.programExercise.exercise.name });
+      }
+    }
+  }
+
+  if (thisSessionMax.size === 0) return [];
+
+  const priorSets = await prisma.sessionSet.findMany({
+    where: {
+      completed: true,
+      weight: { not: null },
+      sessionExercise: {
+        programExercise: { exerciseId: { in: Array.from(thisSessionMax.keys()) } },
+        session: { userId, completed: true, id: { not: sessionId } }
+      }
+    },
+    select: {
+      weight: true,
+      sessionExercise: { select: { programExercise: { select: { exerciseId: true } } } }
+    }
+  });
+
+  const priorMax = new Map<number, number>();
+  for (const set of priorSets) {
+    if (set.weight == null) continue;
+    const exerciseId = set.sessionExercise.programExercise.exerciseId;
+    const existing = priorMax.get(exerciseId);
+    if (existing == null || set.weight > existing) {
+      priorMax.set(exerciseId, set.weight);
+    }
+  }
+
+  const prs: { exerciseId: number; exerciseName: string; weight: number; previousBest: number }[] = [];
+  for (const [exerciseId, { weight, exerciseName }] of thisSessionMax) {
+    const previousBest = priorMax.get(exerciseId);
+    if (previousBest !== undefined && weight > previousBest) {
+      prs.push({ exerciseId, exerciseName, weight, previousBest });
+    }
+  }
+  return prs;
+}
+
 // complete session — auto-archives the program if this was its final scheduled session
 export async function completeSession(userId: number, sessionId: number) {
   const session = await prisma.session.update({
@@ -278,11 +335,17 @@ export async function completeSession(userId: number, sessionId: number) {
         select: {
           program: { select: { id: true, totalWeeks: true, daysPerWeek: true } }
         }
+      },
+      exercises: {
+        select: {
+          programExercise: { select: { exerciseId: true, exercise: { select: { name: true } } } },
+          sets: { where: { completed: true }, select: { weight: true } }
+        }
       }
     }
   });
 
-  const { programDay, ...sessionFields } = session;
+  const { programDay, exercises, ...sessionFields } = session;
   const { program } = programDay;
   const absoluteDayNumber = (sessionFields.weekNumber - 1) * program.daysPerWeek + sessionFields.dayNumber;
 
@@ -290,5 +353,7 @@ export async function completeSession(userId: number, sessionId: number) {
     await prisma.program.update({ where: { id: program.id }, data: { status: 'ARCHIVED' } });
   }
 
-  return sessionFields;
+  const prs = await getSessionPRs(userId, sessionId, exercises);
+
+  return { session: sessionFields, prs };
 }
