@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { exercisesApi } from '../services/api';
 import { StatsSummary } from '../components/StatsSummary';
+import { ProgressionChart } from '../components/ProgressionChart';
 import type { ExerciseRef } from '../types';
 
 export function Progression() {
@@ -33,9 +34,12 @@ export function Progression() {
         ))}
       </select>
 
-      {/* Graph goes below this later — reusing the overview stats card, scoped to the selected exercise */}
       <div style={{ marginTop: 20 }}>
         <StatsSummary exerciseId={selectedId ?? undefined} />
+      </div>
+
+      <div style={{ marginTop: 20 }}>
+        <ProgressionChart exerciseId={selectedId ?? undefined} />
       </div>
     </div>
   );

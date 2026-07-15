@@ -165,8 +165,16 @@ export interface SessionResponse {
   prefill: Prefill;
 }
 
+export interface SessionPR {
+  exerciseId: number;
+  exerciseName: string;
+  weight: number;
+  previousBest: number;
+}
+
 export interface CompleteSessionResponse {
   session: SessionRecord;
+  prs: SessionPR[];
 }
 
 export interface UpdateSetResponse {
@@ -184,6 +192,12 @@ export interface StatsOverview {
   totalVolumeKg: number;
   heaviestLift: { weight: number; exerciseName: string; date: string } | null;
   totalSessionsCompleted: number;
+}
+
+// GET /api/stats/progression — one point per session, sorted chronologically
+export interface StatsProgressionPoint {
+  date: string;
+  weight: number;
 }
 
 // GET /api/exercises

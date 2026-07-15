@@ -1,23 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { sessionsApi, ApiError } from '../services/api';
-import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail } from '../types';
+import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
 import { SetRow } from '../components/SetRow';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { RestTimer } from '../components/RestTimer';
+import { SessionSummaryModal } from '../components/SessionSummaryModal';
 import { useRestTimer } from '../hooks/useRestTimer';
 import { resolveSetDefaults } from '../utils/setDefaults';
+import { formatElapsed } from '../utils/time';
 
 type CompleteStage = 'closed' | 'confirm' | 'incomplete-warning';
-
-// mm:ss, or h:mm:ss once it runs past an hour
-function formatElapsed(totalSeconds: number): string {
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = totalSeconds % 60;
-  const pad = (n: number) => n.toString().padStart(2, '0');
-  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
-}
 
 export function SessionLogger() {
   const { id } = useParams<{ id: string }>();
@@ -36,6 +29,7 @@ export function SessionLogger() {
   const [completeStage, setCompleteStage] = useState<CompleteStage>('closed');
   const [isCompleting, setIsCompleting] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [summary, setSummary] = useState<{ prs: SessionPR[]; elapsedSeconds: number } | null>(null);
   const restTimer = useRestTimer();
 
   useEffect(() => {
@@ -175,6 +169,25 @@ export function SessionLogger() {
             ),
           }))
       );
+
+      // mirror the resolved defaults into local state too — sessionsApi.updateSet below only
+      // persists them server-side, but the summary modal reads from this state, so without this
+      // it'd show these sets as still incomplete with no weight/reps
+      setSession((prev) =>
+        prev
+          ? {
+              ...prev,
+              exercises: prev.exercises.map((ex) => ({
+                ...ex,
+                sets: ex.sets.map((s) => {
+                  const match = incomplete.find((i) => i.setId === s.id);
+                  return match ? { ...s, ...match.fields, completed: true } : s;
+                }),
+              })),
+            }
+          : prev
+      );
+
       await Promise.all(
         incomplete.map(({ setId, fields }) => sessionsApi.updateSet(sessionId, setId, { ...fields, completed: true }))
       );
@@ -188,8 +201,8 @@ export function SessionLogger() {
   async function finishSession() {
     setIsCompleting(true);
     try {
-      await sessionsApi.complete(sessionId);
-      navigate('/');
+      const result = await sessionsApi.complete(sessionId);
+      setSummary({ prs: result.prs, elapsedSeconds });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to complete session');
     } finally {
@@ -360,6 +373,15 @@ export function SessionLogger() {
       />
 
       {restTimer.isRunning && <RestTimer secondsLeft={restTimer.secondsLeft} onDismiss={restTimer.dismiss} />}
+
+      {summary && (
+        <SessionSummaryModal
+          session={session}
+          elapsedSeconds={summary.elapsedSeconds}
+          prs={summary.prs}
+          onClose={() => navigate('/')}
+        />
+      )}
     </div>
   );
 }
