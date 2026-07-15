@@ -1,0 +1,7 @@
+{
+  "name": "exercise-logger",
+  "private": true,
+  "scripts": {
+    "deploy": "npm --prefix server run build && npm --prefix client run build && pm2 restart nordCore --update-env"
+  }
+}
