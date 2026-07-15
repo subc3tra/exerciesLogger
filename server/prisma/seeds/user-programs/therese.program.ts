@@ -41,84 +41,41 @@
  *   resolves each name to its `Exercise.id` before writing anything. If a name
  *   doesn't match, it fails fast and lists every unmatched name, rather than
  *   creating a partial program. If the exercise genuinely doesn't exist yet,
- *   add it to `add.exercises.ts` and re-run that seed first.
+ *   add it to `docs/exercise-list.md` + `sync-exercises.ts`'s `EXERCISES` array
+ *   and re-run that seed first (`add.exercises.ts` is frozen, see DECISIONS.md).
  * ============================================================================
+ *
+ * NOTE (Claude, generated from docs/user-programs-raw/therese.program.md):
+ * source doc had no `totalWeeks` — defaulted to 4 to match the base template,
+ * same as rene.program.ts. ADJUST if Therese's plan runs a different length.
+ *
+ * Seven exercises this program needed didn't exist in the bank and have since
+ * been added (docs/exercise-list.md + sync-exercises.ts) — Terminal Knee
+ * Extension, Seated Calf Raise, Single-Leg Glute Bridge, Side-Lying Hip
+ * Abduction, Copenhagen Adductor, Hip Flexor Stretch, Standing Hip Flexor
+ * Stretch. Run `npx tsx prisma/seeds/sync-exercises.ts` against the target
+ * environment (if not already done there) before running this file.
+ *
+ * Two source exercises were matched to the closest existing bank entry rather
+ * than an exact name (flag if this substitution isn't acceptable):
+ *   - "Step-up (lågt steg 15–20 cm)" → Dumbbell Step-Up
+ *   - "Hip Abduction maskin" → Cable Hip Abduction (machine vs. cable — same
+ *     movement pattern, different equipment)
+ *   - "Leg Curl (liggande eller sittande)" → Seated Leg Curl (source doc
+ *     allows either variant; seated picked for consistency with the pattern
+ *     already used in rene.program.ts)
  */
 
 const PROGRAM_DATA = {
-  username: "rene" as string | null, // MATTIAS: set this — the AI leaves it null on purpose
+  username: 'therese' as string | null, // MATTIAS: set this — the AI leaves it null on purpose
 
-  name: 'Styrka & Kondition 5-dagar', // ADJUST if you want a different display name
-  totalWeeks: 4, // ADJUST — not specified in rene.program.md, defaulted to match the base template
-  daysPerWeek: 5,
+  name: 'Ben & Rumpa 3 dagar/vecka',
+  totalWeeks: 4, // ADJUST — not specified in therese.program.md, defaulted to match the base template
+  daysPerWeek: 3,
 
   days: [
     {
-      name: 'Dag A – Överkropp Push & Pull',
-      dayLabel: null as string | null,
-      duration: null as string | null,
-      sections: [
-        {
-          name: 'Main Workout',
-          zone: null as string | null,
-          sets: null as number | null,
-          restSecs: null as number | null,
-          exercises: [
-            {
-              name: 'Bench Press',
-              targetSets: 4,
-              targetReps: '6-8',
-              targetWeight: null as number | null,
-              notes: 'Kör med kontrollerad sänkning, ca 2 sek ner. Fokus på att känna bröstmuskeln – inte bara trycka upp vikten.',
-            },
-            {
-              name: 'Seated Cable Row',
-              targetSets: 4,
-              targetReps: '8-10',
-              targetWeight: null as number | null,
-              notes: 'Dra med armbågarna nära kroppen, håll axlarna nere. Håll en sekund i slutläget och känn kontraktionen i ryggen.',
-            },
-            {
-              name: 'Incline Dumbbell Chest Press',
-              targetSets: 3,
-              targetReps: '10-12',
-              targetWeight: null as number | null,
-              notes: 'Max 30–45° vinkel på bänken – högre vinkel belastar axeln onödigt. Hantelpress ger bättre rörelsefrihet än stång här.',
-            },
-            {
-              name: 'Face Pulls',
-              targetSets: 3,
-              targetReps: '15',
-              targetWeight: null as number | null,
-              notes: 'Viktig övning för axelstabilitet – hoppa inte över den. Dra mot ansiktet, armbågarna högt, avsluta med händerna utåt.',
-            },
-            {
-              name: 'Dips',
-              targetSets: 3,
-              targetReps: '8-12',
-              targetWeight: null as number | null,
-              notes: 'Luta dig något framåt för mer bröst, stanna rak för mer tricep. Skippa om axeln protesterar.',
-            },
-            {
-              name: 'Dumbbell Bicep Curl',
-              targetSets: 3,
-              targetReps: '12',
-              targetWeight: null as number | null,
-              notes: 'Håll armbågarna stilla vid sidan. Ingen svikt – om du behöver svänga är vikten för tung.',
-            },
-            {
-              name: 'Triceps Pushdown',
-              targetSets: 3,
-              targetReps: '12',
-              targetWeight: null as number | null,
-              notes: 'Håll armbågarna vid kroppen. Pressa hela vägen ner och kontrollera tillbaka.',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Dag B – Ben',
+      name: 'Dag A – Quad & knästabilitet',
       dayLabel: null as string | null,
       duration: null as string | null,
       sections: [
@@ -130,181 +87,138 @@ const PROGRAM_DATA = {
           exercises: [
             {
               name: 'Leg Press',
-              targetSets: 4,
+              targetSets: 3,
               targetReps: '10-12',
               targetWeight: null as number | null,
-              notes: 'Placera fötterna högt upp på plattan – det avlastar knäna och aktiverar mer bakben. Gå inte så djupt att ländryggen lossar från ryggstödet.',
+              notes: 'Högt fotläge ger mer glutes/hamstrings och minskar knästress.',
+            },
+            {
+              name: 'Terminal Knee Extension',
+              targetSets: 3,
+              targetReps: '15',
+              targetWeight: null as number | null,
+              notes: 'Med band. VMO-aktivering, klassisk övning efter knäprotes.',
+            },
+            {
+              name: 'Dumbbell Step-Up',
+              targetSets: 3,
+              targetReps: '8/ben',
+              targetWeight: null as number | null,
+              notes: 'Lågt steg 15–20 cm. Kontrollerad knäbelastning – höj steget när smärtfritt.',
+            },
+            {
+              name: 'Cable Hip Abduction',
+              targetSets: 3,
+              targetReps: '12-15',
+              targetWeight: null as number | null,
+              notes: 'Stärker glute med och stödjer höftstabilitet.',
+            },
+            {
+              name: 'Seated Calf Raise',
+              targetSets: 3,
+              targetReps: '12',
+              targetWeight: null as number | null,
+              notes: 'Skyddar knät och stärker underbenet.',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Dag B – Glute & höft',
+      dayLabel: null as string | null,
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Hip Thrust',
+              targetSets: 3,
+              targetReps: '10-12',
+              targetWeight: null as number | null,
+              notes: 'Primär gluteövning med minimal knäkompression.',
             },
             {
               name: 'Romanian Deadlift',
-              targetSets: 4,
-              targetReps: '8-10',
+              targetSets: 3,
+              targetReps: '10',
               targetWeight: null as number | null,
-              notes: 'Håll ryggen rak och sänk stången längs benen. Du ska känna dragning i baksidan av låret – inte i ländryggen.',
+              notes: 'Höftgångjärn och hamstrings – börja lätt och känn in.',
+            },
+            {
+              name: 'Single-Leg Glute Bridge',
+              targetSets: 3,
+              targetReps: '10/ben',
+              targetWeight: null as number | null,
+              notes: 'Tränar glute med och min, stödjer höftstabilitet.',
+            },
+            {
+              name: 'Side-Lying Hip Abduction',
+              targetSets: 3,
+              targetReps: '15/sida',
+              targetWeight: null as number | null,
+              notes: 'Enkel dosering direkt på höften.',
+            },
+            {
+              name: 'Hip Flexor Stretch',
+              targetSets: 3,
+              targetReps: '45s/sida',
+              targetWeight: null as number | null,
+              notes: 'Hållen. Strama höftböjare bidrar ofta till höftsmärta – ta tid på den.',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Dag C – Kombination & funktionell styrka',
+      dayLabel: null as string | null,
+      duration: null as string | null,
+      sections: [
+        {
+          name: 'Main Workout',
+          zone: null as string | null,
+          sets: null as number | null,
+          restSecs: null as number | null,
+          exercises: [
+            {
+              name: 'Goblet Squat',
+              targetSets: 3,
+              targetReps: '10',
+              targetWeight: null as number | null,
+              notes: 'Lågt djup – kontrollerat, hon avgör range efter känsla.',
+            },
+            {
+              name: 'Hip Thrust',
+              targetSets: 3,
+              targetReps: '10',
+              targetWeight: null as number | null,
+              notes: 'Möjlighet att öka vikt från pass B.',
             },
             {
               name: 'Seated Leg Curl',
               targetSets: 3,
               targetReps: '12',
               targetWeight: null as number | null,
-              notes: 'Kontrollera hela rörelsen, särskilt på väg upp. Sittande variant är skonsam för knäleden.',
+              notes: 'Liggande eller sittande fungerar. Isolerad hamstring, knävänlig.',
             },
             {
-              name: 'Leg Extension',
+              name: 'Copenhagen Adductor',
               targetSets: 3,
-              targetReps: '15',
+              targetReps: '8-10/sida',
               targetWeight: null as number | null,
-              notes: 'Kör med lätt–medel vikt och full rörelse. Bra för att stärka upp knäna successivt.',
+              notes: 'Modifierad. Adduktorer och höftstabilitet – enklare variant på knä om det behövs.',
             },
             {
-              name: 'Dumbbell Step-Up',
+              name: 'Standing Hip Flexor Stretch',
               targetSets: 3,
-              targetReps: '10/ben',
+              targetReps: '45s/sida',
               targetWeight: null as number | null,
-              notes: 'Knäsnällare än lunges. Håll överkroppen rak och tryck upp genom hälen – inte tårna.',
-            },
-            {
-              name: 'Standing Calf Raise',
-              targetSets: 4,
-              targetReps: '15',
-              targetWeight: null as number | null,
-              notes: 'Full rörelse – hela vägen ner för stretch, hela vägen upp. Kan göras stående eller i benpressmaskin.',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Dag C – Kondition & Core',
-      dayLabel: null as string | null,
-      duration: null as string | null,
-      sections: [
-        {
-          name: 'Main Workout',
-          zone: null as string | null,
-          sets: null as number | null,
-          restSecs: null as number | null,
-          exercises: [
-            {
-              name: 'Sled Push/Pull',
-              targetSets: 6,
-              targetReps: '35m',
-              targetWeight: null as number | null,
-              notes: 'Kontrollerat tempo – det här är inte sprint, det är uthållighet. Vila tills pulsen lugnat sig något mellan seten.',
-            },
-            {
-              name: 'Rowing Machine',
-              targetSets: 3,
-              targetReps: '500m',
-              targetWeight: null as number | null,
-              notes: 'Håll jämnt tempo hela vägen, undvik att gå ut för hårt. Skonsam för knän och axlar.',
-            },
-            {
-              name: 'Farmers Carry',
-              targetSets: 4,
-              targetReps: '30m',
-              targetWeight: null as number | null,
-              notes: 'Gå med rak rygg, axlarna bakåt och ner. Tränar core, grepp och kondition samtidigt – underskattat.',
-            },
-            {
-              name: 'Plank',
-              targetSets: 3,
-              targetReps: '40s',
-              targetWeight: null as number | null,
-              notes: 'Håll kroppen rak – ingen höft upp eller ner. Andas lugnt.',
-            },
-            {
-              name: 'Cable Crunch',
-              targetSets: 3,
-              targetReps: '15',
-              targetWeight: null as number | null,
-              notes: 'Kör från knästående, dra neråt med buken – inte med nacken. Håll spänningen hela vägen.',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Dag D – Överkropp Pull & Marklyft',
-      dayLabel: null as string | null,
-      duration: null as string | null,
-      sections: [
-        {
-          name: 'Main Workout',
-          zone: null as string | null,
-          sets: null as number | null,
-          restSecs: null as number | null,
-          exercises: [
-            {
-              name: 'Deadlift',
-              targetSets: 4,
-              targetReps: '4-6',
-              targetWeight: null as number | null,
-              notes: 'Stång nära kroppen hela vägen, låt höfterna driva upp i toppläget. Ta ordentligt med vila mellan seten (2–3 min).',
-            },
-            {
-              name: 'Chin-Up',
-              targetSets: 4,
-              targetReps: '8-10',
-              targetWeight: null as number | null,
-              notes: 'Underhandsgrepp. Om du kör fast, ta kortare vila eller gör färre reps per set snarare än att fuska med teknik.',
-            },
-            {
-              name: 'Single-Arm Dumbbell Row',
-              targetSets: 3,
-              targetReps: '10/sida',
-              targetWeight: null as number | null,
-              notes: 'Stöd dig ordentligt. Dra med armbågen, inte med handen – tänk att du startar rörelsen med ryggen.',
-            },
-            {
-              name: 'Rear Delt Fly',
-              targetSets: 3,
-              targetReps: '15',
-              targetWeight: null as number | null,
-              notes: 'Lätt vikt, kontrollerat. Viktigt för axelbalansen – kompenserar för allt horisontalt tryck i dag A.',
-            },
-            {
-              name: 'Shrugs',
-              targetSets: 3,
-              targetReps: '12',
-              targetWeight: null as number | null,
-              notes: 'Rakt upp och ner – ingen rotation. Håll en sekund i toppläget.',
-            },
-            {
-              name: 'Hammer Curl',
-              targetSets: 3,
-              targetReps: '12',
-              targetWeight: null as number | null,
-              notes: 'Neutralt grepp (tummen upp). Tränar underarmen och bicep på ett sätt som är direkt användbart för grappling.',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Dag E – Aktiv Återhämtning',
-      dayLabel: null as string | null,
-      duration: null as string | null,
-      sections: [
-        {
-          name: 'Main Workout',
-          zone: null as string | null,
-          sets: null as number | null,
-          restSecs: null as number | null,
-          exercises: [
-            {
-              name: 'Cardio (Walk/Bike/Swim)',
-              targetSets: 1,
-              targetReps: '30-45min',
-              targetWeight: null as number | null,
-              notes: 'Lugnt tempo, ingen press. Syftet är blodcirkulation och återhämtning – inte träning.',
-            },
-            {
-              name: 'Mobility & Stretching',
-              targetSets: 1,
-              targetReps: '15min',
-              targetWeight: null as number | null,
-              notes: 'Fokus på höfter och axlar. Särskilt viktigt med BJJ i schemat – rörliga höfter är ett direkt verktyg på mattan.',
+              notes: 'Avsluta passet med rörlighet i höftböjarna.',
             },
           ],
         },
