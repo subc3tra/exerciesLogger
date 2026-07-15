@@ -75,3 +75,57 @@ export async function getStatsOverview(userId:number, range: 'week' | 'month' | 
     totalSessionsCompleted
   }
 }
+
+// get stats for users exercise
+export async function getExerciseProgression(userId:number, exerciseId: number, range: 'week' | 'month' | 'lifetime' ) {
+  let fromDate: Date | undefined;
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+  switch (range) {
+    case 'week':
+      fromDate = new Date(Date.now() - 7 * millisecondsPerDay);
+      break;
+    case 'month':
+      fromDate = new Date(Date.now() - 30 * millisecondsPerDay);
+      break;
+    case 'lifetime':
+      break;
+  }
+  
+  const exercises = await prisma.sessionSet.findMany({
+    where: {
+      completed: true,
+      sessionExercise: {
+        programExercise: {
+          exerciseId
+        },
+        session: {
+          userId, ...(fromDate && { date: { gte: fromDate } })
+        }
+      }
+    },
+    select: {
+      weight: true,
+      sessionExercise: {
+        select: {
+          session: { select: { date: true } }
+        },
+      },
+    },
+  })
+
+  const grouped = exercises.reduce((map, set) => {
+    if (set.weight == null) {
+      return map;
+    }
+
+    const key = set.sessionExercise.session.date.getTime();
+    const existing = map.get(key);
+    if (!existing || set.weight > existing.weight) {
+      map.set(key, { date: set.sessionExercise.session.date, weight: set.weight });
+    }
+    return map;
+  }, new Map<number, { date: Date; weight: number }>());
+
+  return Array.from(grouped.values()).sort((a, b) => a.date.getTime() - b.date.getTime());
+}
