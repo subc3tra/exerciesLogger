@@ -10,6 +10,7 @@ import type {
   UpdateSetResponse,
   StatsOverview,
   StatsRange,
+  StatsProgressionPoint,
   ExercisesResponse,
 } from '../types';
 
@@ -120,6 +121,8 @@ export const sessionsApi = {
 export const statsApi = {
   getOverview: (range: StatsRange, exerciseId?: number) =>
     apiFetch<StatsOverview>(`/stats/overview?range=${range}${exerciseId ? `&exerciseId=${exerciseId}` : ''}`),
+  getProgression: (exerciseId: number, range: StatsRange) =>
+    apiFetch<StatsProgressionPoint[]>(`/stats/progression?exerciseId=${exerciseId}&range=${range}`),
 };
 
 export const exercisesApi = {
