@@ -1,0 +1,39 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" width="460" height="460">
+	<style>
+		.s0 { fill: none;stroke: #d4f53c;stroke-width: 6 } 
+		.s1 { fill: #d4f53c } 
+		.s2 { fill: #000000;stroke: #d4f53c;stroke-width: 11.8 } 
+		.s3 { fill: none;stroke: #d4f53c;stroke-width: 11.8 } 
+	</style>
+	<path fill-rule="evenodd" class="s0" d="m230 442c-117.24 0-212-94.76-212-212 0-117.24 94.76-212 212-212 117.24 0 212 94.76 212 212 0 117.24-94.76 212-212 212z"/>
+	<path fill-rule="evenodd" class="s0" d="m230 378c-81.84 0-148-66.16-148-148 0-81.84 66.16-148 148-148 81.84 0 148 66.16 148 148 0 81.84-66.16 148-148 148z"/>
+	<path class="s0" d="m221.6 71v-42l16.8 11.8v30.2"/>
+	<path class="s1" d="m308.1 61.8l6 6-6 6-6-6z"/>
+	<path class="s0" d="m387.1 104.7l-32.8 26.2"/>
+	<path class="s0" d="m372.1 106l1.2 20.4"/>
+	<path class="s1" d="m405.5 183.9l6 6-6 6-6-6z"/>
+	<path class="s0" d="m426 274.7l-41-9.3"/>
+	<path class="s0" d="m417 272.7l-12.9 7.4-8.4-12.3"/>
+	<path class="s1" d="m370.7 336.2l6 6-6 6-6-6z"/>
+	<path class="s0" d="m317.2 411.1l-18.2-37.8"/>
+	<path class="s0" d="m324.1 404.1l-13.8-7.4"/>
+	<path class="s0" d="m307.4 412.1l2.9-15.4"/>
+	<path class="s1" d="m230 404l6 6-6 6-6-6z"/>
+	<path class="s0" d="m151.1 415.1l18.2-37.8"/>
+	<path class="s0" d="m134.5 407.1l18.2-37.9"/>
+	<path class="s0" d="m151.1 415.1l1.6-45.9"/>
+	<path class="s0" d="m134.5 407.1l34.8-29.8"/>
+	<path class="s1" d="m89.3 336.2l6 6-6 6-6-6z"/>
+	<path class="s0" d="m33 270.25l9.6-20.25 17.4 14.1"/>
+	<path class="s0" d="m73.35 260.8l-9.6 20.25-17.55-14.1"/>
+	<path class="s1" d="m54.5 183.9l6 6-6 6-6-6z"/>
+	<path class="s0" d="m72.9 104.7l32.8 26.2"/>
+	<path class="s1" d="m151.9 61.8l6 6-6 6-6-6z"/>
+	<path id="Layer copy 2" fill-rule="evenodd" class="s2" d="m230 101v257"/>
+	<path fill-rule="evenodd" class="s1" d="m185.6 123.6h88.8c3.26 0 5.9 3.96 5.9 8.85 0 4.89-2.64 8.85-5.9 8.85h-88.8c-3.26 0-5.9-3.96-5.9-8.85 0-4.89 2.64-8.85 5.9-8.85z"/>
+	<path fill-rule="evenodd" class="s1" d="m201.9 112.6h56.3c3.26 0 5.9 2.64 5.9 5.9 0 3.26-2.64 5.9-5.9 5.9h-56.3c-3.26 0-5.9-2.64-5.9-5.9 0-3.26 2.64-5.9 5.9-5.9z"/>
+	<path fill-rule="evenodd" class="s1" d="m185.6 318.7h88.8c3.26 0 5.9 3.96 5.9 8.85 0 4.89-2.64 8.85-5.9 8.85h-88.8c-3.26 0-5.9-3.96-5.9-8.85 0-4.89 2.64-8.85 5.9-8.85z"/>
+	<path fill-rule="evenodd" class="s1" d="m201.9 335.5h56.3c3.26 0 5.9 2.64 5.9 5.9 0 3.26-2.64 5.9-5.9 5.9h-56.3c-3.26 0-5.9-2.64-5.9-5.9 0-3.26 2.64-5.9 5.9-5.9z"/>
+	<path fill-rule="evenodd" class="s3" d="m270 142.7l-66.6 65.1 53.2 44.4-66.6 65.1"/>
+	<path id="Layer copy" fill-rule="evenodd" class="s3" d="m270 142.7l-66.6 65.1 53.2 44.4-66.6 65.1"/>
+</svg>

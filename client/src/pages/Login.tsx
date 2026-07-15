@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
-import logo from '../assets/logo/rune-ring.svg';
+import logo from '../assets/logo/rune-ring-edited.svg';
 
 export function Login() {
   const { user, isLoading, login } = useAuth();

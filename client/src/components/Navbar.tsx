@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import logo from '../assets/logo/ironset-logo.png';
+import logo from '../assets/logo/rune-ring-edited.svg';
 
 export function Navbar() {
   const { user, logout } = useAuth();
