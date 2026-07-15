@@ -156,6 +156,26 @@
 **Description:** Loaded sled driven forward (push) or dragged backward (pull) across a set distance, combining leg drive with a significant conditioning demand. Low eccentric loading makes it a joint-friendly way to build leg power and work capacity; distance and added weight are both easy to progress.
 **Tracked fields:** DISTANCE, WEIGHT (not the LEGS default of REPS+WEIGHT)
 
+### Terminal Knee Extension
+**Category:** LEGS
+**Description:** Banded knee extension performed through only the final few degrees of extension, using a resistance band anchored behind the knee. Isolates the VMO (vastus medialis oblique); a staple rehab exercise after knee injury or surgery since it avoids loading the joint through a full range of motion.
+
+### Seated Calf Raise
+**Category:** LEGS
+**Description:** Isolation movement for the soleus performed seated with the knee bent, pressing through the balls of the feet against a pad or machine. The bent-knee position takes the gastrocnemius largely out of play compared to a standing calf raise, shifting emphasis to the soleus — gentler on the knee joint too.
+
+### Single-Leg Glute Bridge
+**Category:** LEGS
+**Description:** Unilateral bodyweight glute bridge — one foot planted, hips driven up while the other leg stays extended or lifted. Bodyweight-only counterpart to the Hip Thrust, useful when heavy spinal or hip loading isn't appropriate; also exposes left-right glute imbalances.
+
+### Side-Lying Hip Abduction
+**Category:** LEGS
+**Description:** Side-lying leg raise lifting the top leg straight up against gravity or a band, isolating the hip abductors and gluteus medius. Low-load, joint-friendly way to build hip stability — commonly used in rehab and warm-ups.
+
+### Copenhagen Adductor
+**Category:** LEGS
+**Description:** Side plank variation with the top leg supported on a bench, training the hip adductors through an isometric or dynamic hold. The modified/regressed version supports the top leg closer to the knee rather than the ankle, shortening the lever arm for a knee-friendlier entry point.
+
 ---
 
 ## SHOULDERS
@@ -241,6 +261,16 @@
 ### Cable Crunch
 **Category:** CORE
 **Description:** Kneeling cable crunch flexing the spine against resistance from a high pulley, isolating the rectus abdominis through a full range of motion. Curl through the spine rather than just bending at the hips to keep tension on the abs.
+
+### Hip Flexor Stretch
+**Category:** CORE
+**Description:** Held stretch in a half-kneeling position, driving the hips forward to lengthen the hip flexors of the rear leg. Tight hip flexors are a common contributor to hip and lower-back discomfort — hold duration, not reps, is the point.
+**Tracked fields:** DURATION
+
+### Standing Hip Flexor Stretch
+**Category:** CORE
+**Description:** Standing variant of the hip flexor stretch, shifting the rear leg back and tucking the pelvis under to lengthen the hip flexor without kneeling. Useful as a between-exercise or end-of-session mobility finisher when getting to the floor isn't convenient.
+**Tracked fields:** DURATION
 
 ---
 
