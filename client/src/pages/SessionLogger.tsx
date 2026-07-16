@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { sessionsApi, ApiError } from '../services/api';
-import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
+import type { NumericField, Prefill, SectionRef, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
 import { SetRow } from '../components/SetRow';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { RestTimer } from '../components/RestTimer';
@@ -11,6 +11,23 @@ import { resolveSetDefaults } from '../utils/setDefaults';
 import { formatElapsed } from '../utils/time';
 
 type CompleteStage = 'closed' | 'confirm' | 'incomplete-warning';
+
+interface ExerciseSectionGroup {
+  section: SectionRef;
+  exercises: SessionExerciseDetail[];
+}
+
+// groups session exercises by their program section (e.g. "Uppvärmning" / "Huvudpast") — mirrors
+// the same grouping the Program overview page already shows, just for the live session view
+function groupBySection(exercises: SessionExerciseDetail[]): ExerciseSectionGroup[] {
+  const groups = new Map<number, ExerciseSectionGroup>();
+  for (const exercise of exercises) {
+    const { section } = exercise.programExercise;
+    if (!groups.has(section.id)) groups.set(section.id, { section, exercises: [] });
+    groups.get(section.id)!.exercises.push(exercise);
+  }
+  return Array.from(groups.values()).sort((a, b) => a.section.order - b.section.order);
+}
 
 export function SessionLogger() {
   const { id } = useParams<{ id: string }>();
@@ -246,8 +263,15 @@ export function SessionLogger() {
 
       {error && <p style={{ color: 'var(--accent3)', marginBottom: 16 }}>{error}</p>}
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {session.exercises.map((exercise) => {
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        {groupBySection(session.exercises).map((group) => (
+          <div key={group.section.id}>
+            <div className="schedule-chip-section-name" style={{ marginBottom: 8 }}>
+              {group.section.name}
+              {group.section.zone ? ` · ${group.section.zone}` : ''}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {group.exercises.map((exercise) => {
           const isExpanded = expanded.has(exercise.id);
           const isDescExpanded = descExpanded.has(exercise.id);
           const doneCount = exercise.sets.filter((s) => s.completed).length;
@@ -324,7 +348,10 @@ export function SessionLogger() {
               )}
             </div>
           );
-        })}
+              })}
+            </div>
+          </div>
+        ))}
       </div>
 
       <button

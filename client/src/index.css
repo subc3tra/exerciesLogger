@@ -221,7 +221,7 @@ a {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 8px;
   background: transparent;
   border: none;
@@ -230,9 +230,13 @@ a {
   text-align: left;
 }
 
+.ex-description-toggle .block-label {
+  color: var(--accent2);
+}
+
 .ex-description-caret {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 15px;
   flex-shrink: 0;
 }
 

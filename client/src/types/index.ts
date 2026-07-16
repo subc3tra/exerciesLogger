@@ -83,10 +83,20 @@ export interface SessionSet {
   notes: string | null;
 }
 
+// slim section reference nested under a session's programExercise — just enough to group/label by,
+// not the full `Section` (which also carries its own `exercises` list, not needed here)
+export interface SectionRef {
+  id: number;
+  name: string;
+  zone: string | null;
+  order: number;
+}
+
 // ProgramExercise + nested exercise — what comes back via SessionExercise.programExercise
 export interface ProgramExerciseFull extends ProgramExerciseTemplate {
   exerciseId: number;
   sectionId: number;
+  section: SectionRef;
 }
 
 export interface SessionExerciseDetail {
