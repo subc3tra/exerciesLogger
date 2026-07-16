@@ -84,6 +84,9 @@ export async function getSessionById(id: number, userId: number) {
               notes: true,
               order: true,
               sectionId: true,
+              section: {
+                select: { id: true, name: true, zone: true, order: true }
+              },
               exercise: {
                 select: { id: true, name: true, category: true, description: true, trackedFields: true }
               }
@@ -123,8 +126,10 @@ export async function startSession(userId: number, programId: number) {
         select: {
           id: true,
           sections: {
+            orderBy: { order: 'asc' },
             select: {
               exercises: {
+                orderBy: { order: 'asc' },
                 select: {
                 id: true,
                 targetSets: true,
