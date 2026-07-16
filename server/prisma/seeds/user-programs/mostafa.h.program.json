@@ -1,0 +1,129 @@
+{
+  "name": "Styrka & Muskelbygge – BJJ-anpassad 4-dagar",
+  "totalWeeks": 8,
+  "daysPerWeek": 4,
+  "days": [
+    {
+      "name": "Upper A – Push",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Scapular Push Up", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Bygger skulderbladskontroll, skyddar axeln (extra viktigt med din axelskada) och ger bättre stabilitet i underläge/scramble" },
+            { "name": "Face Pulls", "targetSets": 2, "targetReps": "15", "targetWeight": null, "notes": "Lätt vikt – motverkar axelinstabilitet från mycket press + grappling, håller axeln frisk över tid" }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Bench Press", "targetSets": 4, "targetReps": "6-8", "targetWeight": null, "notes": "Grundövning för pressryck, ger råstyrka att skapa utrymme/pressa bort motstånd" },
+            { "name": "Incline Dumbbell Chest Press", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Hantlar rör sig fritt och är skonsammare mot axeln än skivstång – ersätter \"incline benchpress\" som inte finns i banken" },
+            { "name": "Dips", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Viktade – tricep/bröst-styrka, bra presskraft för att skapa distans i klinch" },
+            { "name": "Dumbbell Shoulder Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Lätt-måttlig vikt – hantlar ger friare rörelsebana än skivstång, dra ner om axeln känns illa" },
+            { "name": "Triceps Pushdown", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Ren tricepsuppbyggnad" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lower A – Knäböj-fokus",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Hip CARs (Controlled Articular Rotations)", "targetSets": 2, "targetReps": "5/sida", "targetWeight": null, "notes": "Kan kännas konstig, men är guld för BJJ – bygger aktiv höftrörlighet som hjälper direkt i guard-arbete och höftlyft, och skyddar höften" },
+            { "name": "Banded Lateral Walk", "targetSets": 2, "targetReps": "10/sida", "targetWeight": null, "notes": "Aktiverar höftens sidostabilisatorer, håller knäna stabila vid vridningar och nedslag" }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Barbell Squat", "targetSets": 4, "targetReps": "6-8", "targetWeight": null, "notes": "Benstyrka och explosivitet, hjälper vid takedowns och att resa sig från golvet" },
+            { "name": "Bulgarian Split Squat", "targetSets": 3, "targetReps": "8-10/ben", "targetWeight": null, "notes": "Enbensbalans och -styrka, matchar de asymmetriska ställningar du ofta hamnar i på mattan" },
+            { "name": "Leg Extension", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Isolerar quads, ren muskelbyggnad" },
+            { "name": "Lying Leg Curl", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Hamstringstyrka, skyddar knäna vid vridningar/submissions" },
+            { "name": "Standing Calf Raise", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Vadstyrka, mest allmän benutveckling" },
+            { "name": "Deadbug", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Bålkontroll utan ryggbelastning – hjälper dig hålla spänning och andas rätt under press i grappling" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Upper B – Pull",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Scapular Push Up", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Skulderbladskontroll/axelhälsa" },
+            { "name": "Face Pulls", "targetSets": 2, "targetReps": "15", "targetWeight": null, "notes": "Axelhälsa – samma som Upper A" }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Chin-Up", "targetSets": 4, "targetReps": "6-8", "targetWeight": null, "notes": "Viktad när möjligt – grepp- och dragstyrka, central för att dra motståndaren och hålla grepp i gi. Ersätter \"pullups\" som inte finns i banken (bara underhandsgrepp tillgängligt)" },
+            { "name": "Single-Arm Dumbbell Row", "targetSets": 3, "targetReps": "8-10/sida", "targetWeight": null, "notes": "Enarmsdrag bygger asymmetrisk styrka + bålstabilitet samtidigt, väldigt likt att dra med en arm i grappling" },
+            { "name": "Seated Cable Row", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Övre rygg, hjälper hållning och dragstyrka" },
+            { "name": "Rear Delt Fly", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Din efterfrågade rear delt-övning – viktigt komplement till mycket press och för axelhälsa" },
+            { "name": "Hammer Curl", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Underarm/brachialis-styrka, hjälper grepputhållighet" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lower B – Höftfäll-fokus",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Hip Flexor Stretch", "targetSets": 2, "targetReps": "30s/sida", "targetWeight": null, "notes": "Motverkar stela höftböjare, vanligt problem som begränsar höftrörlighet i guard" },
+            { "name": "Cable Hip Abduction", "targetSets": 2, "targetReps": "12/sida", "targetWeight": null, "notes": "Stärker höftens sidostabilisatorer, skyddar mot skador vid vridande rörelser i grappling" }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Romanian Deadlift", "targetSets": 4, "targetReps": "6-8", "targetWeight": null, "notes": "Baksida lår/säte, central för höftkraft vid lyft och takedowns" },
+            { "name": "Hip Thrust", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Kan kännas udda, men bygger explosiv höftkraft – direkt överförbart till att driva igenom en takedown eller höftlyft (upa)" },
+            { "name": "Leg Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Benstyrka utan lika mycket ryggbelastning som knäböj" },
+            { "name": "Seated Leg Curl", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Hamstringstyrka, skyddar knäna" },
+            { "name": "Standing Calf Raise", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": "Allmän benutveckling" },
+            { "name": "Pallof Press", "targetSets": 2, "targetReps": "10/sida", "targetWeight": null, "notes": "Kan kännas udda men är exakt den anti-rotationsstyrka du behöver för att motstå vridningar när någon försöker rulla/vända dig" }
+          ]
+        }
+      ]
+    }
+  ]
+}
