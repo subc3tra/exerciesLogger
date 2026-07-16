@@ -1,0 +1,109 @@
+{
+  "name": "Styrka & Rörlighet – Axelanpassad 5-dagar",
+  "totalWeeks": 6,
+  "daysPerWeek": 5,
+  "days": [
+    {
+      "name": "Pass A – Underkropp (Styrka)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Main Workout",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Barbell Squat", "targetSets": 4, "targetReps": "6-8", "targetWeight": null, "notes": "Djup efter rörlighet" },
+            { "name": "Romanian Deadlift", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Kontrollerat tempo ner" },
+            { "name": "Bulgarian Split Squat", "targetSets": 3, "targetReps": "10/ben", "targetWeight": null, "notes": "Fram fot på platt" },
+            { "name": "Leg Extension", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": null },
+            { "name": "Lying Leg Curl", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null },
+            { "name": "Standing Calf Raise", "targetSets": 3, "targetReps": "15-20", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass B – Överkropp (Axelanpassad)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Main Workout",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Seated Cable Row", "targetSets": 4, "targetReps": "10-12", "targetWeight": null, "notes": "Skulderbladen styr rörelsens slut" },
+            { "name": "Incline Dumbbell Chest Press", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Undviker impingement – justera vinkel efter axeln" },
+            { "name": "Lat Pulldown", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Dra till övre bröst, inte bakom nacke" },
+            { "name": "Face Pulls", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": "Skulderbladsretraktion, liten extern rotation" },
+            { "name": "Dumbbell Bicep Curl", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Dumbbell Shoulder Press", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Testa smärt-ROM, hoppa om det gör ont" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass C – Underkropp (Volym/Funktionell)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Main Workout",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Front Squat", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": null },
+            { "name": "Hip Thrust", "targetSets": 4, "targetReps": "10-12", "targetWeight": null, "notes": "Fullt höftextension i topp" },
+            { "name": "Sumo Deadlift", "targetSets": 3, "targetReps": "8", "targetWeight": null, "notes": "Bred ståndbredd, fokus på teknik" },
+            { "name": "Dumbbell Step-Up", "targetSets": 3, "targetReps": "10/ben", "targetWeight": null, "notes": "Högt steg" },
+            { "name": "Nordic Curl", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": null },
+            { "name": "Cable Hip Abduction", "targetSets": 3, "targetReps": "12/ben", "targetWeight": null, "notes": "Höftabduktion – glutes medius" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass D – Överkropp (Volym + Core)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Main Workout",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Single-Arm Dumbbell Row", "targetSets": 4, "targetReps": "10/sida", "targetWeight": null, "notes": "Stabil rygg" },
+            { "name": "Cable Chest Press", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Straight-Arm Cable Pulldown", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Rear Delt Fly", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": "Viktigt för axelbalansen" },
+            { "name": "Triceps Pushdown", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": null },
+            { "name": "Plank", "targetSets": 3, "targetReps": "30-45s", "targetWeight": null, "notes": null },
+            { "name": "Pallof Press", "targetSets": 3, "targetReps": "10/sida", "targetWeight": null, "notes": "Core anti-rotation" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass E – Aktiv Återhämtning",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Main Workout",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Cardio (Walk/Bike/Swim)", "targetSets": 1, "targetReps": "30-45min", "targetWeight": null, "notes": "Lugnt tempo — kompletterar löppasset, inte ersätter det" },
+            { "name": "Mobility & Stretching", "targetSets": 1, "targetReps": "15min", "targetWeight": null, "notes": "Fokus på axel/skulderblad givet skadan — bra komplement till värmeyogan" }
+          ]
+        }
+      ]
+    }
+  ]
+}

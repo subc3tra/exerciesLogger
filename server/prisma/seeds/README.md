@@ -7,20 +7,31 @@ All commands run from `server/`.
 
 ## Add a user
 
-1. Copy `user.template.ts` (optional — keeps a record), or just edit it directly.
-2. Set `USERNAME` / `PASSWORD`.
-3. `npx tsx prisma/seeds/user.template.ts`
+`npx tsx prisma/seeds/user.template.ts <username> <password> [wipeExistingData=true|false]`
 
-Re-running it for an existing username resets their password instead of erroring.
-Set `WIPE_EXISTING_DATA = true` first if you also want to clear their programs and
-session history (a full reset, not just a password change).
+No file editing needed — it's a plain CLI script. Re-running it for an existing
+username resets their password instead of erroring. Pass `true` as the third
+arg if you also want to wipe their existing programs and session history (a
+full reset, not just a password change).
 
 ## Add a program
 
 Every exercise in a program must resolve to a row in the `Exercise` bank (global,
-`userId: null`) — the template no longer takes a bare exercise name, it takes a
-name that gets looked up against the bank. `../../docs/exercise-list.md` is the
-curated, human-readable catalog of every exercise currently in the bank.
+`userId: null`). `../../docs/exercise-list.md` is the curated, human-readable
+catalog of every exercise currently in the bank.
+
+**Preferred path — AI-generated, via the `generate-program` skill:** produces a
+`Program`-shaped JSON file (validated against `server/src/services/program.schema.ts`)
+following the persona/guardrails in `../../docs/program-generation-instructions.md`,
+saved to `user-programs/<username>.program.json`. Once you have that file:
+
+`npx tsx prisma/seeds/create-program-from-json.ts <username> <path-to-json>`
+
+Before writing anything, it resolves every exercise name to its bank id
+(case-insensitive) and calls `createProgramFromData` — same fail-fast behavior
+as below, nothing partial gets created if a name doesn't match.
+
+**Older, manual path — hand-filled TS template (still works):**
 
 1. Copy `program.template.ts` to something like `alice-strength.ts`.
 2. Hand the copy to an AI along with the user's goals/preferences **and
@@ -54,8 +65,7 @@ for everything going forward.
 
 1. Find the program's id — easiest way is `npx prisma studio`, open the Program
    table, copy the id. (Or `GET /api/programs` while logged in as that user.)
-2. Set `PROGRAM_ID` in `delete-program.ts`.
-3. `npx tsx prisma/seeds/delete-program.ts`
+2. `npx tsx prisma/seeds/delete-program.ts <programId>`
 
 Wipes the program and everything under it — days, sections, exercises, and any
 session history logged against it. Cannot be undone.

@@ -81,6 +81,10 @@
 **Category:** BACK
 **Description:** Barbell or dumbbell shrug lifting the shoulders straight up toward the ears to target the upper trapezius. Avoid rolling the shoulders — a straight vertical path keeps tension on the traps and reduces shoulder-joint strain.
 
+### Straight-Arm Cable Pulldown
+**Category:** BACK
+**Description:** Cable exercise pulling a high-anchored bar or rope straight down toward the thighs with the arms kept mostly locked out, isolating the lats with minimal bicep involvement. A useful complement to bent-arm pulling work (rows, pulldowns) when more direct lat isolation is wanted; keep a slight elbow bend and avoid using the torso to swing the weight down.
+
 ---
 
 ## LEGS
