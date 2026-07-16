@@ -1,0 +1,119 @@
+{
+  "name": "Styrka + Chin-Up-progression",
+  "totalWeeks": 6,
+  "daysPerWeek": 4,
+  "days": [
+    {
+      "name": "Upper A (Tryck-fokus)",
+      "dayLabel": "Dag 1",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Scapular Push Up", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Aktivering av skulderblad inför pressövningar." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Incline Dumbbell Chest Press", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Fokusera på kontrollerad rörelse och bra teknik snarare än tung vikt." },
+            { "name": "Seated Cable Row", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Håll bröstet uppe, dra med armbågarna bakåt." },
+            { "name": "Chin-Up", "targetSets": 3, "targetReps": "3-5", "targetWeight": null, "notes": "Assisterad (band eller maskin) om full rep inte går ännu — fokusera på långsam, kontrollerad negativ fas som progression mot full chin-up." },
+            { "name": "Dumbbell Shoulder Press", "targetSets": 2, "targetReps": "10-12", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lower A (Knäböj-fokus)",
+      "dayLabel": "Dag 2",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Hip CARs (Controlled Articular Rotations)", "targetSets": 2, "targetReps": "5", "targetWeight": null, "notes": "Höftrörlighet inför knäböj." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Barbell Squat", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Fokusera på teknik: knän i linje med tårna, bröstet uppe." },
+            { "name": "Romanian Deadlift", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Lätt böjda knän, känn stretch i baksida lår." },
+            { "name": "Bulgarian Split Squat", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Plank", "targetSets": 2, "targetReps": "30s", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Upper B (Drag-fokus)",
+      "dayLabel": "Dag 3",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Face Pulls", "targetSets": 2, "targetReps": "15", "targetWeight": null, "notes": "Aktivering av bakre axlar inför dragövningar." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Lat Pulldown", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Bygger dragstyrka mot målet chin-ups." },
+            { "name": "Chin-Up", "targetSets": 3, "targetReps": "3-5", "targetWeight": null, "notes": "Assisterad vid behov, fokus på kontrollerad negativ fas." },
+            { "name": "Cable Chest Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null },
+            { "name": "Hammer Curl", "targetSets": 2, "targetReps": "12", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lower B (Höft/Glute-fokus)",
+      "dayLabel": "Dag 4",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Banded Lateral Walk", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Aktivering av höftmuskulatur inför underkroppspass." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Leg Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null },
+            { "name": "Hip Thrust", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Pressa igenom hälarna, kläm ihop sätesmusklerna i toppen." },
+            { "name": "Lying Leg Curl", "targetSets": 2, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Pallof Press", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Bra komplement till BJJ för rotationsstabilitet i bålen." }
+          ]
+        }
+      ]
+    }
+  ]
+}
