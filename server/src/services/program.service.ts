@@ -1,5 +1,6 @@
 import { Program, ProgramStatus } from "@prisma/client";
 import prisma from "../lib/prisma";
+import { ProgramSchema, Program as ProgramInput } from './program.schema';
 
 // get all programs for logged-in user (active + archived)
 export async function getAllPrograms(userId: number): Promise<Program[]> {
@@ -146,4 +147,62 @@ export async function getDayById(id: number, userId: number) {
       }
     }
   })
+}
+
+// create new program from data
+export async function createProgramFromData(data: unknown, userId: number) {
+  const parsed = ProgramSchema.parse(data);
+
+  const allNames = parsed.days.flatMap((day) =>
+    day.sections.flatMap((section) => section.exercises.map((exercise) => exercise.name))
+  );
+
+  const bankExercises = await prisma.exercise.findMany({
+    where: { userId: null },
+    select: { id: true, name: true },
+  });
+  const exerciseIdByName = new Map(bankExercises.map((e) => [e.name.toLocaleLowerCase(), e.id]));
+
+  const missing = [...new Set(allNames)].filter((name) => !exerciseIdByName.has(name.toLocaleLowerCase()));
+  if (missing.length > 0) {
+    throw new Error(`Exercise(s) not found in the bank: ${missing.join(', ')}`)
+  };
+
+  const program = await prisma.program.create({
+    data: {
+      name: parsed.name,
+      totalWeeks: parsed.totalWeeks,
+      daysPerWeek: parsed.daysPerWeek,
+      userId: userId,   // no `user.id` lookup anymore — it's already a parameter
+      days: {
+        create: parsed.days.map((day, dayIndex) => ({
+          name: day.name,
+          dayLabel: day.dayLabel,
+          duration: day.duration,
+          order: dayIndex,
+          sections: {
+            create: day.sections.map((section, sectionIndex) => ({
+              name: section.name,
+              zone: section.zone,
+              sets: section.sets,
+              restSecs: section.restSecs,
+              order: sectionIndex,
+              exercises: {
+                create: section.exercises.map((exercise, exerciseIndex) => ({
+                  exerciseId: exerciseIdByName.get(exercise.name.toLocaleLowerCase())!,  // match whichever casing you picked when you fixed the bug
+                  targetSets: exercise.targetSets,
+                  targetReps: exercise.targetReps,
+                  targetWeight: exercise.targetWeight,
+                  notes: exercise.notes,
+                  order: exerciseIndex,
+                })),
+              },
+            })),
+          },
+        })),
+      },
+    },
+  });
+
+  return program;
 }
