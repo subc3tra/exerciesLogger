@@ -29,6 +29,10 @@
 **Category:** CHEST
 **Description:** Bodyweight or weighted dip performed on parallel bars, lowering the body until the upper arms are roughly parallel to the floor before pressing back up. Leaning the torso forward shifts emphasis toward the chest and front deltoids; staying upright targets the triceps more directly.
 
+### Push-Up
+**Category:** CHEST
+**Description:** Standard bodyweight push-up from a plank position, hands roughly shoulder-width. Lower the chest toward the floor keeping the body in a straight line, then press back up. Core and glutes braced throughout to prevent the hips sagging or piking — the standard test-format pressing movement.
+
 ---
 
 ## BACK
@@ -84,6 +88,14 @@
 ### Straight-Arm Cable Pulldown
 **Category:** BACK
 **Description:** Cable exercise pulling a high-anchored bar or rope straight down toward the thighs with the arms kept mostly locked out, isolating the lats with minimal bicep involvement. A useful complement to bent-arm pulling work (rows, pulldowns) when more direct lat isolation is wanted; keep a slight elbow bend and avoid using the torso to swing the weight down.
+
+### Scapular Pull-Up
+**Category:** BACK
+**Description:** Hanging from a bar with arms fully extended, pull only through the shoulder blades — elbows stay locked — driving the shoulder blades down and together, then release back to a dead hang. Mirrors the Scapular Push-Up as a corrective/prep drill; builds the scapular control that strict chin-ups depend on before adding elbow-bend pulling volume.
+
+### Band-Assisted Chin-Up
+**Category:** BACK
+**Description:** Chin-up assisted by a resistance band anchored a few meters below the bar (looped around a rack mount, not around the bar itself) and under a knee or foot, offsetting part of your bodyweight to allow more/cleaner strict reps than bodyweight alone. Standard progression tool toward unassisted chin-ups — reduce band tension as strength improves.
 
 ---
 
@@ -180,6 +192,31 @@
 **Category:** LEGS
 **Description:** Side plank variation with the top leg supported on a bench, training the hip adductors through an isometric or dynamic hold. The modified/regressed version supports the top leg closer to the knee rather than the ankle, shortening the lever arm for a knee-friendlier entry point.
 
+### Single-Leg Bridge with Stability Ball and Abduction
+**Category:** LEGS
+**Description:** Lie on your back, one leg extended and resting on a stability ball, the other held straight in the air. Lift the hips until the body forms a straight line, then sweep the raised leg out to the side and back before lowering. Combines a single-leg glute bridge with a hip-abduction component; useful for hip and knee stability work.
+**Link:** https://exorlive.com/video/?culture=sv-SE&hidesmb=true&ex=8307
+
+### Single-Leg Three-Point Balance Reach
+**Category:** LEGS
+**Description:** Standing on one leg, reach the free leg out to three points forming a triangle — straight ahead, diagonally back to one side, then diagonally back to the other — returning to center between each without the reaching leg taking any weight. A stability/proprioception drill for the standing knee and hip; use a chair for balance support if needed.
+**Link:** https://exorlive.com/video/?culture=sv-SE&hidesmb=true&ex=14656
+
+### Single-Leg Jump Landing
+**Category:** LEGS
+**Description:** Start with feet shoulder-width apart, jump straight up, and land under control on one leg. Trains landing mechanics and knee stability under impact — focus on a soft, controlled landing rather than jump height.
+**Link:** https://exorlive.com/video/?culture=sv-SE&hidesmb=true&ex=14552
+
+### Box Jump (Low Box)
+**Category:** LEGS
+**Description:** Take a small countermovement — bend the knees and swing the arms — then jump onto a low box, landing softly with bent knees. Builds explosive lower-body power; landing quality matters more than box height.
+**Link:** https://exorlive.com/video/?culture=sv-SE&hidesmb=true&ex=12730
+
+### Lunge to Step-Up with Knee Raise
+**Category:** LEGS
+**Description:** Stand one stride behind a step. Place one foot on the step, lower into a deep lunge, then drive up through that leg onto the step in one controlled motion, finishing by lifting the opposite knee to stand tall on one leg. Return to the start and repeat — combines a lunge, step-up, and single-leg balance finish in one movement.
+**Link:** https://exorlive.com/video/?culture=sv-SE&hidesmb=true&ex=12159
+
 ---
 
 ## SHOULDERS
@@ -275,6 +312,10 @@
 **Category:** CORE
 **Description:** Standing variant of the hip flexor stretch, shifting the rear leg back and tucking the pelvis under to lengthen the hip flexor without kneeling. Useful as a between-exercise or end-of-session mobility finisher when getting to the floor isn't convenient.
 **Tracked fields:** DURATION
+
+### Sit-Up
+**Category:** CORE
+**Description:** Full sit-up from lying to seated, knees bent and feet anchored, hands behind the head or crossed over the chest. Curl up through the spine to a full seated position, then lower back down under control. The standard test-format ab movement, distinct from the machine-based Cable Crunch already in the bank.
 
 ---
 

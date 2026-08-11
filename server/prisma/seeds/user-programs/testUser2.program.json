@@ -1,0 +1,97 @@
+{
+  "name": "Styrkeprogram – testUser2",
+  "totalWeeks": 8,
+  "daysPerWeek": 3,
+  "days": [
+    {
+      "name": "Pass A – Marklyft",
+      "dayLabel": "Dag 1",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Hip CARs (Controlled Articular Rotations)", "targetSets": 1, "targetReps": "6 per sida", "targetWeight": null, "notes": null },
+            { "name": "Scapular Push Up", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Deadlift", "targetSets": 3, "targetReps": "5", "targetWeight": null, "notes": null },
+            { "name": "Bench Press", "targetSets": 3, "targetReps": "6-8", "targetWeight": null, "notes": null },
+            { "name": "Chin-Up", "targetSets": 3, "targetReps": "6-10", "targetWeight": null, "notes": "Lägg till vikt vid behov" },
+            { "name": "KB Swing", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": "Ersätter frivändning – fokus på explosiv höftextension" },
+            { "name": "Plank", "targetSets": 3, "targetReps": "45s", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass B – Knäböj",
+      "dayLabel": "Dag 2",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "90/90 Hip Rotation", "targetSets": 1, "targetReps": "6 per sida", "targetWeight": null, "notes": null },
+            { "name": "Banded Lateral Walk", "targetSets": 2, "targetReps": "10 per sida", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Barbell Squat", "targetSets": 3, "targetReps": "5-6", "targetWeight": null, "notes": null },
+            { "name": "Overhead Press", "targetSets": 3, "targetReps": "6-8", "targetWeight": null, "notes": null },
+            { "name": "Seated Cable Row", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": null },
+            { "name": "Bulgarian Split Squat", "targetSets": 3, "targetReps": "8-10 per ben", "targetWeight": null, "notes": null },
+            { "name": "Face Pulls", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass C – Höftfokus",
+      "dayLabel": "Dag 3",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Hip Flexor Stretch", "targetSets": 1, "targetReps": "30s per sida", "targetWeight": null, "notes": null },
+            { "name": "Scapular Push Up", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Romanian Deadlift", "targetSets": 3, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Incline Dumbbell Chest Press", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": null },
+            { "name": "Single-Arm Dumbbell Row", "targetSets": 3, "targetReps": "10 per sida", "targetWeight": null, "notes": null },
+            { "name": "Hammer Curl", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null },
+            { "name": "Skull Crusher", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    }
+  ]
+}
