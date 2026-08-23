@@ -13,26 +13,32 @@
 ### Close-Grip Bench Press
 **Category:** CHEST
 **Description:** Barbell bench press with a narrower grip (roughly shoulder-width), shifting emphasis toward the triceps while still engaging the chest and anterior deltoid. Keep elbows closer to the body than a standard bench press to protect the wrists and maximize tricep recruitment.
+**Links:** https://youtube.com/shorts/xXd7sddHGa0?si=ZeIv2XSPvJc7zgXm
 
 ### Incline Dumbbell Chest Press
 **Category:** CHEST
 **Description:** Dumbbell press on a bench set to approximately 30 degrees, with palms facing each other. The incline angle increases upper chest and anterior deltoid involvement; neutral grip reduces shoulder stress compared to a pronated grip.
+**Link:** https://youtube.com/shorts/8fXfwG4ftaQ?si=cS6QKIOp4koFbEN5
 
 ### Cable Chest Press
 **Category:** CHEST
 **Description:** Unilateral or bilateral horizontal press using a cable machine, typically set at chest height. Provides constant tension throughout the range of motion, making it effective for chest hypertrophy with less joint loading than a barbell.
+**Link:** https://youtube.com/shorts/NXpRKhXg2P8?si=yHf4vP5fDLvhuZnM
 
 ### Scapular Push Up
 **Category:** CHEST
 **Description:** Bodyweight movement performed from a push-up or plank position, moving only through the shoulder blades — elbows stay locked while the scapula protracts and retracts. Isolates the serratus anterior and lower trapezius; commonly used as a warm-up or corrective drill to build scapular control and shoulder stability, especially useful for overhead athletes or as injury-prevention work.
+**Link:** https://youtube.com/shorts/emB58J1SyXA?si=zyAWd_B5KcA4gcrA
 
 ### Dips
 **Category:** CHEST
 **Description:** Bodyweight or weighted dip performed on parallel bars, lowering the body until the upper arms are roughly parallel to the floor before pressing back up. Leaning the torso forward shifts emphasis toward the chest and front deltoids; staying upright targets the triceps more directly.
+**Link:** https://youtube.com/shorts/SXBksC78v8M?si=TEwSt5kZ8mC5s8As
 
 ### Push-Up
 **Category:** CHEST
 **Description:** Standard bodyweight push-up from a plank position, hands roughly shoulder-width. Lower the chest toward the floor keeping the body in a straight line, then press back up. Core and glutes braced throughout to prevent the hips sagging or piking — the standard test-format pressing movement.
+**Link:** https://youtube.com/shorts/4Bc1tPaYkOo?si=SfIznkS_EBSC0ibW
 
 ---
 
