@@ -15,6 +15,8 @@ export const CHANGELOG: ChangelogEntry[] = [
     changes: [
       'Progression page now shows a graph of your weight over time for each exercise, right below your stats.',
       "Finishing a workout now shows a summary screen — duration, total weight lifted, sets done, and any new PRs, with a little celebration animation when you hit one.",
+      'That summary screen now also lists your whole session — every exercise and every set, scroll down to see it all.',
+      'Added a "Copy as text" button on the summary screen — copies your full session (exercises, sets, reps, weight/duration) as plain text, handy for pasting into Whoop or similar.',
       'Duration fields (planks, holds, timed cardio) now edit as separate minutes/seconds boxes instead of one field, so they actually work with a phone\'s numeric keypad.',
       'Timed exercises can now count down to a target time instead of just up — set your time, get a 3-2-1 countdown, then a sound plays when it hits zero. Switch back to the old stopwatch style anytime.',
       'The countdown "done" sound is now a proper chime instead of a quiet beep — easier to actually hear over gym noise.',
