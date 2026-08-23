@@ -217,7 +217,8 @@ a {
   margin-bottom: 8px;
 }
 
-.ex-description-toggle {
+.ex-description-toggle,
+.ex-video-toggle {
   width: 100%;
   display: flex;
   align-items: center;
@@ -234,7 +235,12 @@ a {
   color: var(--accent2);
 }
 
-.ex-description-caret {
+.ex-video-toggle .block-label {
+  color: var(--accent);
+}
+
+.ex-description-caret,
+.ex-video-caret {
   color: var(--muted);
   font-size: 15px;
   flex-shrink: 0;
@@ -251,6 +257,11 @@ a {
   margin-bottom: 8px;
 }
 
+.ex-video-block.nested {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
 .ex-video-link {
   display: block;
   margin-bottom: 8px;
@@ -258,7 +269,7 @@ a {
 }
 
 .ex-video-link .block-label {
-  color: var(--accent2);
+  color: var(--accent);
 }
 
 .ex-video-embed {

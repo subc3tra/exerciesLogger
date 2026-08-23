@@ -109,6 +109,7 @@
 ### Barbell Squat
 **Category:** LEGS
 **Description:** Hip-width barbell back squat, the cornerstone lower-body strength movement targeting quads, glutes, and adductors. Brace the core, sit into the hips, and drive the knees out over the toes; depth should reach at least parallel.
+**Link:** https://youtube.com/shorts/PPmvh7gBTi0?si=Kl_KQUTKh-SnfeQt 
 
 ### Front Squat
 **Category:** LEGS

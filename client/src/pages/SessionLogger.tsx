@@ -297,7 +297,7 @@ export function SessionLogger() {
                   {prefill?.[programExercise.id] && (
                     <p className="prefill-notice">Prefilled from your last session — check before marking done</p>
                   )}
-                  {programExercise.exercise.description && (
+                  {programExercise.exercise.description ? (
                     <div className="ex-description-block">
                       <button
                         className="ex-description-toggle"
@@ -308,11 +308,17 @@ export function SessionLogger() {
                         <span className="ex-description-caret">{isDescExpanded ? '▾' : '▸'}</span>
                       </button>
                       {isDescExpanded && (
-                        <p className="ex-description">{programExercise.exercise.description}</p>
+                        <>
+                          <p className="ex-description">{programExercise.exercise.description}</p>
+                          <ExerciseVideo link={programExercise.exercise.link} nested />
+                        </>
                       )}
                     </div>
+                  ) : (
+                    // no description to nest under — fall back to a top-level toggle so the
+                    // video link is still reachable
+                    <ExerciseVideo link={programExercise.exercise.link} />
                   )}
-                  <ExerciseVideo link={programExercise.exercise.link} />
                   <p className="target-line">
                     Target: {programExercise.targetSets ?? '–'}×{programExercise.targetReps ?? '–'}
                     {programExercise.targetWeight ? ` @ ${programExercise.targetWeight}kg` : ''}

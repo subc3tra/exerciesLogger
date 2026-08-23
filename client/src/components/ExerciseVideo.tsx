@@ -3,14 +3,17 @@ import { parseYoutubeLink } from '../utils/youtube';
 
 interface ExerciseVideoProps {
   link: string | null;
+  // true when rendered inside an already-expanded Description block (sits right under the
+  // description text, so it uses tighter top spacing instead of its own standalone margin)
+  nested?: boolean;
 }
 
-// Collapsed-by-default video toggle, same shape as the Description block right above it.
-// A recognized YouTube link (video, youtu.be, or Shorts) gets a lazy-mounted inline embed —
-// the iframe isn't in the DOM at all until opened, so a collapsed row costs nothing. Anything
-// else (the bank has some non-YouTube links, e.g. exorlive.com) falls back to a plain external
-// link instead of trying to embed something that isn't YouTube.
-export function ExerciseVideo({ link }: ExerciseVideoProps) {
+// Collapsed-by-default video toggle. A recognized YouTube link (video, youtu.be, or Shorts)
+// gets a lazy-mounted inline embed — the iframe isn't in the DOM at all until opened, so a
+// collapsed row costs nothing. Anything else (the bank has some non-YouTube links, e.g.
+// exorlive.com) falls back to a plain external link instead of trying to embed something
+// that isn't YouTube.
+export function ExerciseVideo({ link, nested }: ExerciseVideoProps) {
   const [expanded, setExpanded] = useState(false);
 
   if (!link) return null;
@@ -26,14 +29,14 @@ export function ExerciseVideo({ link }: ExerciseVideoProps) {
   }
 
   return (
-    <div className="ex-video-block">
+    <div className={`ex-video-block ${nested ? 'nested' : ''}`}>
       <button
-        className="ex-description-toggle"
+        className="ex-video-toggle"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
       >
         <span className="block-label">Watch video</span>
-        <span className="ex-description-caret">{expanded ? '▾' : '▸'}</span>
+        <span className="ex-video-caret">{expanded ? '▾' : '▸'}</span>
       </button>
       {expanded && (
         <div className={`ex-video-embed ${parsed.aspect === '9:16' ? 'vertical' : 'horizontal'}`}>
