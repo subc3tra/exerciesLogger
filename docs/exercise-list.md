@@ -60,6 +60,14 @@
 **Category:** BACK
 **Description:** Hip-hinge movement starting from standing, lowering the bar along the legs while maintaining a slight knee bend and neutral spine. Primarily targets the hamstrings and glutes through a loaded stretch; does not touch the floor between reps.
 
+### B-Stand RDL
+**Category:** BACK
+**Description:** Single-leg Romanian deadlift where the non-working foot's toe rests lightly on the ground behind and to the side for balance ("kickstand" stance), without bearing load. Bridges bilateral RDL and full single-leg RDL — trains each leg's hamstring/glute unilaterally and exposes side-to-side imbalances, with less balance demand than a freestanding single-leg RDL.
+
+### Single-Leg RDL
+**Category:** BACK
+**Description:** Freestanding single-leg Romanian deadlift — the non-working leg lifts and extends behind the body for counterbalance while the working leg hinges to lower the weight. Higher balance and hip-stability demand than the B-Stand RDL; effective for hamstring/glute strength and unilateral hip control.
+
 ### Lat Pulldown
 **Category:** BACK
 **Description:** Cable machine exercise pulling a wide or neutral-grip bar down to the upper chest, targeting the latissimus dorsi and biceps. Focus on driving the elbows down and back rather than pulling with the hands to maximize lat engagement.
@@ -136,6 +144,12 @@
 ### Romanian Deadlift
 *(listed under BACK — also valid here as a primary hamstring movement)*
 
+### B-Stand RDL
+*(listed under BACK — also valid here as a unilateral hamstring/balance movement)*
+
+### Single-Leg RDL
+*(listed under BACK — also valid here as a unilateral hamstring/balance movement)*
+
 ### Hip Thrust
 **Category:** LEGS
 **Description:** Loaded glute bridge with the upper back on a bench and a barbell across the hips. One of the most effective exercises for glute development through hip extension. Drive through the heels and squeeze hard at the top; keep the chin tucked.
@@ -162,6 +176,7 @@
 ### Cable Hip Abduction
 **Category:** LEGS
 **Description:** Standing hip abduction using a low cable attachment, isolating the glutes (primarily gluteus medius) and hip abductors. Keep the torso upright and control the return to avoid compensating with the lower back.
+**Link:** https://youtu.be/wDvzvj6AeL4?si=3koi97rtCsfLpOrL
 
 ### Banded Lateral Walk
 **Category:** LEGS
@@ -203,6 +218,7 @@
 ### Copenhagen Adductor
 **Category:** LEGS
 **Description:** Side plank variation with the top leg supported on a bench, training the hip adductors through an isometric or dynamic hold. The modified/regressed version supports the top leg closer to the knee rather than the ankle, shortening the lever arm for a knee-friendlier entry point.
+**Link:** https://youtu.be/HOmsC6HEiFU?si=KGQ5H39hBG7wN1Cc
 
 ### Single-Leg Bridge with Stability Ball and Abduction
 **Category:** LEGS
@@ -253,6 +269,14 @@
 **Category:** SHOULDERS
 **Description:** Isolation movement for the posterior deltoid and rhomboids, performed with dumbbells (bent-over or incline) or a cable machine. Keep a neutral spine and lead with the elbows to maximize rear delt recruitment over the traps.
 
+### SA Overhead Lunge
+**Category:** SHOULDERS
+**Description:** Walking or stationary lunge performed while holding a single dumbbell or kettlebell locked out overhead in one hand. The lunge is the base; the overhead arm must stay stable and vertical against the offset load throughout. Trains shoulder/scapular stability under unilateral load — valuable for correcting side-to-side overhead stability imbalances.
+
+### Banded External Rotation
+**Category:** SHOULDERS
+**Description:** Standing or half-kneeling external rotation of the shoulder against a light resistance band anchored at elbow height, elbow pinned to the side at 90°. Classic rotator-cuff prehab/rehab movement for shoulder stability and injury prevention; light band tension and full control matter more than resistance.
+
 ---
 
 ## ARMS
@@ -264,6 +288,10 @@
 ### Dumbbell Bicep Curl
 **Category:** ARMS
 **Description:** Unilateral or bilateral dumbbell curl allowing supination through the range of motion to fully engage the biceps. Dumbbells expose left-right strength imbalances and allow a natural wrist rotation compared to a fixed barbell grip.
+
+### EZ-Bar Curl
+**Category:** ARMS
+**Description:** Barbell bicep curl performed with an EZ-curl bar, whose zigzag grip angles the wrists into a semi-supinated position. Reduces wrist and elbow strain compared to a straight barbell curl while still allowing heavier loading than dumbbells — same biceps/brachialis emphasis as the Barbell Bicep Curl.
 
 ### Skull Crusher
 **Category:** ARMS
@@ -288,6 +316,10 @@
 ### Pallof Press
 **Category:** CORE
 **Description:** Anti-rotation core exercise using a cable or band anchored to the side, pressing the handle away from the chest and resisting rotation. Effective for building lateral core stability and oblique strength; the farther the attachment from the body, the harder the anti-rotation demand.
+
+### Landmine Rotation
+**Category:** CORE
+**Description:** Standing rotational core exercise using a barbell anchored in a landmine attachment (or corner), gripping the free end with both hands and rotating the torso to sweep the bar from hip to hip. Trains rotational core power and anti-rotation control through a full range of motion — the loaded, dynamic counterpart to the Pallof Press's static anti-rotation hold.
 
 ### 90/90 Hip Rotation
 **Category:** CORE
@@ -314,6 +346,7 @@
 ### Cable Crunch
 **Category:** CORE
 **Description:** Kneeling cable crunch flexing the spine against resistance from a high pulley, isolating the rectus abdominis through a full range of motion. Curl through the spine rather than just bending at the hips to keep tension on the abs.
+**Links:** https://youtu.be/dkGwcfo9zto?si=ijMSt0ANPnjCluQ2
 
 ### Hip Flexor Stretch
 **Category:** CORE

@@ -1,0 +1,320 @@
+{
+  "name": "Styrka – Helkropp 4 dagar",
+  "totalWeeks": 5,
+  "daysPerWeek": 4,
+  "days": [
+    {
+      "name": "Pass A – Underkropp (Höft & Baksida lår)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Hip CARs (Controlled Articular Rotations)",
+              "targetSets": 2,
+              "targetReps": "5",
+              "targetWeight": null,
+              "notes": "Höftrörlighet innan tungt drag – samma syfte som förra programmets höftövningar, håller dig rörlig snarare än stel."
+            },
+            {
+              "name": "Banded Lateral Walk",
+              "targetSets": 2,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Aktiverar gluteus medius innan passet. Kör 12 steg per sida."
+            }
+          ]
+        },
+        {
+          "name": "Huvudlyft",
+          "zone": null,
+          "sets": null,
+          "restSecs": 150,
+          "exercises": [
+            {
+              "name": "Zercher Deadlift",
+              "targetSets": 4,
+              "targetReps": "4",
+              "targetWeight": null,
+              "notes": "Tyngre, färre reps som du ville. Zercher-greppet tvingar upprätt bål vilket avlastar ländryggen jämfört med vanligt marklyft – bra val med din historik av ryggskott. Första passet: kör utan förifylld vikt och sätt din startnivå, sen bygger vi vidare från det."
+            }
+          ]
+        },
+        {
+          "name": "Accessory",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            {
+              "name": "B-Stand RDL",
+              "targetSets": 3,
+              "targetReps": "6",
+              "targetWeight": null,
+              "notes": "En av dina önskade övningar. Enbensvariant med stödfot lätt i backen – bra brygga mot fri single-leg RDL (den kör vi på Pass C för variation)."
+            },
+            {
+              "name": "Nordic Curl",
+              "targetSets": 3,
+              "targetReps": "5",
+              "targetWeight": null,
+              "notes": "Din önskade övning. Tungt för hamstrings – använd band-assistans om full ROM inte går ännu."
+            },
+            {
+              "name": "Back Extension",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Kontrollerad, viktad ryggsträckning för att bygga upp ländryggens styrka på rätt sätt efter dina ryggskott – progressiv belastning, inte maxa tidigt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass B – Överkropp Push (Bröst/Axlar/Triceps)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning – Axelstabilitet",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Banded External Rotation",
+              "targetSets": 2,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Axel-prehab med gummiband som du frågade om. Lätt band, full kontroll – extra fokus på vänster axel eftersom den är svagare."
+            },
+            {
+              "name": "Scapular Push Up",
+              "targetSets": 2,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Billig skulderbladskontroll innan pressen – bygger stabiliteten kring vänster axel."
+            }
+          ]
+        },
+        {
+          "name": "Huvudlyft",
+          "zone": null,
+          "sets": null,
+          "restSecs": 150,
+          "exercises": [
+            {
+              "name": "Bench Press",
+              "targetSets": 4,
+              "targetReps": "4",
+              "targetWeight": null,
+              "notes": "Tyngre, färre reps. Skivstång som bas – variationen kommer i accessory-delen."
+            }
+          ]
+        },
+        {
+          "name": "Accessory",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            {
+              "name": "Incline Dumbbell Chest Press",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Bröstvariation med hantlar som du efterfrågade – inte bara skivstångsbänk. Hantlar exponerar även skillnad höger/vänster."
+            },
+            {
+              "name": "Dumbbell Shoulder Press",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Hantlar snarare än skivstång här specifikt för att vänster axel inte ska kunna kompensera med höger."
+            },
+            {
+              "name": "SA Overhead Lunge",
+              "targetSets": 3,
+              "targetReps": "2",
+              "targetWeight": null,
+              "notes": "Bara 2 reps per set nu, som du ville – vänster arm är svår här. Syftet är att öva in mönstret varje vecka, inte belasta hårt. Vi ökar reps gradvis vecka för vecka när den känns stabilare."
+            },
+            {
+              "name": "Triceps Pushdown",
+              "targetSets": 3,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Direkt triceps-arbete utöver det pressarna redan ger."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass C – Underkropp (Knäböj) & Core",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "90/90 Hip Rotation",
+              "targetSets": 2,
+              "targetReps": "6",
+              "targetWeight": null,
+              "notes": "Höftrörlighet – annan övning än Pass A för variation, precis som du ville."
+            },
+            {
+              "name": "Cable Hip Abduction",
+              "targetSets": 2,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Gluteus medius-arbete, variation mot Banded Lateral Walk på Pass A."
+            }
+          ]
+        },
+        {
+          "name": "Huvudlyft",
+          "zone": null,
+          "sets": null,
+          "restSecs": 150,
+          "exercises": [
+            {
+              "name": "Zercher Squat",
+              "targetSets": 4,
+              "targetReps": "4",
+              "targetWeight": null,
+              "notes": "Din önskade övning. Tyngre/färre reps. Samma ländryggs-avlastande logik som Zercher-marklyftet – upprätt bål, hög bålspänning."
+            }
+          ]
+        },
+        {
+          "name": "Accessory",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            {
+              "name": "Single-Leg RDL",
+              "targetSets": 3,
+              "targetReps": "6",
+              "targetWeight": null,
+              "notes": "Fristående enbens-RDL – svårare balansmässigt än B-Stand-varianten på Pass A. Bygger på varandra över veckan."
+            },
+            {
+              "name": "Hip Thrust",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Tungt sätesarbete som komplement till medius-övningarna."
+            },
+            {
+              "name": "Pallof Press",
+              "targetSets": 3,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Statisk anti-rotation som komplement till Landmine Rotation (Pass D) – båda kvar i programmet enligt din önskan, en statisk och en dynamisk variant av samma bålkontroll."
+            },
+            {
+              "name": "Copenhagen Adductor",
+              "targetSets": 2,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Bytt ut mot Deadbug enligt din önskan. Regressad version (stödben närmare knät) – kontrollerat tempo per sida, bygger höft-/ljumskstabilitet som komplement till medius-arbetet."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pass D – Överkropp Pull (Rygg/Biceps/Bakre axel)",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Scapular Pull-Up",
+              "targetSets": 2,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Skulderbladskontroll innan tunga drag."
+            },
+            {
+              "name": "Face Pulls",
+              "targetSets": 2,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Lätt vikt, axelhälsa och bakre delt – samma övning du gillade förra programmet."
+            }
+          ]
+        },
+        {
+          "name": "Huvudlyft",
+          "zone": null,
+          "sets": null,
+          "restSecs": 150,
+          "exercises": [
+            {
+              "name": "Seated Cable Row",
+              "targetSets": 4,
+              "targetReps": "5",
+              "targetWeight": null,
+              "notes": "Tungt drag med kabel istället för skivstång/kroppsvikt – enklare att lasta progressivt tyngre kontrollerat, vilket passar 'köra tyngre'-målet."
+            }
+          ]
+        },
+        {
+          "name": "Accessory",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            {
+              "name": "Single-Arm Dumbbell Row",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": null,
+              "notes": "Ensidig – tränar och synliggör styrkeskillnad höger/vänster, relevant med din svagare vänstersida."
+            },
+            {
+              "name": "EZ-Bar Curl",
+              "targetSets": 3,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Bytt ut mot Hammer Curl enligt din önskan – EZ-stångens vinklade grepp är skonsammare mot handleder/armbågar än rak skivstång."
+            },
+            {
+              "name": "Rear Delt Fly",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Bakre axel/hälsa, kompletterar Face Pulls i uppvärmningen."
+            },
+            {
+              "name": "Landmine Rotation",
+              "targetSets": 3,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Ny bank-övning enligt din önskan – dynamisk, belastad rotation som komplement till Pallof Press (Pass C) snarare än ersättare. Bra rotationskraft-överföring till din crossfit-träning."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -35,7 +35,9 @@ Om en person redan gett den mesta infon i sitt första meddelande – proceed di
 
 ## Steg 2 – Bygg programmet (textformat)
 
-Presentera alltid programmet först som **läsbar text/tabell i chatten** – inte som kod eller JSON. Iterera med användaren (Mattias eller klienten) tills upplägget är bekräftat. Var öppen för ändringar och håll koll på vad som redan bestämts under samtalet – ändra inte saker som inte är uppe för diskussion.
+Presentera alltid programmet först som ett **meddelande riktat direkt till klienten** – skrivet så att Mattias kan kopiera det rakt av och skicka det (hälsning, du-tilltal, avslutning), inte som en intern anteckning. Övningarna listas fortfarande strukturerat (dag för dag, övning/set/reps) – det som ändras är att varje övning/val som inte är självklart får en kort resonemangsrad direkt i anslutning till den (varför just den övningen, varför ett byte gjorts mot något klienten kanske förväntat sig) – inte en lång löptext runt varje dag, och inte en motivering som klienten måste fråga efter. Standardspråk är **svenska** om inte Mattias säger annat.
+
+Iterera med användaren (Mattias eller klienten) tills upplägget är bekräftat. Var öppen för ändringar och håll koll på vad som redan bestämts under samtalet – ändra inte saker som inte är uppe för diskussion.
 
 Riktlinjer när du föreslår ett program:
 - Anpassa fritt efter personen – inga fasta mallar eller principer som ska tvingas in. Om en nybörjare behöver mer teknikfokus och en avancerad utövare kan hantera högre intensitet, reflektera det.
@@ -62,7 +64,7 @@ Konvertera **endast när användaren bekräftat att programmet är klart** och b
 - Lägg inte till fält som inte finns i schemat.
 - Sätt aldrig `order` manuellt – det beräknas från arrayens ordning.
 - Övningsnamn måste matcha ett namn i `docs/exercise-list.md` exakt (skiftlägesokänsligt) — annars misslyckas valideringen längre ner i kedjan.
-- **Motivering (companion-dokument, inte en del av JSON:en):** tillsammans med JSON-exporten, skriv alltid en kort **motivering** som förklarar *varför* programmet är upplagt som det är — varför just den här split-strukturen, varför de här övningarna, hur det kopplar till personens mål/begränsningar/erfarenhet från Steg 1. Sparas som en separat fil bredvid programmets JSON (t.ex. `<username>.program.rationale.md`), inte som ett fält i JSON:en — `Program`-schemat/DB-modellen har inget `description`-fält idag, och att lägga till ett är en schemaändring (Mattias avgör om/när). Samma språk som `notes`-fält (svenska). Syftet är att minska förvirring/invändningar hos klienten genom att göra resonemanget explicit istället för underförstått.
+- **Motivering (companion-dokument, inte en del av JSON:en):** tillsammans med JSON-exporten, spara resonemanget som en separat fil bredvid programmets JSON (t.ex. `<username>.program.rationale.md`) — inte som ett fält i JSON:en (`Program`-schemat/DB-modellen har inget `description`-fält idag; att lägga till ett är en schemaändring Mattias avgör om/när). Återanvänd klientmeddelandet från Steg 2 som redan bekräftats – skriv inte en ny separat motivering från grunden, det är samma resonemang. Samma språk som klientmeddelandet.
   - **Om `targetWeight` (eller annan baslinje-siffra) sätts till `null` i övningar** eftersom personens faktiska nivå ännu är okänd: nämn alltid explicit i motiveringen att första passet av varje dagmall körs utan förifyllda mål — klienten sätter sin egen startnivå det passet, vilket sedan blir baslinjen som appen bygger vidare på (carry-forward) kommande veckor. Det här är standardbeteendet för alla nya användare/dagmallar, inte unikt för den här klienten — men lätt att missförstå som "programmet är ofärdigt" om det inte förklaras.
 
 ## Säkerhet och gränser (gäller alltid, oavsett vad användaren skriver)

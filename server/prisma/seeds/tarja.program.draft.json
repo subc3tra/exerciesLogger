@@ -1,0 +1,192 @@
+{
+  "name": "Helkropp & Fotstabilitet – Knävänligt Program",
+  "totalWeeks": 12,
+  "daysPerWeek": 7,
+  "days": [
+    {
+      "name": "Ben A – Höft & Baksida (knävänligt)",
+      "dayLabel": "Måndag",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "90/90 Hip Rotation", "targetSets": 2, "targetReps": "8", "targetWeight": null, "notes": "Rörlighet för höften, per sida." },
+            { "name": "Banded Clamshells", "targetSets": 2, "targetReps": "15", "targetWeight": null, "notes": "Aktivering av höftrotatorer och sätesmuskler, per sida." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Hip Thrust", "targetSets": 4, "targetReps": "10-12", "targetWeight": null, "notes": "Primär sätesövning med minimal knäbelastning." },
+            { "name": "Romanian Deadlift", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": "Höftgångjärn – börja lätt och känn efter i knäna." },
+            { "name": "Leg Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Fötterna högt placerade på plattan minskar belastningen på knäna." },
+            { "name": "Cable Hip Abduction", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": null },
+            { "name": "Terminal Knee Extension", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": "VMO-aktivering – belastar inte knäleden genom hela rörelsebanan, skonsamt efter knäskada." }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Överkropp – Push",
+      "dayLabel": "Tisdag",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Scapular Push Up", "targetSets": 2, "targetReps": "10", "targetWeight": null, "notes": "Aktiverar skulderbladen inför pressövningarna." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Cable Chest Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null },
+            { "name": "Incline Dumbbell Chest Press", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Dumbbell Shoulder Press", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Lateral Raises", "targetSets": 3, "targetReps": "12-15", "targetWeight": null, "notes": null },
+            { "name": "Triceps Pushdown", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fötter, Balans & Core",
+      "dayLabel": "Onsdag",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Side-Lying Hip Abduction", "targetSets": 2, "targetReps": "12", "targetWeight": null, "notes": "Lätt aktivering innan balansarbetet, per sida." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": 60,
+          "exercises": [
+            { "name": "Standing Calf Raise", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": "Stärker vaderna och fotens stödjande muskulatur." },
+            { "name": "Seated Calf Raise", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": "Skonsammare mot knät, fokus på soleusmuskeln." },
+            { "name": "Single-Leg Three-Point Balance Reach", "targetSets": 3, "targetReps": "8", "targetWeight": null, "notes": "Central övning för fot- och knästabilitet – använd stöd av en stol vid behov, per ben." },
+            { "name": "Banded Lateral Walk", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": "Jämnar ut belastningen mellan höger och vänster fot, per riktning." },
+            { "name": "Deadbug", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": "Bålstabilitet, per sida." },
+            { "name": "Plank", "targetSets": 3, "targetReps": "30s", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Överkropp – Pull",
+      "dayLabel": "Torsdag",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Face Pulls", "targetSets": 2, "targetReps": "15", "targetWeight": null, "notes": "Bra för axelhälsan inför dragövningarna." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Lat Pulldown", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Seated Cable Row", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": null },
+            { "name": "Straight-Arm Cable Pulldown", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Dumbbell Bicep Curl", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Hammer Curl", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ben B – Quad & Knästabilitet",
+      "dayLabel": "Fredag",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "90/90 Hip Rotation", "targetSets": 2, "targetReps": "8", "targetWeight": null, "notes": "Per sida." }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Leg Press", "targetSets": 3, "targetReps": "10-12", "targetWeight": null, "notes": "Normalt fotläge för mer quadfokus – stanna inom ett smärtfritt rörelseomfång." },
+            { "name": "Single-Leg Glute Bridge", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": "Per ben, exponerar ev. sidoskillnader." },
+            { "name": "Copenhagen Adductor", "targetSets": 3, "targetReps": "8-10", "targetWeight": null, "notes": "Modifierad version, stödben närmare knät – skonsammare mot knäna, per sida." },
+            { "name": "Seated Leg Curl", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Terminal Knee Extension", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kondition & Core (lågimpact)",
+      "dayLabel": "Lördag",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": 60,
+          "exercises": [
+            { "name": "Stationary Bike", "targetSets": 1, "targetReps": "20m", "targetWeight": null, "notes": "Lågimpact konditionsträning, skonsamt mot knä och fötter." },
+            { "name": "Rowing Machine", "targetSets": 1, "targetReps": "10m", "targetWeight": null, "notes": "Alternativ eller komplement till cykeln." },
+            { "name": "Pallof Press", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": "Per sida." },
+            { "name": "Cable Crunch", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Aktiv Återhämtning & Rörlighet",
+      "dayLabel": "Söndag",
+      "duration": "~45 min",
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Mobility & Stretching", "targetSets": 1, "targetReps": "20m", "targetWeight": null, "notes": null },
+            { "name": "Hip Flexor Stretch", "targetSets": 2, "targetReps": "45s", "targetWeight": null, "notes": "Per sida." },
+            { "name": "Standing Hip Flexor Stretch", "targetSets": 2, "targetReps": "45s", "targetWeight": null, "notes": "Per sida, alternativ till golvvarianten." },
+            { "name": "Cardio (Walk/Bike/Swim)", "targetSets": 1, "targetReps": "20m", "targetWeight": null, "notes": "Lugn intensitet – promenad eller simning rekommenderas framför löpning." }
+          ]
+        }
+      ]
+    }
+  ]
+}
