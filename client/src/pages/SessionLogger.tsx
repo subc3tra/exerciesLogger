@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { sessionsApi, programsApi, ApiError } from '../services/api';
 import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
@@ -27,6 +27,8 @@ export function SessionLogger() {
 
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
   const [descExpanded, setDescExpanded] = useState<Set<number>>(new Set());
+  const [lastToggledId, setLastToggledId] = useState<number | null>(null);
+  const exerciseHeaderRefs = useRef<Record<number, HTMLButtonElement | null>>({});
   const [pendingAddFor, setPendingAddFor] = useState<number | null>(null);
   const [pendingRemove, setPendingRemove] = useState<{ exerciseId: number; setId: number } | null>(null);
   const [completeStage, setCompleteStage] = useState<CompleteStage>('closed');
@@ -78,7 +80,19 @@ export function SessionLogger() {
       else next.add(exerciseId);
       return next;
     });
+    // Scroll-to-center happens in the effect below, once the state above has actually
+    // committed/rendered — not here.
+    setLastToggledId(exerciseId);
   }
+
+  // Center the exercise's header in the viewport on every open *and* close — opening lands you on
+  // what you just tapped instead of it staying wherever it was pre-expand; closing re-centers it
+  // too, so you're not left hunting for a now-collapsed row that shifted position on screen.
+  useEffect(() => {
+    if (lastToggledId === null) return;
+    exerciseHeaderRefs.current[lastToggledId]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setLastToggledId(null);
+  }, [lastToggledId]);
 
   function toggleDescription(exerciseId: number) {
     setDescExpanded((prev) => {
@@ -275,6 +289,9 @@ export function SessionLogger() {
           return (
             <div key={exercise.id} className="block">
               <button
+                ref={(el) => {
+                  exerciseHeaderRefs.current[exercise.id] = el;
+                }}
                 className="program-row"
                 onClick={() => toggleExpand(exercise.id)}
                 aria-expanded={isExpanded}

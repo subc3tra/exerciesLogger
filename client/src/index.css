@@ -1276,6 +1276,10 @@ a {
   color: var(--muted);
 }
 
+.schedule-week-summary.complete {
+  color: var(--accent);
+}
+
 .schedule-week-days {
   display: flex;
   flex-direction: column;
@@ -1287,25 +1291,60 @@ a {
   width: 100%;
   min-width: 0;
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   border-radius: 10px;
   padding: 10px 12px;
   background: var(--surface);
   cursor: pointer;
 }
 
+/* Done: normal contrast, not faded — a completed day should read as "on record", not "disappearing".
+   Signaled by the lime left-edge + checkmark badge rather than dimming the whole chip. */
 .schedule-chip.done {
-  border-color: rgba(212, 245, 60, 0.25);
-  opacity: 0.65;
+  border-left-color: var(--accent);
 }
 
+.schedule-chip.done .schedule-chip-name {
+  color: var(--muted);
+}
+
+/* Upcoming: recedes through muted *color*, not transparency, so it stays legible against the
+   dark page instead of washing out into it. */
 .schedule-chip.upcoming {
-  opacity: 0.5;
+  border-left-color: var(--border);
 }
 
+.schedule-chip.upcoming .schedule-chip-name {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.schedule-chip.upcoming .schedule-chip-exercises {
+  opacity: 0.7;
+}
+
+/* Active/next: the one chip that should pull the eye first. */
 .schedule-chip.next,
 .schedule-chip.active {
   border-color: var(--accent);
-  background: rgba(212, 245, 60, 0.06);
+  border-left-color: var(--accent);
+  border-left-width: 3px;
+  background: rgba(212, 245, 60, 0.08);
+  box-shadow: 0 0 0 1px rgba(212, 245, 60, 0.15);
+}
+
+.schedule-chip-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .schedule-chip-header {
@@ -1318,8 +1357,15 @@ a {
 }
 
 .schedule-chip-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   font-weight: 500;
+  min-width: 0;
+}
+
+.schedule-chip-name-text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

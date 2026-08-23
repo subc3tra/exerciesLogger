@@ -20,6 +20,17 @@ import editNotesGif from '../assets/changelog/0.3.1-edit-notes.gif';
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.3.2',
+    date: '2026-08-23',
+    title: 'Update: 0.3.2',
+    changes: [
+      "Opening a program now shows your weeks collapsed, with only your current week expanded — tap any week to open or close it, with a done-count next to each one.",
+      'Redesigned how done, current, and upcoming days look in a program — done days now have a clear checkmark, upcoming days are muted instead of faded out, and your current/next day stands out more.',
+      'A fully completed week now shows a checkmark next to its label too.',
+      'Tapping an exercise while logging a session now scrolls it to the center of your screen, both opening and closing it — no more hunting for it after it collapses.',
+    ],
+  },
+  {
     version: '0.3.1',
     date: '2026-08-23',
     title: 'Update: 0.3.1',

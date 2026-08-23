@@ -199,6 +199,7 @@ export function Dashboard() {
                           const isCurrentWeek = weekSlots.some(
                             (s) => s.status === 'active' || s.status === 'next',
                           );
+                          const isWeekComplete = doneCount === weekSlots.length;
 
                           return (
                             <div key={weekIdx} className="schedule-week">
@@ -210,9 +211,12 @@ export function Dashboard() {
                                 <span className="schedule-week-label">
                                   Week {weekNumber}
                                   {isCurrentWeek && <span className="schedule-week-current-dot" />}
+                                  {isWeekComplete && <span className="schedule-chip-check">✓</span>}
                                 </span>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                  <span className="schedule-week-summary">
+                                  <span
+                                    className={`schedule-week-summary${isWeekComplete ? ' complete' : ''}`}
+                                  >
                                     {doneCount}/{weekSlots.length} done
                                   </span>
                                   <span className="schedule-chip-caret">{isWeekExpanded ? '▾' : '▸'}</span>
@@ -233,8 +237,10 @@ export function Dashboard() {
                                       >
                                         <div className="schedule-chip-header">
                                           <span className="schedule-chip-name">
-                                            {slot.status === 'done' && '✓ '}
-                                            {slot.day.name}
+                                            {slot.status === 'done' && (
+                                              <span className="schedule-chip-check">✓</span>
+                                            )}
+                                            <span className="schedule-chip-name-text">{slot.day.name}</span>
                                           </span>
                                           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                                             {(slot.status === 'next' || slot.status === 'active') && (
