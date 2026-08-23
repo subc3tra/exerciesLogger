@@ -8,6 +8,7 @@
 ### Bench Press
 **Category:** CHEST
 **Description:** Barbell bench press performed flat, targeting the pectorals, anterior deltoids, and triceps. Set up with shoulder-blade retraction and a slight arch; lower the bar to mid-chest with control before pressing. A foundational horizontal push movement.
+**Link:** https://youtube.com/shorts/hWbUlkb5Ms4?si=xJoTLrmDngjr4bSM
 
 ### Close-Grip Bench Press
 **Category:** CHEST

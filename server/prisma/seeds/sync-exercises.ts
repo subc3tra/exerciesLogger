@@ -16,7 +16,7 @@ const EXERCISES: {
   trackedFields?: TrackField[]; // omit to use the category default below
 }[] = [
   // CHEST
-  { name: 'Bench Press', category: 'CHEST', description: 'Barbell bench press performed flat, targeting the pectorals, anterior deltoids, and triceps. Set up with shoulder-blade retraction and a slight arch; lower the bar to mid-chest with control before pressing. A foundational horizontal push movement.' },
+  { name: 'Bench Press', category: 'CHEST', description: 'Barbell bench press performed flat, targeting the pectorals, anterior deltoids, and triceps. Set up with shoulder-blade retraction and a slight arch; lower the bar to mid-chest with control before pressing. A foundational horizontal push movement.', link: 'https://youtube.com/shorts/hWbUlkb5Ms4?si=xJoTLrmDngjr4bSM' },
   { name: 'Close-Grip Bench Press', category: 'CHEST', description: 'Barbell bench press with a narrower grip (roughly shoulder-width), shifting emphasis toward the triceps while still engaging the chest and anterior deltoid. Keep elbows closer to the body than a standard bench press to protect the wrists and maximize tricep recruitment.' },
   { name: 'Incline Dumbbell Chest Press', category: 'CHEST', description: 'Dumbbell press on a bench set to approximately 30 degrees, with palms facing each other. The incline angle increases upper chest and anterior deltoid involvement; neutral grip reduces shoulder stress compared to a pronated grip.' },
   { name: 'Cable Chest Press', category: 'CHEST', description: 'Unilateral or bilateral horizontal press using a cable machine, typically set at chest height. Provides constant tension throughout the range of motion, making it effective for chest hypertrophy with less joint loading than a barbell.' },

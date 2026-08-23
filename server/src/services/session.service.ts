@@ -88,7 +88,7 @@ export async function getSessionById(id: number, userId: number) {
                 select: { id: true, name: true, zone: true, order: true }
               },
               exercise: {
-                select: { id: true, name: true, category: true, description: true, trackedFields: true }
+                select: { id: true, name: true, category: true, description: true, trackedFields: true, link: true }
               }
             }
           },

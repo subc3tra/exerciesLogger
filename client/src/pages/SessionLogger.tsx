@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { sessionsApi, ApiError } from '../services/api';
 import type { NumericField, Prefill, SectionRef, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
 import { SetRow } from '../components/SetRow';
+import { ExerciseVideo } from '../components/ExerciseVideo';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { RestTimer } from '../components/RestTimer';
 import { SessionSummaryModal } from '../components/SessionSummaryModal';
@@ -311,6 +312,7 @@ export function SessionLogger() {
                       )}
                     </div>
                   )}
+                  <ExerciseVideo link={programExercise.exercise.link} />
                   <p className="target-line">
                     Target: {programExercise.targetSets ?? '–'}×{programExercise.targetReps ?? '–'}
                     {programExercise.targetWeight ? ` @ ${programExercise.targetWeight}kg` : ''}

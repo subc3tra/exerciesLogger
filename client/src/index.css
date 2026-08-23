@@ -247,6 +247,45 @@ a {
   margin-top: 6px;
 }
 
+.ex-video-block {
+  margin-bottom: 8px;
+}
+
+.ex-video-link {
+  display: block;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+
+.ex-video-link .block-label {
+  color: var(--accent2);
+}
+
+.ex-video-embed {
+  margin-top: 6px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.ex-video-embed.horizontal {
+  aspect-ratio: 16 / 9;
+}
+
+.ex-video-embed.vertical {
+  aspect-ratio: 9 / 16;
+  max-width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ex-video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 .ex-reps-num {
   font-family: var(--font-display);
   font-size: 22px;

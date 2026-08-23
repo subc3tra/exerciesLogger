@@ -15,6 +15,7 @@ export interface ExerciseRef {
   category: ExerciseCategory;
   description: string | null;
   trackedFields: TrackField[];
+  link: string | null;
 }
 
 export interface User {
