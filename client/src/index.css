@@ -214,7 +214,9 @@ a {
 }
 
 .ex-note-trigger {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   background: transparent;
   border: none;
   padding: 0;
@@ -224,13 +226,18 @@ a {
 }
 
 .ex-note-placeholder {
-  color: var(--border);
-  opacity: 0;
-  transition: opacity 0.15s;
+  color: var(--muted);
 }
 
-.exercise:hover .ex-note-placeholder,
-.ex-note-trigger:focus-visible .ex-note-placeholder {
+.ex-note-edit-icon {
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.ex-note-trigger:hover .ex-note-edit-icon,
+.ex-note-trigger:focus-visible .ex-note-edit-icon {
   opacity: 1;
 }
 

@@ -200,19 +200,14 @@ router.get('/:id/days', getDays);
 
 /**
  * @swagger
- * /api/programs/{id}/exercises/{exerciseId}/notes:
+ * /api/programs/exercises/{exerciseId}/notes:
  *   patch:
  *     tags:
  *       - Programs
- *     summary: Update the persistent note on a program exercise (e.g. "use the red band") — carries forward every time this exercise comes up in the program, independent of any single session
+ *     summary: Update the persistent note on a program exercise (e.g. "use the red band") — carries forward every time this exercise comes up in the program, independent of any single session. No program id in the path — ownership is resolved via the relation chain (same pattern as the sessions/sets routes), and callers like the Session Logger don't have a program id in scope anyway.
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
  *       - in: path
  *         name: exerciseId
  *         required: true
@@ -234,6 +229,6 @@ router.get('/:id/days', getDays);
  *       401:
  *         description: Unauthorized
  */
-router.patch('/:id/exercises/:exerciseId/notes', updateExerciseNotes);
+router.patch('/exercises/:exerciseId/notes', updateExerciseNotes);
 
 export default router;

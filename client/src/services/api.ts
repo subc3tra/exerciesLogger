@@ -79,8 +79,8 @@ export const programsApi = {
   getAll: () => apiFetch<ProgramsResponse>('/programs'),
   getById: (id: number) => apiFetch<ProgramResponse>(`/programs/${id}`),
   getProgress: (id: number) => apiFetch<ProgramProgress>(`/programs/${id}/progress`),
-  updateExerciseNotes: (programId: number, exerciseId: number, notes: string) =>
-    apiFetch<UpdateExerciseNotesResponse>(`/programs/${programId}/exercises/${exerciseId}/notes`, {
+  updateExerciseNotes: (exerciseId: number, notes: string) =>
+    apiFetch<UpdateExerciseNotesResponse>(`/programs/exercises/${exerciseId}/notes`, {
       method: 'PATCH',
       body: JSON.stringify({ notes }),
     }),

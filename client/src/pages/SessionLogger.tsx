@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { sessionsApi, ApiError } from '../services/api';
+import { sessionsApi, programsApi, ApiError } from '../services/api';
 import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
 import { SetRow } from '../components/SetRow';
+import { ExerciseNote } from '../components/ExerciseNote';
 import { ExerciseVideo } from '../components/ExerciseVideo';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { RestTimer } from '../components/RestTimer';
@@ -60,6 +61,14 @@ export function SessionLogger() {
     setSession((prev) =>
       prev ? { ...prev, exercises: prev.exercises.map((ex) => (ex.id === exerciseId ? updater(ex) : ex)) } : prev
     );
+  }
+
+  async function handleSaveExerciseNotes(sessionExerciseId: number, programExerciseId: number, notes: string) {
+    const res = await programsApi.updateExerciseNotes(programExerciseId, notes);
+    updateExercise(sessionExerciseId, (ex) => ({
+      ...ex,
+      programExercise: { ...ex.programExercise, notes: res.programExercise.notes },
+    }));
   }
 
   function toggleExpand(exerciseId: number) {
@@ -326,12 +335,13 @@ export function SessionLogger() {
                       ))}
                   </div>
 
-                  {programExercise.notes && (
-                    <div className="ex-note-block">
-                      <span className="block-label">Notes</span>
-                      <p className="ex-note">{programExercise.notes}</p>
-                    </div>
-                  )}
+                  <div className="ex-note-block">
+                    <span className="block-label">Notes</span>
+                    <ExerciseNote
+                      notes={programExercise.notes}
+                      onSave={(notes) => handleSaveExerciseNotes(exercise.id, programExercise.id, notes)}
+                    />
+                  </div>
 
                   <button className="add-set-button" onClick={() => setPendingAddFor(exercise.id)}>
                     + Add set
