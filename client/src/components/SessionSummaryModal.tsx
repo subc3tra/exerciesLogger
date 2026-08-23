@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { SessionDetail, SessionPR } from '../types';
+import { sessionsApi } from '../services/api';
 import { formatElapsed } from '../utils/time';
 import { getCompletionMessage } from '../utils/completionMessage';
 import { groupBySection } from '../utils/groupBySection';
@@ -36,6 +37,23 @@ export function SessionSummaryModal({ session, elapsedSeconds, prs, onClose }: S
   const completionMessage = useMemo(() => getCompletionMessage(), []);
 
   const [copied, setCopied] = useState(false);
+
+  const [notesDraft, setNotesDraft] = useState(session.notes ?? '');
+  const [lastSavedNotes, setLastSavedNotes] = useState(session.notes ?? '');
+  const [notesSaved, setNotesSaved] = useState(false);
+
+  async function handleNotesBlur() {
+    const trimmed = notesDraft.trim();
+    if (trimmed === lastSavedNotes) return; // nothing changed since the last save — skip the call
+    try {
+      await sessionsApi.updateNotes(session.id, trimmed);
+      setLastSavedNotes(trimmed);
+      setNotesSaved(true);
+      setTimeout(() => setNotesSaved(false), 2000);
+    } catch {
+      // best-effort — draft stays in the textarea either way, nothing destructive happens on failure
+    }
+  }
 
   async function handleCopy() {
     const text = formatSessionAsText(session, elapsedSeconds);
@@ -119,6 +137,19 @@ export function SessionSummaryModal({ session, elapsedSeconds, prs, onClose }: S
               );
             })
           )}
+        </div>
+
+        <div className="summary-notes">
+          <span className="block-label">Notes</span>
+          <textarea
+            className="feedback-textarea summary-notes-textarea"
+            value={notesDraft}
+            onChange={(e) => setNotesDraft(e.target.value)}
+            onBlur={handleNotesBlur}
+            placeholder="How did this one go?"
+            rows={3}
+          />
+          {notesSaved && <span className="summary-notes-saved">Saved ✓</span>}
         </div>
 
         <div className="dialog-actions">

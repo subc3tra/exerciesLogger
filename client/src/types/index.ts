@@ -196,6 +196,10 @@ export interface UpdateExerciseNotesResponse {
   programExercise: { id: number; notes: string | null };
 }
 
+export interface UpdateSessionNotesResponse {
+  session: { id: number; notes: string | null };
+}
+
 export interface ApiErrorResponse {
   message: string;
 }

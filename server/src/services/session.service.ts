@@ -26,6 +26,17 @@ export async function getAllSessions(userId:number) {
   });
 }
 
+// update the note on a specific session (e.g. how the whole workout felt) — separate concept from
+// the per-exercise ProgramExercise.notes (persistent, program-wide) and any future per-session
+// per-exercise note; this one is scoped to a single session instance
+export async function updateSessionNotes(userId: number, sessionId: number, notes: string) {
+  return await prisma.session.update({
+    where: { id: sessionId, userId },
+    data: { notes },
+    select: { id: true, notes: true }
+  })
+}
+
 // previous session's actual set values for this program day, keyed by programExerciseId — used to
 // prefill the session logger with real carry-forward numbers instead of the template again
 export async function getPrefillForProgramDay(userId: number, programDayId: number, excludeSessionId?: number) {

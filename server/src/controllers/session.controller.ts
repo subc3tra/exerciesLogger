@@ -5,6 +5,7 @@ import {
   getPrefillForProgramDay,
   startSession,
   updateSetById,
+  updateSessionNotes,
   removeSetRow,
   addNewSetRow,
   completeSession
@@ -71,6 +72,23 @@ export async function complete(req: Request, res: Response, next: NextFunction):
     const id = Number(req.params.id);
     const result = await completeSession(userId, id);
     res.status(200).json(result);
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
+      res.status(404).json({ message: "Session not found" });
+      return;
+    }
+    next(err);
+  }
+}
+
+// update the note on a session
+export async function updateNotes(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const userId = req.user!.id;
+    const id = Number(req.params.id);
+    const { notes } = req.body;
+    const session = await updateSessionNotes(userId, id, notes ?? '');
+    res.status(200).json({ session });
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
       res.status(404).json({ message: "Session not found" });

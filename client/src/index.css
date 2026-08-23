@@ -871,6 +871,31 @@ a {
   margin-bottom: 16px;
 }
 
+.summary-notes {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-notes-saved {
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.summary-notes-textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* placeholder only — keep the typed-text/base size at 16px, that's the existing iOS
+   input-zoom-prevention fix elsewhere in this app, don't regress it */
+.summary-notes-textarea::placeholder {
+  font-size: 13px;
+}
+
 .summary-exercise-list {
   border-top: 1px solid var(--border);
   padding-top: 16px;

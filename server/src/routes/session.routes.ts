@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAll, getById, start, complete, updateSet, removeSet, addSet } from "../controllers/session.controller";
+import { getAll, getById, start, complete, updateNotes, updateSet, removeSet, addSet } from "../controllers/session.controller";
 import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
@@ -103,6 +103,39 @@ router.get('/:id', getById);
  *         description: Unauthorized
  */
 router.post('/:id/complete', complete);
+
+/**
+ * @swagger
+ * /api/sessions/{id}/notes:
+ *   patch:
+ *     tags:
+ *       - Sessions
+ *     summary: Update the note on a session (e.g. how the whole workout felt) — distinct from the per-exercise ProgramExercise note, scoped to this one session instance
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               notes:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Note updated
+ *       404:
+ *         description: Session not found
+ *       401:
+ *         description: Unauthorized
+ */
+router.patch('/:id/notes', updateNotes);
 
 /**
  * @swagger
