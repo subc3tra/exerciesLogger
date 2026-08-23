@@ -9,6 +9,15 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.3.1',
+    date: '2026-08-23',
+    title: 'Update: 0.3.1',
+    changes: [
+      "You can now add a persistent note to any exercise in your program (e.g. \"use the red band\") — tap the pencil next to an exercise's notes while logging a session. It carries forward and stays editable every time that exercise comes up again.",
+      'The post-workout summary screen now has a notes field — jot down how the session went right there, it saves automatically.',
+    ],
+  },
+  {
     version: '0.3.0',
     date: '2026-08-23',
     title: 'Update: 0.3.0',
