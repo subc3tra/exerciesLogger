@@ -81,6 +81,10 @@
 **Category:** BACK
 **Description:** Bodyweight pull-up performed with an underhand (supinated) grip, emphasizing the lats and biceps more than a standard overhand pull-up. Pull until the chin clears the bar; add weight via a dip belt once bodyweight reps are no longer challenging.
 
+### Pull-Up
+**Category:** BACK
+**Description:** Bodyweight or weighted pull-up performed with an overhand (pronated) grip, the standard competition/test-format vertical pull. Pull until the chin clears the bar; add weight via a dip belt once bodyweight reps are no longer challenging. More back/lat-dominant and less bicep-driven than the underhand Chin-Up.
+
 ### Shrugs
 **Category:** BACK
 **Description:** Barbell or dumbbell shrug lifting the shoulders straight up toward the ears to target the upper trapezius. Avoid rolling the shoulders — a straight vertical path keeps tension on the traps and reduces shoulder-joint strain.

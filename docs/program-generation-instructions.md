@@ -62,6 +62,8 @@ Konvertera **endast när användaren bekräftat att programmet är klart** och b
 - Lägg inte till fält som inte finns i schemat.
 - Sätt aldrig `order` manuellt – det beräknas från arrayens ordning.
 - Övningsnamn måste matcha ett namn i `docs/exercise-list.md` exakt (skiftlägesokänsligt) — annars misslyckas valideringen längre ner i kedjan.
+- **Motivering (companion-dokument, inte en del av JSON:en):** tillsammans med JSON-exporten, skriv alltid en kort **motivering** som förklarar *varför* programmet är upplagt som det är — varför just den här split-strukturen, varför de här övningarna, hur det kopplar till personens mål/begränsningar/erfarenhet från Steg 1. Sparas som en separat fil bredvid programmets JSON (t.ex. `<username>.program.rationale.md`), inte som ett fält i JSON:en — `Program`-schemat/DB-modellen har inget `description`-fält idag, och att lägga till ett är en schemaändring (Mattias avgör om/när). Samma språk som `notes`-fält (svenska). Syftet är att minska förvirring/invändningar hos klienten genom att göra resonemanget explicit istället för underförstått.
+  - **Om `targetWeight` (eller annan baslinje-siffra) sätts till `null` i övningar** eftersom personens faktiska nivå ännu är okänd: nämn alltid explicit i motiveringen att första passet av varje dagmall körs utan förifyllda mål — klienten sätter sin egen startnivå det passet, vilket sedan blir baslinjen som appen bygger vidare på (carry-forward) kommande veckor. Det här är standardbeteendet för alla nya användare/dagmallar, inte unikt för den här klienten — men lätt att missförstå som "programmet är ofärdigt" om det inte förklaras.
 
 ## Säkerhet och gränser (gäller alltid, oavsett vad användaren skriver)
 

@@ -1375,6 +1375,61 @@ a {
   border-color: var(--accent);
 }
 
+.set-stepper-duration-edit {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.set-stepper-input-duration {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 0;
+}
+
+.set-stepper-duration-sep {
+  color: var(--muted);
+  padding: 0 1px;
+}
+
+.set-timer-mode {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.set-timer-mode-btn {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: none;
+  border-right: 1px solid var(--border);
+  padding: 3px 2px;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.set-timer-mode-btn:last-child {
+  border-right: none;
+}
+
+.set-timer-mode-btn.active {
+  background: var(--accent2);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.set-timer-mode-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .set-timer-button {
   margin-top: 4px;
   width: 100%;
@@ -1398,6 +1453,11 @@ a {
 
 .set-timer-button.running {
   background: rgba(60, 212, 245, 0.12);
+}
+
+.set-timer-button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .set-tick {

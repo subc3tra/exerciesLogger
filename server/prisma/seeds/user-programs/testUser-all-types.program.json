@@ -1,0 +1,57 @@
+{
+  "name": "🧪 Test — All Set Types",
+  "totalWeeks": 4,
+  "daysPerWeek": 1,
+  "days": [
+    {
+      "name": "Test Day",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "All Types",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Barbell Squat",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": 60,
+              "notes": "REPS+WEIGHT test exercise."
+            },
+            {
+              "name": "Bench Press",
+              "targetSets": 3,
+              "targetReps": "8",
+              "targetWeight": 40,
+              "notes": "REPS+WEIGHT test exercise."
+            },
+            {
+              "name": "Treadmill",
+              "targetSets": 1,
+              "targetReps": "300s",
+              "targetWeight": null,
+              "notes": "DURATION+DISTANCE test exercise — use the Start/Stop timer here."
+            },
+            {
+              "name": "Farmers Carry",
+              "targetSets": 3,
+              "targetReps": "20m",
+              "targetWeight": 24,
+              "notes": "DISTANCE+WEIGHT test exercise."
+            },
+            {
+              "name": "Plank",
+              "targetSets": 3,
+              "targetReps": "45s",
+              "targetWeight": null,
+              "notes": "DURATION-only test exercise — the one to check the new mm/ss duration edit against."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

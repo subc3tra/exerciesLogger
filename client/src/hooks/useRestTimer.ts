@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { playBeep } from '../utils/beep';
 
 const STORAGE_KEY = 'nordcore_rest_duration';
 const DEFAULT_DURATION = 90;
@@ -16,24 +17,6 @@ export function useRestTimer() {
   function setDuration(value: number) {
     setDurationState(value);
     localStorage.setItem(STORAGE_KEY, String(value));
-  }
-
-  function beep() {
-    const ctx = audioCtxRef.current;
-    if (!ctx) return;
-    try {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.frequency.value = 880;
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.4);
-    } catch {
-      // Web Audio unsupported — countdown still works visually
-    }
   }
 
   function start() {
@@ -58,7 +41,7 @@ export function useRestTimer() {
     if (!isRunning) return;
     if (secondsLeft <= 0) {
       setIsRunning(false);
-      beep();
+      playBeep(audioCtxRef.current);
       if ('vibrate' in navigator) navigator.vibrate(200);
       return;
     }
