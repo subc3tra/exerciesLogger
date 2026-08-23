@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { InfoBanner } from '../components/InfoBanner';
 import { StatsSummary } from '../components/StatsSummary';
 import { programsApi, sessionsApi, ApiError } from '../services/api';
-import type { Program, ProgramDay, ProgramDetail, ProgramProgress } from '../types';
+import type { Program, ProgramDay, ProgramDetail, ProgramExerciseTemplate, ProgramProgress } from '../types';
 
 type SlotStatus = 'done' | 'active' | 'next' | 'upcoming';
 
@@ -39,6 +39,74 @@ function buildSchedule(detail: ProgramDetail, progress: ProgramProgress): Schedu
 
 function exerciseSummary(day: ProgramDay): string {
   return day.sections.flatMap((s) => s.exercises.map((e) => e.exercise.name)).join(', ');
+}
+
+// click-to-edit persistent note on a program exercise (e.g. "use the red band") — carries forward
+// every time this exercise comes up in the program, independent of any one session
+function ExerciseNote({
+  exercise,
+  onSave,
+}: {
+  exercise: ProgramExerciseTemplate;
+  onSave: (notes: string) => Promise<void>;
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [draft, setDraft] = useState(exercise.notes ?? '');
+  const [isSaving, setIsSaving] = useState(false);
+
+  if (!isEditing) {
+    return (
+      <button
+        type="button"
+        className="ex-note-trigger"
+        onClick={(e) => {
+          e.stopPropagation();
+          setDraft(exercise.notes ?? '');
+          setIsEditing(true);
+        }}
+      >
+        {exercise.notes ? (
+          <span className="ex-note">{exercise.notes}</span>
+        ) : (
+          <span className="ex-note ex-note-placeholder">+ Add note</span>
+        )}
+      </button>
+    );
+  }
+
+  return (
+    <div className="ex-note-edit" onClick={(e) => e.stopPropagation()}>
+      <textarea
+        className="ex-note-textarea"
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        placeholder="e.g. red band, felt heavy…"
+        rows={2}
+        autoFocus
+      />
+      <div className="ex-note-edit-actions">
+        <button
+          type="button"
+          className="ex-note-save"
+          disabled={isSaving}
+          onClick={async () => {
+            setIsSaving(true);
+            try {
+              await onSave(draft.trim());
+              setIsEditing(false);
+            } finally {
+              setIsSaving(false);
+            }
+          }}
+        >
+          {isSaving ? '…' : 'Save'}
+        </button>
+        <button type="button" className="ex-note-cancel" onClick={() => setIsEditing(false)}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export function Dashboard() {
@@ -89,6 +157,29 @@ export function Dashboard() {
         setDetailLoadingId(null);
       }
     }
+  }
+
+  async function handleSaveExerciseNotes(programId: number, exerciseId: number, notes: string) {
+    const res = await programsApi.updateExerciseNotes(programId, exerciseId, notes);
+    setDetails((prev) => {
+      const detail = prev[programId];
+      if (!detail) return prev;
+      return {
+        ...prev,
+        [programId]: {
+          ...detail,
+          days: detail.days.map((day) => ({
+            ...day,
+            sections: day.sections.map((section) => ({
+              ...section,
+              exercises: section.exercises.map((ex) =>
+                ex.id === exerciseId ? { ...ex, notes: res.programExercise.notes } : ex
+              ),
+            })),
+          })),
+        },
+      };
+    });
   }
 
   function toggleSlot(programId: number, slotKey: string) {
@@ -224,7 +315,12 @@ export function Dashboard() {
                                               <div key={exercise.id} className="exercise">
                                                 <div>
                                                   <div className="ex-name">{exercise.exercise.name}</div>
-                                                  {exercise.notes && <div className="ex-note">{exercise.notes}</div>}
+                                                  <ExerciseNote
+                                                    exercise={exercise}
+                                                    onSave={(notes) =>
+                                                      handleSaveExerciseNotes(program.id, exercise.id, notes)
+                                                    }
+                                                  />
                                                 </div>
                                                 <div>
                                                   <div className="ex-reps-num">

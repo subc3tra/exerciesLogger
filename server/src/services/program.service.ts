@@ -96,6 +96,20 @@ export async function updateProgram(id: number, userId: number, name?: string, t
   })
 }
 
+// update the persistent note on a program exercise (e.g. "use the red band") — deliberately a
+// narrow, notes-only endpoint: doesn't touch targetSets/targetReps/targetWeight, so it stays safe
+// to call even on a program with logged sessions, unlike a general ProgramExercise edit would be
+export async function updateProgramExerciseNotes(userId: number, programExerciseId: number, notes: string) {
+  return await prisma.programExercise.update({
+    where: {
+      id: programExerciseId,
+      section: { programDay: { program: { userId } } }
+    },
+    data: { notes },
+    select: { id: true, notes: true }
+  })
+}
+
 // delete program
 export async function deleteProgram(id: number, userId: number): Promise<Program> {
   return await prisma.program.delete({

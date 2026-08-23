@@ -192,6 +192,10 @@ export interface UpdateSetResponse {
   set: SessionSet;
 }
 
+export interface UpdateExerciseNotesResponse {
+  programExercise: { id: number; notes: string | null };
+}
+
 export interface ApiErrorResponse {
   message: string;
 }

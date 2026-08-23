@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAll, getById, getProgress, create, update, remove, getDays, getDay } from "../controllers/program.controller";
+import { getAll, getById, getProgress, create, update, updateExerciseNotes, remove, getDays, getDay } from "../controllers/program.controller";
 import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
@@ -197,5 +197,43 @@ router.delete('/:id', remove);
  *         description: Unauthorized
  */
 router.get('/:id/days', getDays);
+
+/**
+ * @swagger
+ * /api/programs/{id}/exercises/{exerciseId}/notes:
+ *   patch:
+ *     tags:
+ *       - Programs
+ *     summary: Update the persistent note on a program exercise (e.g. "use the red band") — carries forward every time this exercise comes up in the program, independent of any single session
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *       - in: path
+ *         name: exerciseId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               notes:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Note updated
+ *       404:
+ *         description: Exercise not found
+ *       401:
+ *         description: Unauthorized
+ */
+router.patch('/:id/exercises/:exerciseId/notes', updateExerciseNotes);
 
 export default router;

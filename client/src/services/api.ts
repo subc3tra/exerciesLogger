@@ -12,6 +12,7 @@ import type {
   StatsRange,
   StatsProgressionPoint,
   ExercisesResponse,
+  UpdateExerciseNotesResponse,
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
@@ -78,6 +79,11 @@ export const programsApi = {
   getAll: () => apiFetch<ProgramsResponse>('/programs'),
   getById: (id: number) => apiFetch<ProgramResponse>(`/programs/${id}`),
   getProgress: (id: number) => apiFetch<ProgramProgress>(`/programs/${id}/progress`),
+  updateExerciseNotes: (programId: number, exerciseId: number, notes: string) =>
+    apiFetch<UpdateExerciseNotesResponse>(`/programs/${programId}/exercises/${exerciseId}/notes`, {
+      method: 'PATCH',
+      body: JSON.stringify({ notes }),
+    }),
 };
 
 export const sessionsApi = {

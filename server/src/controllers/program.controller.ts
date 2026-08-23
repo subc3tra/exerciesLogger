@@ -5,6 +5,7 @@ import {
   getProgramProgress,
   createProgram,
   updateProgram,
+  updateProgramExerciseNotes,
   deleteProgram,
   getDaysByProgramId,
   getDayById
@@ -82,6 +83,24 @@ export async function update(req: Request, res: Response, next: NextFunction): P
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
       res.status(404).json({ message: "Program not found" });
+      return;
+    }
+    next(err);
+  }
+}
+
+// update the persistent note on a program exercise
+export async function updateExerciseNotes(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const exerciseId = Number(req.params.exerciseId);
+    const userId = req.user!.id;
+    const { notes } = req.body;
+    const programExercise = await updateProgramExerciseNotes(userId, exerciseId, notes ?? '');
+
+    res.status(200).json({ programExercise });
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2025') {
+      res.status(404).json({ message: "Exercise not found" });
       return;
     }
     next(err);
