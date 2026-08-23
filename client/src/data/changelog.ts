@@ -3,7 +3,18 @@ export interface ChangelogEntry {
   date: string;
   title: string;
   changes: string[];
+  /**
+   * Optional: one GIF max, for the single standout/easy-to-miss feature in this
+   * version (e.g. "you can edit notes now"). Drop the file in
+   * src/assets/changelog/ and import it, e.g.:
+   *   import editNotesGif from '../assets/changelog/0.3.1-edit-notes.gif';
+   * then set gifUrl: editNotesGif on that entry.
+   */
+  gifUrl?: string;
 }
+
+import videoLinkGif from '../assets/changelog/0.3.0-video-link.gif';
+import editNotesGif from '../assets/changelog/0.3.1-edit-notes.gif';
 
 // Newest entry first. The top entry is what the "What's new" modal shows —
 // bumping `version` here is what makes it pop up again for everyone.
@@ -16,6 +27,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       "You can now add a persistent note to any exercise in your program (e.g. \"use the red band\") — tap the pencil next to an exercise's notes while logging a session. It carries forward and stays editable every time that exercise comes up again.",
       'The post-workout summary screen now has a notes field — jot down how the session went right there, it saves automatically.',
     ],
+    gifUrl: editNotesGif,
   },
   {
     version: '0.3.0',
@@ -32,6 +44,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       'Exercises can now include a "Watch video" link (YouTube videos or Shorts) tucked under the Description toggle.',
       "Fixed a bug where finishing a workout via \"mark all & complete\" (instead of ticking every set) could undercount total volume and sets on the new summary screen.",
     ],
+    gifUrl: videoLinkGif,
   },
   {
     version: '0.2.0',

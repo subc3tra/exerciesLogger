@@ -30,6 +30,14 @@ export function WhatsNewModal() {
                 <li key={change}>{change}</li>
               ))}
             </ul>
+            {entry.gifUrl && (
+              <img
+                src={entry.gifUrl}
+                alt={entry.title}
+                className="whats-new-gif"
+                loading="lazy"
+              />
+            )}
           </div>
         ))}
         <div className="dialog-actions">
