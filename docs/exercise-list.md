@@ -116,6 +116,34 @@
 **Category:** BACK
 **Description:** Chin-up assisted by a resistance band anchored a few meters below the bar (looped around a rack mount, not around the bar itself) and under a knee or foot, offsetting part of your bodyweight to allow more/cleaner strict reps than bodyweight alone. Standard progression tool toward unassisted chin-ups — reduce band tension as strength improves.
 
+### Inverted Row
+**Category:** BACK
+**Description:** Bodyweight horizontal row performed hanging under a bar or in a rack, pulling the chest toward it while the body stays rigid from heels to head. Regressed by raising the bar (more upright body) or progressed by lowering it (closer to horizontal) — a bodyweight scaling tool for the same pulling pattern as the cable/dumbbell rows above.
+
+### Floating RDL
+**Category:** BACK
+**Description:** Romanian deadlift performed without resetting the bar on the floor between reps — tension stays on the hamstrings continuously from the top of one rep into the next. Same hip-hinge mechanics as the standard RDL, but the removed "reset" makes it harder to lose position rep to rep.
+
+### Good Morning
+**Category:** BACK
+**Description:** Barbell held across the upper back as in a squat, hinging forward at the hips with a soft knee bend until the torso is roughly parallel to the floor, then returning upright. Trains the posterior chain (erectors, glutes, hamstrings) similarly to an RDL but with the load on the back rather than in the hands — technically demanding, start light.
+
+### Rack Pull
+**Category:** BACK
+**Description:** Partial-range deadlift starting from pins set just below or at knee height, removing the floor-to-knee portion of the pull. Allows heavier loading than a full deadlift with less lower-back demand, useful for building top-end pulling strength and lockout.
+
+### Rope Climb
+**Category:** BACK
+**Description:** Climbing a suspended rope hand-over-hand using a leg-lock or foot-hook technique to unweight the arms between pulls. Heavy grip, lat, and bicep demand; scale with a shorter rope, an assisted descent, or a legless variation once basic climbs are solid.
+
+### Trap Bar Deadlift (High Handles)
+**Category:** BACK
+**Description:** Deadlift using a trap/hex bar's higher handle position, shortening the pull range and keeping the torso more upright than a barbell deadlift. A gentler entry point for the trap bar pattern — good for beginners or as a lighter-load, higher-volume variation.
+
+### Trap Bar Deadlift (Low Handles)
+**Category:** BACK
+**Description:** Deadlift using a trap/hex bar's lower handle position, closer in range of motion and torso angle to a conventional barbell deadlift than the high-handle version. More posterior-chain demand than the high-handle variant; use once the high-handle pattern is solid.
+
 ---
 
 ## LEGS
@@ -245,6 +273,54 @@
 **Description:** Stand one stride behind a step. Place one foot on the step, lower into a deep lunge, then drive up through that leg onto the step in one controlled motion, finishing by lifting the opposite knee to stand tall on one leg. Return to the start and repeat — combines a lunge, step-up, and single-leg balance finish in one movement.
 **Link:** https://exorlive.com/video/?culture=sv-SE&hidesmb=true&ex=12159
 
+### Curtsy Dumbbell Lunge
+**Category:** LEGS
+**Description:** Lunge stepping one leg diagonally back and across behind the other, like a curtsy, lowering until both knees bend to roughly 90 degrees. Adds a glute medius/adductor demand on top of the standard lunge's quad/glute work through the diagonal step path.
+
+### Hack Squat (Machine)
+**Category:** LEGS
+**Description:** Machine squat performed on a fixed sled at an angle, back and shoulders braced against pads throughout the movement. Removes the balance and bracing demand of a free squat, allowing heavier, more isolated quad loading.
+
+### Box Squat
+**Category:** LEGS
+**Description:** Barbell back squat performed to a box or bench set at or slightly below parallel, sitting back to briefly touch the box before driving back up. Teaches hip-hinge depth control and removes the stretch-reflex "bounce" out of the bottom, useful for building raw strength out of a dead stop.
+
+### Cable Kickback
+**Category:** LEGS
+**Description:** Standing hip extension using an ankle cable attachment, kicking one leg straight back against resistance while bracing the torso. Isolates the glutes through hip extension, complementing the hip-abduction-focused cable/band work already in the bank.
+
+### Machine Hip Abductor
+**Category:** LEGS
+**Description:** Seated machine exercise pressing the knees outward against resistance pads, isolating the hip abductors and gluteus medius. Same movement pattern as the Cable Hip Abduction above, on fixed equipment instead of a cable — useful when that machine is what's available.
+
+### Machine Hip Adductor
+**Category:** LEGS
+**Description:** Seated machine exercise pressing the knees inward against resistance pads, isolating the hip adductors (inner thigh). The adductor counterpart to the Machine Hip Abductor above — first adductor-specific entry in the bank.
+
+### Walking Lunges
+**Category:** LEGS
+**Description:** Alternating forward lunges stepping continuously across a distance rather than returning to the start position each rep, loaded with dumbbells or a barbell. Adds a dynamic-balance and hip-stability demand on top of the standard lunge's quad/glute work.
+
+### Hip Hike (Weighted)
+**Category:** LEGS
+**Description:** Standing on one leg on a step or box, dropping the opposite hip down and then lifting it back level using only the standing leg's hip abductors, optionally holding extra weight. Isolates the gluteus medius through pelvic control — a common corrective for hip drop during single-leg movements like squats and running.
+
+### Side Plank Leg Lift
+**Category:** LEGS
+**Description:** Side plank hold with the top leg lifted straight up against gravity, combining the isometric core demand of a side plank with hip-abductor work in the top leg. Closely related to Side-Lying Hip Abduction above, but performed from a supported plank position instead of lying flat.
+
+### Single-Leg Hip Thrust
+**Category:** LEGS
+**Description:** Hip thrust performed with one foot planted and the other leg extended or held off the ground, upper back supported on a bench. Unilateral, loadable version of the Single-Leg Glute Bridge above — more range and load capacity since the upper back (not the floor) supports the torso.
+
+### Pistol Squat
+**Category:** LEGS
+**Description:** Single-leg bodyweight squat with the non-working leg extended straight out in front, lowering until the working hip is at or below knee height before standing back up. Demanding combination of unilateral strength, ankle/hip mobility, and balance; scale with a box under the hips or a counterbalance held out front.
+
+### Touch Down Squat
+**Category:** LEGS
+**Description:** Single-leg squat reaching the free hand down to lightly touch the floor (or a raised target) at the bottom of the movement before standing back up, the standing leg doing the work throughout. A regressed pistol-squat pattern — the touch point provides balance assistance and a depth target without needing full pistol mobility/strength yet.
+
 ---
 
 ## SHOULDERS
@@ -276,6 +352,10 @@
 ### Banded External Rotation
 **Category:** SHOULDERS
 **Description:** Standing or half-kneeling external rotation of the shoulder against a light resistance band anchored at elbow height, elbow pinned to the side at 90°. Classic rotator-cuff prehab/rehab movement for shoulder stability and injury prevention; light band tension and full control matter more than resistance.
+
+### One-Arm Landmine Press
+**Category:** SHOULDERS
+**Description:** Single-arm press of a barbell anchored in a landmine attachment, pressing diagonally up and away from the shoulder rather than straight overhead. The angled path is easier on the shoulder joint than a strict overhead press while still training vertical pressing strength unilaterally.
 
 ---
 
@@ -362,6 +442,15 @@
 **Category:** CORE
 **Description:** Full sit-up from lying to seated, knees bent and feet anchored, hands behind the head or crossed over the chest. Curl up through the spine to a full seated position, then lower back down under control. The standard test-format ab movement, distinct from the machine-based Cable Crunch already in the bank.
 
+### Toes to Bar
+**Category:** CORE
+**Description:** Hanging from a bar, raising the legs (straight or slightly bent) until the toes touch the bar, then lowering under control. Dynamic hanging ab movement combining grip endurance with hip flexor and lower-ab strength; regress with knee raises if a full straight-leg toes-to-bar isn't there yet.
+
+### Suitcase Carry
+**Category:** CORE
+**Description:** Loaded carry holding a single weight in one hand at the side, like carrying a suitcase, walking a set distance while resisting the pull toward the loaded side. Unilateral counterpart to the Farmers Carry — trains anti-lateral-flexion core strength specifically, since only one side is loaded.
+**Tracked fields:** DISTANCE, WEIGHT (not the CORE default of REPS+WEIGHT)
+
 ---
 
 ## CARDIO
@@ -386,9 +475,82 @@
 **Category:** CARDIO
 **Description:** Generic low-to-moderate intensity steady-state cardio for general conditioning and active recovery — walking, cycling, or swimming, whichever's convenient. Intensity/pace is a program-specific note, not baked into the exercise itself.
 
+### Burpees
+**Category:** CARDIO
+**Description:** Drop to a plank, chest to floor, then explosively return to standing with a jump. Full-body conditioning movement combining a push-up-adjacent pattern with a squat and jump; scale by removing the push-up or the jump.
+**Tracked fields:** REPS (not the CARDIO default of DURATION+DISTANCE)
+
+### Burpee Broad Jump
+**Category:** CARDIO
+**Description:** Burpee immediately followed by a two-footed broad jump forward instead of a vertical jump, then reset for the next rep from the new position. Adds a horizontal power/distance component on top of the standard burpee's conditioning demand.
+**Tracked fields:** REPS (not the CARDIO default of DURATION+DISTANCE)
+
+### Burpee Box Jump Over
+**Category:** CARDIO
+**Description:** Burpee performed facing a box, finishing by jumping up and over it (both feet landing on the far side) instead of a vertical jump in place. Combines the burpee's conditioning demand with the coordination/power of clearing an obstacle.
+**Tracked fields:** REPS (not the CARDIO default of DURATION+DISTANCE)
+
+### Wallballs
+**Category:** CARDIO
+**Description:** Squat holding a weighted ball at the chest, standing up and throwing it against a target on the wall, catching it on the way down into the next squat. Combines squat volume with a throwing/catching conditioning element; target height and ball weight are both easy to scale.
+**Tracked fields:** REPS (not the CARDIO default of DURATION+DISTANCE)
+
 ## RECOVERY
 
 ### Mobility & Stretching
 **Category:** RECOVERY
 **Description:** General mobility and stretching work — no fixed movement list, just time spent on joint mobility and flexibility. Track total duration only.
 **Tracked fields:** DURATION
+
+---
+
+## OLYMPIC
+
+> ⚠️ **New `ExerciseCategory` enum value — not yet in `schema.prisma`.** Purely additive, no
+> backfill needed (same shape as the 2026-07-14 `RECOVERY` addition) — needs a migration adding
+> `OLYMPIC` to the enum before any of the entries below can be synced via `sync-exercises.ts`.
+> Backend design-partner note, not implemented here — Mattias's call on when to run it.
+
+### Clean and Jerk
+**Category:** OLYMPIC
+**Description:** Two-part Olympic lift: a Clean brings the bar from the floor to the shoulders, then a Jerk drives it overhead using a leg-drive dip and re-bend. The full competition lift; highly technical, best coached in person before loading heavy.
+
+### Clean
+**Category:** OLYMPIC
+**Description:** Olympic lift pulling the bar from the floor to a racked front-squat position on the shoulders in one explosive movement, catching it in a partial or full squat. Trains full-body power and the second-pull triple extension (hips, knees, ankles) shared with the Snatch.
+
+### Power Clean
+**Category:** OLYMPIC
+**Description:** Clean caught in a partial squat (above parallel) rather than a full front squat, demanding more bar speed and less catch-depth mobility. Common training variant when full-squat clean mobility isn't there yet, or to bias more power output per rep.
+
+### Clean Pull
+**Category:** OLYMPIC
+**Description:** The pulling portion of the Clean (floor to full extension) performed without the turnover/catch under the bar. Used to overload the pull with more weight than could be caught, or to groove pulling mechanics without the catch's technical demand.
+
+### Squat Jerk
+**Category:** OLYMPIC
+**Description:** Jerk variant where the bar is caught overhead in a full squat rather than a shallow split stance, requiring significant shoulder and hip mobility. Higher mobility demand than a Split Jerk but removes the front-to-back footwork of the split.
+
+### Snatch
+**Category:** OLYMPIC
+**Description:** Olympic lift pulling the bar from the floor directly overhead in one continuous motion, catching it in a full squat with a wide grip. The most technical barbell lift in the bank — full-body power, mobility, and timing all have to line up in the same rep.
+
+### Power Snatch
+**Category:** OLYMPIC
+**Description:** Snatch caught in a partial squat (above parallel) rather than a full overhead squat position. Same power-over-mobility trade-off as the Power Clean, applied to the wide-grip pull.
+
+### Hang Power Snatch
+**Category:** OLYMPIC
+**Description:** Power Snatch starting from a hang position (bar at or above the knee) instead of the floor, removing the first pull. Isolates the second-pull explosive extension and catch, useful for grooving the top half of the lift on its own.
+
+### Hang Snatch
+**Category:** OLYMPIC
+**Description:** Full-squat Snatch starting from a hang position instead of the floor. Same first-pull removal as the Hang Power Snatch, but caught in a full overhead squat rather than a partial one.
+
+### Snatch Balance
+**Category:** OLYMPIC
+**Description:** Drill starting with the bar already racked on the back like a squat, dipping and driving it overhead while dropping under it into a full overhead squat catch — no pull involved. Isolates the catch and overhead-squat receiving position in isolation from the pulling portion of the lift.
+
+### Overhead Squat
+**Category:** OLYMPIC
+**Description:** Squat performed with the bar locked out overhead in a wide snatch grip throughout the descent and ascent. Builds the mobility, stability, and core control the Snatch's catch position depends on; also a standalone mobility assessment on its own.

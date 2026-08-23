@@ -56,6 +56,7 @@ export function Dashboard() {
   const [startingId, setStartingId] = useState<number | null>(null);
   const [startError, setStartError] = useState<string | null>(null);
   const [expandedSlots, setExpandedSlots] = useState<Record<number, Set<string>>>({});
+  const [expandedWeeks, setExpandedWeeks] = useState<Record<number, Set<number>>>({});
 
   useEffect(() => {
     programsApi
@@ -83,6 +84,16 @@ export function Dashboard() {
         ]);
         setDetails((prev) => ({ ...prev, [program.id]: detailRes.program }));
         setProgress((prev) => ({ ...prev, [program.id]: progressRes }));
+
+        // Default to only the current week open — the one with the active/next slot — so a
+        // freshly-opened program isn't a wall of expanded weeks. Falls back to the last week if
+        // the program's already complete (nothing "next" to find).
+        const weeks = buildSchedule(detailRes.program, progressRes);
+        const currentWeekIdx = weeks.findIndex((weekSlots) =>
+          weekSlots.some((slot) => slot.status === 'active' || slot.status === 'next'),
+        );
+        const defaultWeek = currentWeekIdx === -1 ? weeks.length : currentWeekIdx + 1;
+        setExpandedWeeks((prev) => ({ ...prev, [program.id]: new Set([defaultWeek]) }));
       } catch (err) {
         setError(err instanceof ApiError ? err.message : 'Failed to load program details');
       } finally {
@@ -96,6 +107,15 @@ export function Dashboard() {
       const next = new Set(prev[programId] ?? []);
       if (next.has(slotKey)) next.delete(slotKey);
       else next.add(slotKey);
+      return { ...prev, [programId]: next };
+    });
+  }
+
+  function toggleWeek(programId: number, week: number) {
+    setExpandedWeeks((prev) => {
+      const next = new Set(prev[programId] ?? []);
+      if (next.has(week)) next.delete(week);
+      else next.add(week);
       return { ...prev, [programId]: next };
     });
   }
@@ -172,84 +192,115 @@ export function Dashboard() {
                       )}
 
                       <div className="schedule">
-                        {weeks.map((weekSlots, weekIdx) => (
-                          <div key={weekIdx} className="schedule-week">
-                            <span className="schedule-week-label">Week {weekIdx + 1}</span>
-                            <div className="schedule-week-days">
-                              {weekSlots.map((slot, dayIdx) => {
-                                const slotKey = `${slot.week}-${slot.day.id}`;
-                                const isSlotExpanded = expandedSlots[program.id]?.has(slotKey) ?? false;
+                        {weeks.map((weekSlots, weekIdx) => {
+                          const weekNumber = weekIdx + 1;
+                          const isWeekExpanded = expandedWeeks[program.id]?.has(weekNumber) ?? false;
+                          const doneCount = weekSlots.filter((s) => s.status === 'done').length;
+                          const isCurrentWeek = weekSlots.some(
+                            (s) => s.status === 'active' || s.status === 'next',
+                          );
 
-                                return (
-                                  <div
-                                    key={dayIdx}
-                                    className={`schedule-chip ${slot.status}`}
-                                    onClick={() => toggleSlot(program.id, slotKey)}
-                                  >
-                                    <div className="schedule-chip-header">
-                                      <span className="schedule-chip-name">
-                                        {slot.status === 'done' && '✓ '}
-                                        {slot.day.name}
-                                      </span>
-                                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                        {(slot.status === 'next' || slot.status === 'active') && (
-                                          <button
-                                            className="schedule-continue"
-                                            onClick={(e) => {
-                                              e.stopPropagation();
-                                              handleStart(program);
-                                            }}
-                                            disabled={startingId === program.id}
-                                          >
-                                            {startingId === program.id
-                                              ? '…'
-                                              : slot.status === 'active'
-                                                ? 'Continue'
-                                                : 'Start'}
-                                          </button>
-                                        )}
-                                        <span className="schedule-chip-caret">{isSlotExpanded ? '▾' : '▸'}</span>
-                                      </div>
-                                    </div>
+                          return (
+                            <div key={weekIdx} className="schedule-week">
+                              <button
+                                className="schedule-week-header"
+                                onClick={() => toggleWeek(program.id, weekNumber)}
+                                aria-expanded={isWeekExpanded}
+                              >
+                                <span className="schedule-week-label">
+                                  Week {weekNumber}
+                                  {isCurrentWeek && <span className="schedule-week-current-dot" />}
+                                </span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                  <span className="schedule-week-summary">
+                                    {doneCount}/{weekSlots.length} done
+                                  </span>
+                                  <span className="schedule-chip-caret">{isWeekExpanded ? '▾' : '▸'}</span>
+                                </div>
+                              </button>
 
-                                    {isSlotExpanded ? (
-                                      <div className="schedule-chip-detail">
-                                        {slot.day.sections.map((section) => (
-                                          <div key={section.id} className="schedule-chip-section">
-                                            <div className="schedule-chip-section-name">
-                                              {section.name}
-                                              {section.zone ? ` · ${section.zone}` : ''}
-                                            </div>
-                                            {section.exercises.map((exercise) => (
-                                              <div key={exercise.id} className="exercise">
-                                                <div>
-                                                  <div className="ex-name">{exercise.exercise.name}</div>
-                                                  {exercise.notes && <div className="ex-note">{exercise.notes}</div>}
+                              {isWeekExpanded && (
+                                <div className="schedule-week-days">
+                                  {weekSlots.map((slot, dayIdx) => {
+                                    const slotKey = `${slot.week}-${slot.day.id}`;
+                                    const isSlotExpanded = expandedSlots[program.id]?.has(slotKey) ?? false;
+
+                                    return (
+                                      <div
+                                        key={dayIdx}
+                                        className={`schedule-chip ${slot.status}`}
+                                        onClick={() => toggleSlot(program.id, slotKey)}
+                                      >
+                                        <div className="schedule-chip-header">
+                                          <span className="schedule-chip-name">
+                                            {slot.status === 'done' && '✓ '}
+                                            {slot.day.name}
+                                          </span>
+                                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                            {(slot.status === 'next' || slot.status === 'active') && (
+                                              <button
+                                                className="schedule-continue"
+                                                onClick={(e) => {
+                                                  e.stopPropagation();
+                                                  handleStart(program);
+                                                }}
+                                                disabled={startingId === program.id}
+                                              >
+                                                {startingId === program.id
+                                                  ? '…'
+                                                  : slot.status === 'active'
+                                                    ? 'Continue'
+                                                    : 'Start'}
+                                              </button>
+                                            )}
+                                            <span className="schedule-chip-caret">
+                                              {isSlotExpanded ? '▾' : '▸'}
+                                            </span>
+                                          </div>
+                                        </div>
+
+                                        {isSlotExpanded ? (
+                                          <div className="schedule-chip-detail">
+                                            {slot.day.sections.map((section) => (
+                                              <div key={section.id} className="schedule-chip-section">
+                                                <div className="schedule-chip-section-name">
+                                                  {section.name}
+                                                  {section.zone ? ` · ${section.zone}` : ''}
                                                 </div>
-                                                <div>
-                                                  <div className="ex-reps-num">
-                                                    {exercise.targetSets ?? '–'}×{exercise.targetReps ?? '–'}
+                                                {section.exercises.map((exercise) => (
+                                                  <div key={exercise.id} className="exercise">
+                                                    <div>
+                                                      <div className="ex-name">{exercise.exercise.name}</div>
+                                                      {exercise.notes && (
+                                                        <div className="ex-note">{exercise.notes}</div>
+                                                      )}
+                                                    </div>
+                                                    <div>
+                                                      <div className="ex-reps-num">
+                                                        {exercise.targetSets ?? '–'}×{exercise.targetReps ?? '–'}
+                                                      </div>
+                                                      <div className="ex-reps-label">
+                                                        {exercise.exercise.trackedFields.length > 0
+                                                          ? exercise.exercise.trackedFields.join(' + ')
+                                                          : 'REPS'}
+                                                      </div>
+                                                    </div>
                                                   </div>
-                                                  <div className="ex-reps-label">
-                                                    {exercise.exercise.trackedFields.length > 0
-                                                      ? exercise.exercise.trackedFields.join(' + ')
-                                                      : 'REPS'}
-                                                  </div>
-                                                </div>
+                                                ))}
                                               </div>
                                             ))}
                                           </div>
-                                        ))}
+                                        ) : (
+                                          <p className="schedule-chip-exercises">{exerciseSummary(slot.day)}</p>
+                                        )}
                                       </div>
-                                    ) : (
-                                      <p className="schedule-chip-exercises">{exerciseSummary(slot.day)}</p>
-                                    )}
-                                  </div>
-                                );
-                              })}
+                                    );
+                                  })}
+                                </div>
+                              )}
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </>
                   )}
