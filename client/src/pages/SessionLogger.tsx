@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { sessionsApi, ApiError } from '../services/api';
-import type { NumericField, Prefill, SectionRef, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
+import type { NumericField, Prefill, SessionDetail, SessionExerciseDetail, SessionPR } from '../types';
 import { SetRow } from '../components/SetRow';
 import { ExerciseVideo } from '../components/ExerciseVideo';
 import { ConfirmDialog } from '../components/ConfirmDialog';
@@ -10,25 +10,9 @@ import { SessionSummaryModal } from '../components/SessionSummaryModal';
 import { useRestTimer } from '../hooks/useRestTimer';
 import { resolveSetDefaults } from '../utils/setDefaults';
 import { formatElapsed } from '../utils/time';
+import { groupBySection } from '../utils/groupBySection';
 
 type CompleteStage = 'closed' | 'confirm' | 'incomplete-warning';
-
-interface ExerciseSectionGroup {
-  section: SectionRef;
-  exercises: SessionExerciseDetail[];
-}
-
-// groups session exercises by their program section (e.g. "Uppvärmning" / "Huvudpast") — mirrors
-// the same grouping the Program overview page already shows, just for the live session view
-function groupBySection(exercises: SessionExerciseDetail[]): ExerciseSectionGroup[] {
-  const groups = new Map<number, ExerciseSectionGroup>();
-  for (const exercise of exercises) {
-    const { section } = exercise.programExercise;
-    if (!groups.has(section.id)) groups.set(section.id, { section, exercises: [] });
-    groups.get(section.id)!.exercises.push(exercise);
-  }
-  return Array.from(groups.values()).sort((a, b) => a.section.order - b.section.order);
-}
 
 export function SessionLogger() {
   const { id } = useParams<{ id: string }>();

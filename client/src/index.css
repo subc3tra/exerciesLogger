@@ -791,6 +791,44 @@ a {
   margin-bottom: 16px;
 }
 
+.summary-exercise-list {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-exercise {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-exercise-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.summary-set-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.summary-set-line {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.summary-set-number {
+  flex-shrink: 0;
+  width: 14px;
+}
+
 .pr-badge-anchor {
   position: relative;
   display: inline-flex;

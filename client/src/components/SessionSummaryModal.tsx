@@ -1,7 +1,9 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { SessionDetail, SessionPR } from '../types';
 import { formatElapsed } from '../utils/time';
 import { getCompletionMessage } from '../utils/completionMessage';
+import { groupBySection } from '../utils/groupBySection';
+import { formatSessionAsText, formatSetLine } from '../utils/sessionText';
 import { Fireworks } from './Fireworks';
 
 interface SessionSummaryModalProps {
@@ -32,6 +34,20 @@ export function SessionSummaryModal({ session, elapsedSeconds, prs, onClose }: S
   // picked once per mount — this component re-renders every second while the parent's elapsed
   // timer keeps ticking, and an inline call here would re-roll on every one of those re-renders
   const completionMessage = useMemo(() => getCompletionMessage(), []);
+
+  const [copied, setCopied] = useState(false);
+
+  async function handleCopy() {
+    const text = formatSessionAsText(session, elapsedSeconds);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard permission denied or unsupported — nothing to fall back to silently, leave
+      // the button as-is rather than claiming success
+    }
+  }
 
   return (
     <div className="dialog-overlay">
@@ -82,7 +98,33 @@ export function SessionSummaryModal({ session, elapsedSeconds, prs, onClose }: S
 
         <p className="summary-message">{completionMessage}</p>
 
+        <div className="summary-exercise-list">
+          <span className="block-label">Full session</span>
+          {groupBySection(session.exercises).map((group) =>
+            group.exercises.map((exercise) => {
+              const completedSets = exercise.sets.filter((s) => s.completed);
+              if (completedSets.length === 0) return null;
+              return (
+                <div className="summary-exercise" key={exercise.id}>
+                  <span className="summary-exercise-name">{exercise.programExercise.exercise.name}</span>
+                  <div className="summary-set-list">
+                    {completedSets.map((set) => (
+                      <div className="summary-set-line" key={set.id}>
+                        <span className="summary-set-number">{set.setNumber}</span>
+                        <span>{formatSetLine(set, exercise.programExercise.exercise.trackedFields)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
         <div className="dialog-actions">
+          <button className="dialog-button secondary" onClick={handleCopy}>
+            {copied ? 'Copied ✓' : 'Copy as text'}
+          </button>
           <button className="dialog-button primary" onClick={onClose}>
             Done
           </button>

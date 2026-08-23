@@ -9,6 +9,20 @@ export interface ChangelogEntry {
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.3.0',
+    date: '2026-08-23',
+    title: 'Update: 0.3.0',
+    changes: [
+      'Progression page now shows a graph of your weight over time for each exercise, right below your stats.',
+      "Finishing a workout now shows a summary screen — duration, total weight lifted, sets done, and any new PRs, with a little celebration animation when you hit one.",
+      'Duration fields (planks, holds, timed cardio) now edit as separate minutes/seconds boxes instead of one field, so they actually work with a phone\'s numeric keypad.',
+      'Timed exercises can now count down to a target time instead of just up — set your time, get a 3-2-1 countdown, then a sound plays when it hits zero. Switch back to the old stopwatch style anytime.',
+      'The countdown "done" sound is now a proper chime instead of a quiet beep — easier to actually hear over gym noise.',
+      'Exercises can now include a "Watch video" link (YouTube videos or Shorts) tucked under the Description toggle.',
+      "Fixed a bug where finishing a workout via \"mark all & complete\" (instead of ticking every set) could undercount total volume and sets on the new summary screen.",
+    ],
+  },
+  {
     version: '0.2.0',
     date: '2026-07-14',
     title: 'Update: 0.2.0',
