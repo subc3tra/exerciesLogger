@@ -1,0 +1,307 @@
+{
+  "name": "Styrka & Kondition 5-dagar v2",
+  "totalWeeks": 4,
+  "daysPerWeek": 5,
+  "days": [
+    {
+      "name": "Dag A – Överkropp Push & Pull",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Bench Press",
+              "targetSets": 4,
+              "targetReps": "6-8",
+              "targetWeight": null,
+              "notes": "Kör med kontrollerad sänkning, ca 2 sek ner. Fokus på att känna bröstmuskeln – inte bara trycka upp vikten."
+            },
+            {
+              "name": "Low Cable Row",
+              "targetSets": 4,
+              "targetReps": "8-10",
+              "targetWeight": null,
+              "notes": "Låg vinkel ger ett annat dragläge än sittande row. Håll ryggen rak, dra med armbågarna bakåt."
+            },
+            {
+              "name": "Cable Chest Press",
+              "targetSets": 3,
+              "targetReps": "10-12",
+              "targetWeight": null,
+              "notes": "Jämn spänning genom hela rörelsen, skonsamt mot axlarna. Kör i din egen takt."
+            },
+            {
+              "name": "Face Pulls",
+              "targetSets": 3,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Viktig övning för axelstabilitet – hoppa inte över den. Dra mot ansiktet, armbågarna högt, avsluta med händerna utåt."
+            },
+            {
+              "name": "Dips",
+              "targetSets": 3,
+              "targetReps": "8-12",
+              "targetWeight": null,
+              "notes": "Luta dig något framåt för mer bröst, stanna rak för mer tricep. Skippa om axeln protesterar — kör band-assisterat om du vill avlasta vikten."
+            },
+            {
+              "name": "Barbell Bicep Curl",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Håll armbågarna stilla vid sidan. Ingen svikt – om du behöver svänga är vikten för tung."
+            },
+            {
+              "name": "Skull Crusher",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Sänk mot pannan med kontroll, armbågarna pekar rakt upp hela vägen."
+            },
+            {
+              "name": "Deadbug",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Ligg på rygg, sänk motsatt arm och ben samtidigt utan att svanka ländryggen. Lugnt tempo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dag B – Ben",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Terminal Knee Extension",
+              "targetSets": 2,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Band bakom knäet, sträck ut de sista graderna. Bra aktivering innan tunga benövningar, särskilt i kallt väder."
+            },
+            {
+              "name": "Banded Lateral Walk",
+              "targetSets": 2,
+              "targetReps": "10m",
+              "targetWeight": null,
+              "notes": "Band runt anklarna, gå i sidled i lätt knäböjsposition. Väcker höft och knä innan belastning."
+            }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Leg Press",
+              "targetSets": 4,
+              "targetReps": "10-12",
+              "targetWeight": null,
+              "notes": "Placera fötterna högt upp på plattan – det avlastar knäna och aktiverar mer bakben. Gå inte så djupt att ländryggen lossar från ryggstödet."
+            },
+            {
+              "name": "Romanian Deadlift",
+              "targetSets": 4,
+              "targetReps": "8-10",
+              "targetWeight": null,
+              "notes": "Håll ryggen rak och sänk stången längs benen. Du ska känna dragning i baksidan av låret – inte i ländryggen."
+            },
+            {
+              "name": "Seated Leg Curl",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Kontrollera hela rörelsen, särskilt på väg upp. Sittande variant är skonsam för knäleden."
+            },
+            {
+              "name": "Leg Extension",
+              "targetSets": 3,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Kör med lätt–medel vikt och full rörelse. Bra för att stärka upp knäna successivt."
+            },
+            {
+              "name": "Dumbbell Step-Up",
+              "targetSets": 3,
+              "targetReps": "10/ben",
+              "targetWeight": null,
+              "notes": "Knäsnällare än lunges. Håll överkroppen rak och tryck upp genom hälen – inte tårna."
+            },
+            {
+              "name": "Seated Calf Raise",
+              "targetSets": 4,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Böjt knä tar bort belastning från själva knäleden jämfört med stående variant – skonsammare för dig just nu."
+            },
+            {
+              "name": "Pallof Press",
+              "targetSets": 3,
+              "targetReps": "10/sida",
+              "targetWeight": null,
+              "notes": "Press rakt fram, motstå att kroppen vrids. Bra core-stabilitet som även hjälper i grappling."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dag C – Kondition & Core",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Sled Push/Pull",
+              "targetSets": 6,
+              "targetReps": "35m",
+              "targetWeight": null,
+              "notes": "Kontrollerat tempo – det här är inte sprint, det är uthållighet. Vila tills pulsen lugnat sig något mellan seten."
+            },
+            {
+              "name": "Rowing Machine",
+              "targetSets": 3,
+              "targetReps": "500m",
+              "targetWeight": null,
+              "notes": "Håll jämnt tempo hela vägen, undvik att gå ut för hårt. Skonsam för knän och axlar."
+            },
+            {
+              "name": "Farmers Carry",
+              "targetSets": 4,
+              "targetReps": "30m",
+              "targetWeight": null,
+              "notes": "Gå med rak rygg, axlarna bakåt och ner. Tränar core, grepp och kondition samtidigt – underskattat."
+            },
+            {
+              "name": "Plank",
+              "targetSets": 3,
+              "targetReps": "40s",
+              "targetWeight": null,
+              "notes": "Håll kroppen rak – ingen höft upp eller ner. Andas lugnt."
+            },
+            {
+              "name": "Cable Crunch",
+              "targetSets": 3,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Kör från knästående, dra neråt med buken – inte med nacken. Håll spänningen hela vägen."
+            },
+            {
+              "name": "Sit-Up",
+              "targetSets": 3,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Klassisk sit-up, kontrollerad rörelse hela vägen upp och ner."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dag D – Överkropp Pull & Marklyft",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Deadlift",
+              "targetSets": 4,
+              "targetReps": "4-6",
+              "targetWeight": null,
+              "notes": "Stång nära kroppen hela vägen, låt höfterna driva upp i toppläget. Ta ordentligt med vila mellan seten (2–3 min)."
+            },
+            {
+              "name": "Chin-Up",
+              "targetSets": 4,
+              "targetReps": "8-10",
+              "targetWeight": null,
+              "notes": "Underhandsgrepp. Om du kör fast, ta kortare vila eller gör färre reps per set snarare än att fuska med teknik."
+            },
+            {
+              "name": "Straight-Arm Cable Pulldown",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Raka armar, dra rakt ner mot låren. Isolerar latsen mer rent än rows."
+            },
+            {
+              "name": "Rear Delt Fly",
+              "targetSets": 3,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Lätt vikt, kontrollerat. Viktigt för axelbalansen – kompenserar för allt horisontalt tryck i dag A."
+            },
+            {
+              "name": "Shrugs",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Rakt upp och ner – ingen rotation. Håll en sekund i toppläget."
+            },
+            {
+              "name": "Hammer Curl",
+              "targetSets": 3,
+              "targetReps": "12",
+              "targetWeight": null,
+              "notes": "Neutralt grepp (tummen upp). Tränar underarmen och bicep på ett sätt som är direkt användbart för grappling."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dag E – Aktiv Återhämtning",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Cardio (Walk/Bike/Swim)",
+              "targetSets": 1,
+              "targetReps": "30-45min",
+              "targetWeight": null,
+              "notes": "Lugnt tempo, ingen press. Syftet är blodcirkulation och återhämtning – inte träning."
+            },
+            {
+              "name": "Mobility & Stretching",
+              "targetSets": 1,
+              "targetReps": "15min",
+              "targetWeight": null,
+              "notes": "Fokus på höfter och axlar. Särskilt viktigt med BJJ i schemat – rörliga höfter är ett direkt verktyg på mattan."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
