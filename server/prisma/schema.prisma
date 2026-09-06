@@ -144,3 +144,19 @@ model SessionSet {
   sessionExerciseId Int
   sessionExercise   SessionExercise @relation(fields: [sessionExerciseId], references: [id])
 }
+
+model IntakeSubmission
+id                      Int             @id @default(autoincrement())
+  firstname             String          
+  goal                  String
+  experienceLevel       String
+  age                   Int?
+  weight                Int?
+  height                Int?
+  injuriesOrLimitations String?
+  availableTime         String
+  equipmentAccess       String?
+  otherParallelTraining String?
+  preferredExercises    String?
+  programLengthWeeks    Int?
+  createdAt             DateTime        @default(now())
