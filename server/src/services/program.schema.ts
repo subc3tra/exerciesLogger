@@ -13,10 +13,13 @@ import { z } from 'zod';
 const ExerciseSchema = z.object({
   name: z.string(),
   targetSets: z.number(),
-  targetReps: z.string(),
   // `.nullable()`, not `.optional()`: strict mode requires every key to be
   // listed in JSON Schema's `required` array, so "this field is optional" is
   // modeled as "always present, but its value may be null" instead.
+  // `targetReps: null` is for failure-based sets with no prescribed rep count
+  // (e.g. Sled Push "till failure") — the actual rep count only exists once
+  // it's logged, so a `notes` field carries the instruction instead.
+  targetReps: z.string().nullable(),
   targetWeight: z.number().nullable(),
   notes: z.string().nullable(),
 }).strict();

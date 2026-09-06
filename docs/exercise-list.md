@@ -459,6 +459,10 @@
 **Category:** CARDIO
 **Description:** Full-body cardiovascular exercise on an ergometer, engaging the legs, core, and upper body in sequence. Low impact on the joints; excellent for conditioning and active recovery. Drive with the legs first, then lean back and pull the handle to the lower chest.
 
+### Ski Erg
+**Category:** CARDIO
+**Description:** Full-body cardiovascular exercise on a stationary ski ergometer, mimicking the double-poling motion of cross-country skiing by pulling two handles down and back in a rhythmic, standing motion. Engages the lats, triceps, and core heavily alongside the legs; low impact and a strong complement to rowing for varied full-body conditioning.
+
 ### Stationary Bike
 **Category:** CARDIO
 **Description:** Low-impact cardiovascular exercise performed on an upright or recumbent stationary bike. Allows sustained aerobic work with minimal joint stress; useful as a warm-up, LISS, or interval training tool.

@@ -1,0 +1,289 @@
+{
+  "name": "Danyella – Fullbody Nybörjarprogram",
+  "totalWeeks": 6,
+  "daysPerWeek": 3,
+  "days": [
+    {
+      "name": "Fullbody A – Knäböj & Rygg",
+      "dayLabel": "Dag 1",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Hip CARs (Controlled Articular Rotations)",
+              "targetSets": 1,
+              "targetReps": "6 per sida",
+              "targetWeight": null,
+              "notes": "Aktiv höftmobilitet innan knäböjen"
+            },
+            {
+              "name": "Scapular Pull-Up",
+              "targetSets": 2,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Skulderbladskontroll - grunden för bättre hållning"
+            },
+            {
+              "name": "Banded Clamshells",
+              "targetSets": 2,
+              "targetReps": "12 per sida",
+              "targetWeight": null,
+              "notes": null
+            }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Barbell Squat",
+              "targetSets": 3,
+              "targetReps": "8-10",
+              "targetWeight": null,
+              "notes": "Tekniken viktigast första passen - vikten sätts på plats denna vecka"
+            },
+            {
+              "name": "Seated Cable Row",
+              "targetSets": 3,
+              "targetReps": "10-12",
+              "targetWeight": null,
+              "notes": "Ryggtjocklek - motverkar den framåtböjda hållningen"
+            },
+            {
+              "name": "Romanian Deadlift",
+              "targetSets": 3,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": "Baksida lår och säte, bygger även upp mönstret inför det tyngre marklyftet på dag 2"
+            },
+            {
+              "name": "Lat Pulldown",
+              "targetSets": 3,
+              "targetReps": "10-12",
+              "targetWeight": null,
+              "notes": "Ryggbredd - samma hållningssyfte som roddraget"
+            },
+            {
+              "name": "Plank",
+              "targetSets": 3,
+              "targetReps": "30s",
+              "targetWeight": null,
+              "notes": "Bålstabilitet"
+            }
+          ]
+        },
+        {
+          "name": "Kondition",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Rowing Machine",
+              "targetSets": 1,
+              "targetReps": "8m",
+              "targetWeight": null,
+              "notes": "Lugnt, jämnt tempo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fullbody B – Marklyft & Push",
+      "dayLabel": "Dag 2",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Hip CARs (Controlled Articular Rotations)",
+              "targetSets": 1,
+              "targetReps": "6 per sida",
+              "targetWeight": null,
+              "notes": null
+            },
+            {
+              "name": "Scapular Push-Up",
+              "targetSets": 2,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": null
+            },
+            {
+              "name": "Banded Lateral Walk",
+              "targetSets": 2,
+              "targetReps": "10 steg per sida",
+              "targetWeight": null,
+              "notes": null
+            }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Deadlift",
+              "targetSets": 3,
+              "targetReps": "5",
+              "targetWeight": null,
+              "notes": "Din prioriterade övning. Lägre volym första veckorna så tekniken sitter innan vi lägger på vikt"
+            },
+            {
+              "name": "Dumbbell Shoulder Press",
+              "targetSets": 3,
+              "targetReps": "10",
+              "targetWeight": null,
+              "notes": null
+            },
+            {
+              "name": "Bulgarian Split Squat",
+              "targetSets": 3,
+              "targetReps": "10 per ben",
+              "targetWeight": null,
+              "notes": "Lår och säte, en sida i taget"
+            },
+            {
+              "name": "Face Pulls",
+              "targetSets": 3,
+              "targetReps": "12-15",
+              "targetWeight": null,
+              "notes": "Tillsammans med roddraget på dag 1 - båda motverkar den runda övre ryggen"
+            },
+            {
+              "name": "Deadbug",
+              "targetSets": 3,
+              "targetReps": "10 per sida",
+              "targetWeight": null,
+              "notes": "Djup bålkontroll - grunden innan mer riktat magarbete"
+            }
+          ]
+        },
+        {
+          "name": "Kondition",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Wallballs",
+              "targetSets": 3,
+              "targetReps": "15",
+              "targetWeight": null,
+              "notes": "Hyrox-inslag - helkroppsrörelse med kondition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fullbody C – Lår, Säte & Core",
+      "dayLabel": "Dag 3",
+      "duration": null,
+      "sections": [
+        {
+          "name": "Uppvärmning",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Hip CARs (Controlled Articular Rotations)",
+              "targetSets": 1,
+              "targetReps": "6 per sida",
+              "targetWeight": null,
+              "notes": null
+            },
+            {
+              "name": "90/90 Hip Rotation",
+              "targetSets": 1,
+              "targetReps": "6 per sida",
+              "targetWeight": null,
+              "notes": null
+            },
+            {
+              "name": "Banded Clamshells",
+              "targetSets": 2,
+              "targetReps": "12 per sida",
+              "targetWeight": null,
+              "notes": null
+            }
+          ]
+        },
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Hip Thrust",
+              "targetSets": 3,
+              "targetReps": "10-12",
+              "targetWeight": null,
+              "notes": "Direkt säte-fokus"
+            },
+            {
+              "name": "Leg Press",
+              "targetSets": 3,
+              "targetReps": "10-12",
+              "targetWeight": null,
+              "notes": "Lårvolym utan att belasta ryggen efter två tunga baslyft-dagar"
+            },
+            {
+              "name": "Single-Arm Dumbbell Row",
+              "targetSets": 3,
+              "targetReps": "10 per sida",
+              "targetWeight": null,
+              "notes": "Mer ryggvolym, en sida i taget"
+            },
+            {
+              "name": "Cable Crunch",
+              "targetSets": 3,
+              "targetReps": "12-15",
+              "targetWeight": null,
+              "notes": "Riktat magarbete som komplement till plankan och deadbugen"
+            }
+          ]
+        },
+        {
+          "name": "Kondition",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            {
+              "name": "Ski Erg",
+              "targetSets": 1,
+              "targetReps": "2m",
+              "targetWeight": null,
+              "notes": "Kort och hårt - lite mer överkropp/lats än roddpasset på dag 1, bra variation"
+            },
+            {
+              "name": "Farmers Carry",
+              "targetSets": 2,
+              "targetReps": "20m",
+              "targetWeight": null,
+              "notes": "Hyrox-inslag - grepp och bål under belastning"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
