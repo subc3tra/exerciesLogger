@@ -11,6 +11,7 @@ import sessionRouter from './routes/session.routes';
 import feedbackRouter from './routes/feedback.routes';
 import statsRouter from './routes/stats.routes';
 import exerciseRouter from './routes/exercise.routes';
+import programGenerationRouter from './routes/programGeneration.routes';
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/sessions', sessionRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/stats', statsRouter);
 app.use('/api/exercises', exerciseRouter);
+app.use('/api/program-generation', programGenerationRouter);
 
 app.use(errorHandler)
 
