@@ -628,6 +628,142 @@ a {
   cursor: default;
 }
 
+/* Intake form (public, pre-auth — same visual language as login) */
+.intake-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.intake-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(212, 245, 60, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.intake-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+
+.intake-title {
+  font-family: var(--font-display);
+  text-align: center;
+  font-size: 28px;
+  color: var(--accent);
+  margin: 12px 0 0;
+}
+
+.intake-subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 4px 0 20px;
+}
+
+.intake-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+.intake-input,
+.intake-textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 6px;
+  outline: none;
+  width: 100%;
+}
+
+.intake-textarea {
+  min-height: 70px;
+  resize: vertical;
+  margin-top: 8px;
+}
+
+.intake-input:focus,
+.intake-textarea:focus {
+  border-color: var(--accent);
+}
+
+.intake-error {
+  color: var(--accent3);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.intake-button {
+  margin-top: 22px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.intake-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.intake-success {
+  text-align: center;
+  padding: 40px 28px;
+}
+
+.intake-toggle-field {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.intake-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* Honeypot — off-screen, not display:none (some bots skip elements hidden that way) */
+.intake-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* App shell */
 .app-shell {
   min-height: 100vh;

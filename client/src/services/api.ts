@@ -14,6 +14,8 @@ import type {
   ExercisesResponse,
   UpdateExerciseNotesResponse,
   UpdateSessionNotesResponse,
+  IntakeSubmissionInput,
+  IntakeSubmissionResponse,
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
@@ -146,5 +148,15 @@ export const feedbackApi = {
     apiFetch<{ message: string }>('/feedback', {
       method: 'POST',
       body: JSON.stringify({ message }),
+    }),
+};
+
+// Public, unauthenticated — apiFetch only attaches a token if one exists in
+// localStorage, and a visitor on this page was never logged in, so no token is sent.
+export const programGenerationApi = {
+  submitIntake: (data: IntakeSubmissionInput) =>
+    apiFetch<IntakeSubmissionResponse>('/program-generation/intake', {
+      method: 'POST',
+      body: JSON.stringify(data),
     }),
 };

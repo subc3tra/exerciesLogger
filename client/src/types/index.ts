@@ -223,3 +223,24 @@ export interface StatsProgressionPoint {
 export interface ExercisesResponse {
   exercises: ExerciseRef[];
 }
+
+// POST /api/program-generation/intake
+export interface IntakeSubmissionInput {
+  firstName: string;
+  goal: string;
+  experienceLevel: string;
+  age?: number;
+  weight?: number;
+  height?: number;
+  injuriesOrLimitations?: string;
+  availableTime: string;
+  equipmentAccess?: string;
+  otherParallelTraining?: string;
+  preferredExercises?: string;
+  programLengthWeeks?: number;
+  website?: string; // honeypot — must stay empty, hidden from real users
+}
+
+export interface IntakeSubmissionResponse {
+  submission: { id: number };
+}
