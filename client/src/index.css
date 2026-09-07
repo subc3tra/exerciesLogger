@@ -764,6 +764,123 @@ a {
   overflow: hidden;
 }
 
+/* Draft review page (login-gated — lives inside app-content, no separate width cap) */
+.draft-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.draft-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.draft-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.draft-pending-note {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--warn);
+  font-size: 12px;
+  margin: 14px 0;
+}
+
+.draft-day {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.draft-day-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--text);
+  margin: 0;
+}
+
+.draft-day-duration {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 2px 0 0;
+}
+
+.draft-section {
+  margin-top: 14px;
+}
+
+.draft-section-title {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.draft-exercise-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.draft-exercise {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.draft-exercise-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.draft-exercise-meta {
+  color: var(--muted);
+  font-size: 12px;
+  float: right;
+}
+
+.draft-exercise-notes {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 6px 0 0;
+}
+
+.draft-actions {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.draft-secondary-button {
+  margin-top: 10px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.draft-secondary-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 /* App shell */
 .app-shell {
   min-height: 100vh;

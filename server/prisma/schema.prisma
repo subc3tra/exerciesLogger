@@ -8,13 +8,14 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  username  String    @unique
-  password  String    // bcrypt hash
-  programs  Program[]
-  sessions  Session[]
-  exercise  Exercise[]
-  createdAt DateTime  @default(now())
+  id            Int            @id @default(autoincrement())
+  username      String         @unique
+  password      String         // bcrypt hash
+  programs      Program[]
+  sessions      Session[]
+  exercise      Exercise[]
+  programDrafts ProgramDraft[]
+  createdAt     DateTime       @default(now())
 }
 
 enum ProgramStatus {
@@ -147,7 +148,7 @@ model SessionSet {
 
 model IntakeSubmission {
 id                      Int             @id @default(autoincrement())
-  firstName             String          
+  firstName             String
   goal                  String
   experienceLevel       String
   age                   Int?
@@ -159,5 +160,26 @@ id                      Int             @id @default(autoincrement())
   otherParallelTraining String?
   preferredExercises    String?
   programLengthWeeks    Int?
+  programDraft          ProgramDraft?
   createdAt             DateTime        @default(now())
+}
+
+// The generated-but-not-yet-real program a client reviews before it becomes an actual
+// `Program` row. `programData` is Program-shaped JSON validated against `ProgramSchema`
+// (server/src/services/program.schema.ts) — the same schema `createProgramFromData`
+// parses at confirm time, so this is never a second source of truth for that shape.
+// One row per client for now (manual generation workflow) — no @@unique([userId]) yet
+// since the real lifecycle (can a confirmed draft be replaced/regenerated later?) isn't
+// decided, so the service just reads the most recent row instead of assuming exactly one.
+model ProgramDraft {
+  id                   Int              @id @default(autoincrement())
+  userId               Int              // set at draft-creation time — the User already exists by then (created manually, same as today's program seeding)
+  user                 User             @relation(fields: [userId], references: [id])
+  intakeSubmissionId   Int              @unique
+  intakeSubmission     IntakeSubmission @relation(fields: [intakeSubmissionId], references: [id])
+  programData          Json             // Program-shaped JSON (see ProgramSchema) — the draft the client is reviewing
+  editNotes            String?          // client's free-text "please change this" request, if any. Null = no open request.
+  confirmed            Boolean          @default(false)
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
 }

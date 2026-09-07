@@ -16,6 +16,8 @@ import type {
   UpdateSessionNotesResponse,
   IntakeSubmissionInput,
   IntakeSubmissionResponse,
+  ProgramDraftResponse,
+  ConfirmDraftResponse,
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
@@ -158,5 +160,18 @@ export const programGenerationApi = {
     apiFetch<IntakeSubmissionResponse>('/program-generation/intake', {
       method: 'POST',
       body: JSON.stringify(data),
+    }),
+};
+
+// Private — always "my" draft, resolved from the JWT on the server. No draft id ever
+// appears here, so there's nothing in the URL a caller could tamper with.
+export const programDraftApi = {
+  getMine: () => apiFetch<ProgramDraftResponse>('/program-drafts/me'),
+  confirm: () =>
+    apiFetch<ConfirmDraftResponse>('/program-drafts/me/confirm', { method: 'PATCH' }),
+  requestEdit: (notes: string) =>
+    apiFetch<ProgramDraftResponse>('/program-drafts/me/request-edit', {
+      method: 'PATCH',
+      body: JSON.stringify({ notes }),
     }),
 };
