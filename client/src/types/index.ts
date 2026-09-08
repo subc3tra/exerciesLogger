@@ -223,3 +223,76 @@ export interface StatsProgressionPoint {
 export interface ExercisesResponse {
   exercises: ExerciseRef[];
 }
+
+// POST /api/program-generation/intake
+export interface IntakeSubmissionInput {
+  firstName: string;
+  goal: string;
+  experienceLevel: string;
+  age?: number;
+  weight?: number;
+  height?: number;
+  injuriesOrLimitations?: string;
+  availableTime: string;
+  equipmentAccess?: string;
+  otherParallelTraining?: string;
+  preferredExercises?: string;
+  programLengthWeeks?: number;
+  website?: string; // honeypot — must stay empty, hidden from real users
+}
+
+export interface IntakeSubmissionResponse {
+  submission: { id: number };
+}
+
+// Program-shaped JSON as generated pre-database (mirrors server's ProgramSchema in
+// program.schema.ts) — what a ProgramDraft's `programData` holds until it's confirmed
+// into a real Program. Deliberately NOT the same shape as `ProgramDetail` above: no ids
+// yet (nothing's been created), exercises are referenced by name only.
+export interface DraftExercise {
+  name: string;
+  targetSets: number;
+  targetReps: string | null;
+  targetWeight: number | null;
+  notes: string | null;
+}
+
+export interface DraftSection {
+  name: string;
+  zone: string | null;
+  sets: number | null;
+  restSecs: number | null;
+  exercises: DraftExercise[];
+}
+
+export interface DraftDay {
+  name: string;
+  dayLabel: string | null;
+  duration: string | null;
+  sections: DraftSection[];
+}
+
+export interface DraftProgramData {
+  name: string;
+  totalWeeks: number;
+  daysPerWeek: number;
+  days: DraftDay[];
+}
+
+// GET /api/program-drafts/me
+export interface ProgramDraft {
+  id: number;
+  programData: DraftProgramData;
+  editNotes: string | null;
+  confirmed: boolean;
+  createdAt: string;
+}
+
+export interface ProgramDraftResponse {
+  draft: ProgramDraft;
+}
+
+// PATCH /api/program-drafts/me/confirm
+export interface ConfirmDraftResponse {
+  program: Program;
+}
