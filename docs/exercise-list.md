@@ -144,6 +144,10 @@
 **Category:** BACK
 **Description:** Deadlift using a trap/hex bar's lower handle position, closer in range of motion and torso angle to a conventional barbell deadlift than the high-handle version. More posterior-chain demand than the high-handle variant; use once the high-handle pattern is solid.
 
+### Ball Over-Shoulder Drop
+**Category:** BACK
+**Description:** Lift a heavy ball (roughly 30-40 kg) from the floor up onto one shoulder, then let it fall behind you and reset, alternating shoulders. Combines a hip-hinge pull, explosive triple extension and trunk control under an awkward load; the drop and reset make it a power and posterior-chain movement. Keep the back braced and clear the area behind you before each rep.
+
 ---
 
 ## LEGS
@@ -321,6 +325,14 @@
 **Category:** LEGS
 **Description:** Single-leg squat reaching the free hand down to lightly touch the floor (or a raised target) at the bottom of the movement before standing back up, the standing leg doing the work throughout. A regressed pistol-squat pattern — the touch point provides balance assistance and a depth target without needing full pistol mobility/strength yet.
 
+### ATG Split Squat
+**Category:** LEGS
+**Description:** Split squat with the front foot elevated on a board or plate, letting the front knee travel far forward over the toes while the torso stays upright, loaded with dumbbells. Trains the quad and glute through a deep range of motion with high knee and ankle demand; start light and build depth gradually.
+
+### Sissy Squat
+**Category:** LEGS
+**Description:** Squat pattern leaning the torso back and driving the knees far forward over the toes with the heels rising, usually bodyweight and often holding a support for balance. Puts heavy, direct load on the quadriceps with the knee in deep flexion; a quad-isolation and knee-resilience movement, so progress range and load gradually.
+
 ---
 
 ## SHOULDERS
@@ -449,6 +461,11 @@
 ### Suitcase Carry
 **Category:** CORE
 **Description:** Loaded carry holding a single weight in one hand at the side, like carrying a suitcase, walking a set distance while resisting the pull toward the loaded side. Unilateral counterpart to the Farmers Carry — trains anti-lateral-flexion core strength specifically, since only one side is loaded.
+**Tracked fields:** DISTANCE, WEIGHT (not the CORE default of REPS+WEIGHT)
+
+### Ball Shoulder Carry + KB Suitcase Carry
+**Category:** CORE
+**Description:** Loaded carry with a heavy ball (roughly 30-40 kg) held on one shoulder and a kettlebell in the opposite hand, walking a set distance and then switching sides. Combines an offset shoulder load with a suitcase-style carry to challenge anti-lateral-flexion core strength, grip and trunk stability. Log the ball weight in the weight field and note the kettlebell weight in the exercise notes.
 **Tracked fields:** DISTANCE, WEIGHT (not the CORE default of REPS+WEIGHT)
 
 ---

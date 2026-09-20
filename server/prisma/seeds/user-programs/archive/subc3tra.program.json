@@ -1,0 +1,204 @@
+{
+  "name": "Knee Rehab & Military Draft Prep",
+  "totalWeeks": 7,
+  "daysPerWeek": 5,
+  "days": [
+    {
+      "name": "Strength (Specialist-Cleared) + Light Touch",
+      "dayLabel": "Wednesday",
+      "duration": "~45 min",
+      "sections": [
+        {
+          "name": "Warm-Up",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Stationary Bike", "targetSets": 1, "targetReps": "15m", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Strength (Specialist-Cleared)",
+          "zone": null,
+          "sets": null,
+          "restSecs": 120,
+          "exercises": [
+            { "name": "Zercher Squat", "targetSets": 4, "targetReps": "6", "targetWeight": null, "notes": "Stop if any knee pain" },
+            { "name": "Deadlift", "targetSets": 4, "targetReps": "5", "targetWeight": null, "notes": "Stop if any knee pain" },
+            { "name": "Back Extension", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Light Touch",
+          "zone": null,
+          "sets": null,
+          "restSecs": 45,
+          "exercises": [
+            { "name": "Push-Up", "targetSets": 2, "targetReps": "8", "targetWeight": null, "notes": "Easy effort, not to failure" },
+            { "name": "Scapular Pull-Up", "targetSets": 2, "targetReps": "8", "targetWeight": null, "notes": "Easy effort, not to failure" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Push Focus + Rehab",
+      "dayLabel": "Thursday",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Warm-Up",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Stationary Bike", "targetSets": 1, "targetReps": "15m", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Rehab",
+          "zone": null,
+          "sets": null,
+          "restSecs": 60,
+          "exercises": [
+            { "name": "Single-Leg Bridge with Stability Ball and Abduction", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Three-Point Balance Reach", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Jump Landing", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Box Jump (Low Box)", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Lunge to Step-Up with Knee Raise", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Draft Prep — Push",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Push-Up", "targetSets": 4, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Close-Grip Bench Press", "targetSets": 3, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Sit-Up", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pull Focus + Rehab (Test Day)",
+      "dayLabel": "Friday",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Warm-Up",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Stationary Bike", "targetSets": 1, "targetReps": "15m", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Rehab",
+          "zone": null,
+          "sets": null,
+          "restSecs": 60,
+          "exercises": [
+            { "name": "Single-Leg Bridge with Stability Ball and Abduction", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Three-Point Balance Reach", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Jump Landing", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Box Jump (Low Box)", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Lunge to Step-Up with Knee Raise", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Draft Prep — Pull",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Chin-Up", "targetSets": 4, "targetReps": "AMRAP", "targetWeight": null, "notes": "Strict, unassisted — this week's test set" },
+            { "name": "Straight-Arm Cable Pulldown", "targetSets": 3, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Sit-Up", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Push Focus + Rehab",
+      "dayLabel": "Monday",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Warm-Up",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Stationary Bike", "targetSets": 1, "targetReps": "15m", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Rehab",
+          "zone": null,
+          "sets": null,
+          "restSecs": 60,
+          "exercises": [
+            { "name": "Single-Leg Bridge with Stability Ball and Abduction", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Three-Point Balance Reach", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Jump Landing", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Box Jump (Low Box)", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Lunge to Step-Up with Knee Raise", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Draft Prep — Push",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Push-Up", "targetSets": 4, "targetReps": "12", "targetWeight": null, "notes": null },
+            { "name": "Dips", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Sit-Up", "targetSets": 3, "targetReps": "15", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pull Focus + Rehab",
+      "dayLabel": "Tuesday",
+      "duration": "~60 min",
+      "sections": [
+        {
+          "name": "Warm-Up",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Stationary Bike", "targetSets": 1, "targetReps": "15m", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Rehab",
+          "zone": null,
+          "sets": null,
+          "restSecs": 60,
+          "exercises": [
+            { "name": "Single-Leg Bridge with Stability Ball and Abduction", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Three-Point Balance Reach", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Single-Leg Jump Landing", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Box Jump (Low Box)", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null },
+            { "name": "Lunge to Step-Up with Knee Raise", "targetSets": 4, "targetReps": "8", "targetWeight": null, "notes": null }
+          ]
+        },
+        {
+          "name": "Draft Prep — Pull",
+          "zone": null,
+          "sets": null,
+          "restSecs": 90,
+          "exercises": [
+            { "name": "Scapular Pull-Up", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": null },
+            { "name": "Band-Assisted Chin-Up", "targetSets": 4, "targetReps": "6", "targetWeight": null, "notes": "Use enough band tension for clean strict reps; reduce tension as strength improves" },
+            { "name": "Lat Pulldown", "targetSets": 3, "targetReps": "10", "targetWeight": null, "notes": null }
+          ]
+        }
+      ]
+    }
+  ]
+}
