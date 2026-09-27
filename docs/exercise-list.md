@@ -40,6 +40,10 @@
 **Description:** Standard bodyweight push-up from a plank position, hands roughly shoulder-width. Lower the chest toward the floor keeping the body in a straight line, then press back up. Core and glutes braced throughout to prevent the hips sagging or piking — the standard test-format pressing movement.
 **Link:** https://youtube.com/shorts/4Bc1tPaYkOo?si=SfIznkS_EBSC0ibW
 
+### T-Bar Row
+**Category:** BACK
+**Description:** Bent-over row on a lever/T-bar machine (or a barbell anchored in a landmine), pulling a close neutral-grip V-bar handle toward the lower chest. The chest-supported or fixed-path versions let you load the mid-back heavily with less lower-back demand than a free barbell row; targets the lats, rhomboids, and mid-traps. Drive the elbows back and avoid jerking the weight up with the hips.
+
 ---
 
 ## BACK
@@ -147,6 +151,10 @@
 ### Ball Over-Shoulder Drop
 **Category:** BACK
 **Description:** Lift a heavy ball (roughly 30-40 kg) from the floor up onto one shoulder, then let it fall behind you and reset, alternating shoulders. Combines a hip-hinge pull, explosive triple extension and trunk control under an awkward load; the drop and reset make it a power and posterior-chain movement. Keep the back braced and clear the area behind you before each rep.
+
+### Incline Bench Press
+**Category:** CHEST
+**Description:** Barbell bench press on a bench set to roughly 30-45 degrees, lowering the bar to the upper chest before pressing. Shifts emphasis toward the upper (clavicular) pectorals and anterior deltoids compared to a flat bench press; allows heavier loading than the dumbbell incline variant.
 
 ---
 
@@ -369,6 +377,14 @@
 **Category:** SHOULDERS
 **Description:** Single-arm press of a barbell anchored in a landmine attachment, pressing diagonally up and away from the shoulder rather than straight overhead. The angled path is easier on the shoulder joint than a strict overhead press while still training vertical pressing strength unilaterally.
 
+### Front Raises
+**Category:** SHOULDERS
+**Description:** Dumbbell, plate, or cable raise lifting the arms straight in front of the body to roughly shoulder height, isolating the anterior deltoid. Keep a slight elbow bend and a still torso; avoid swinging the weight up with the hips or lower back.
+
+### Cable Upright Row
+**Category:** SHOULDERS
+**Description:** Standing cable row pulling a straight bar or rope from a low pulley up along the body toward the lower chest, elbows leading and staying above the hands. Trains the lateral deltoids and upper traps together; stopping around lower-chest height (rather than chin height) keeps it easier on the shoulder joint.
+
 ---
 
 ## ARMS
@@ -396,6 +412,14 @@
 ### Hammer Curl
 **Category:** ARMS
 **Description:** Dumbbell curl performed with a neutral (palms-facing-in) grip throughout, shifting emphasis toward the brachialis and brachioradialis alongside the biceps. The neutral grip is also easier on the wrists than a standard curl for lifters with wrist discomfort.
+
+### Reverse Curl
+**Category:** ARMS
+**Description:** Barbell, EZ-bar, or cable curl performed with an overhand (pronated) grip, shifting emphasis toward the brachioradialis and brachialis rather than the biceps. Builds the upper forearm and grip strength; keep the elbows fixed at the sides and expect to use noticeably less weight than a standard curl.
+
+### Wrist Curl
+**Category:** ARMS
+**Description:** Forearm isolation exercise with the forearms resting on a bench or the thighs, curling a barbell or dumbbells up by flexing only at the wrist. Targets the wrist flexors on the underside of the forearm; use a full range of motion, letting the weight roll down toward the fingertips at the bottom.
 
 ---
 

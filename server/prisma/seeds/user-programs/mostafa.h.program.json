@@ -1,0 +1,84 @@
+{
+  "name": "Mostafas egna upplägg – 4-dagar",
+  "totalWeeks": 8,
+  "daysPerWeek": 4,
+  "days": [
+    {
+      "name": "Back & Biceps",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Pull-Up", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Börja med ett kort uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Rear Delt Fly", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Liggande på lutande bänk (incline rear lateral raise). Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Hammer Curl", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Sittande. 2 set till failure." },
+            { "name": "Reverse Curl", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "2 set till failure." },
+            { "name": "Wrist Curl", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "För underarmarna. 2 set till failure." }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Back & Lower",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "T-Bar Row", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Lever bent over row med V-grepp. Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Deadlift", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure med bibehållen teknik, avbryt setet när ryggen börjar runda sig." },
+            { "name": "Cable Crunch", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Knästående. 2 set till failure." },
+            { "name": "Back Extension", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "2 set till failure." }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Push Day",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Dips", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Luta överkroppen framåt för bröstfokus. Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Front Raises", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Triceps Pushdown", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "2 set till failure." },
+            { "name": "Cable Upright Row", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Tränar både övre trapezius och sidodelts. Dra upp till nedre bröstet, inte hakan, skonsammare för axeln. 2 set till failure." }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Push Day 2",
+      "dayLabel": null,
+      "duration": null,
+      "sections": [
+        {
+          "name": "Huvudpass",
+          "zone": null,
+          "sets": null,
+          "restSecs": null,
+          "exercises": [
+            { "name": "Dips", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Luta överkroppen framåt för bröstfokus. Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Front Raises", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Börja med ett uppvärmningsset (loggas inte). Sedan 2 set till failure." },
+            { "name": "Incline Bench Press", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "2 set till failure. Ha gärna en spotter eller säkerhetsspärrar när du kör till failure." },
+            { "name": "Cable Upright Row", "targetSets": 2, "targetReps": null, "targetWeight": null, "notes": "Tränar både övre trapezius och sidodelts. Dra upp till nedre bröstet, inte hakan, skonsammare för axeln. 2 set till failure." }
+          ]
+        }
+      ]
+    }
+  ]
+}
