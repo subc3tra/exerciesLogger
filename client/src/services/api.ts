@@ -4,6 +4,8 @@ import type {
   ProgramsResponse,
   ProgramResponse,
   ProgramProgress,
+  Program,
+  ProgramStatus,
   StartSessionResponse,
   SessionResponse,
   CompleteSessionResponse,
@@ -84,6 +86,11 @@ export const programsApi = {
   getAll: () => apiFetch<ProgramsResponse>('/programs'),
   getById: (id: number) => apiFetch<ProgramResponse>(`/programs/${id}`),
   getProgress: (id: number) => apiFetch<ProgramProgress>(`/programs/${id}/progress`),
+  updateStatus: (id: number, status: ProgramStatus) =>
+    apiFetch<{ program: Program }>(`/programs/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
   updateExerciseNotes: (exerciseId: number, notes: string) =>
     apiFetch<UpdateExerciseNotesResponse>(`/programs/exercises/${exerciseId}/notes`, {
       method: 'PATCH',

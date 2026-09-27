@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { InfoBanner } from '../components/InfoBanner';
 import { StatsSummary } from '../components/StatsSummary';
 import { programsApi, sessionsApi, ApiError } from '../services/api';
-import type { Program, ProgramDay, ProgramDetail, ProgramProgress } from '../types';
+import { ConfirmDialog } from '../components/ConfirmDialog';
+import type { Program, ProgramDay, ProgramDetail, ProgramProgress, ProgramStatus } from '../types';
 
 type SlotStatus = 'done' | 'active' | 'next' | 'upcoming';
 
@@ -57,6 +58,13 @@ export function Dashboard() {
   const [startError, setStartError] = useState<string | null>(null);
   const [expandedSlots, setExpandedSlots] = useState<Record<number, Set<string>>>({});
   const [expandedWeeks, setExpandedWeeks] = useState<Record<number, Set<number>>>({});
+  const [showArchived, setShowArchived] = useState(false);
+  const [archiveTarget, setArchiveTarget] = useState<Program | null>(null);
+  const [statusUpdatingId, setStatusUpdatingId] = useState<number | null>(null);
+  const [statusError, setStatusError] = useState<{ programId: number; message: string } | null>(null);
+
+  const activePrograms = programs.filter((p) => p.status === 'ACTIVE');
+  const archivedPrograms = programs.filter((p) => p.status === 'ARCHIVED');
 
   useEffect(() => {
     programsApi
@@ -137,6 +145,226 @@ export function Dashboard() {
     }
   }
 
+  async function changeStatus(program: Program, status: ProgramStatus) {
+    setStatusUpdatingId(program.id);
+    setStatusError(null);
+    try {
+      const res = await programsApi.updateStatus(program.id, status);
+      setPrograms((prev) => prev.map((p) => (p.id === program.id ? { ...p, status: res.program.status } : p)));
+      setExpandedId(null);
+    } catch (err) {
+      setStatusError({
+        programId: program.id,
+        message: err instanceof ApiError ? err.message : 'Failed to update program',
+      });
+    } finally {
+      setStatusUpdatingId(null);
+    }
+  }
+
+  function renderProgram(program: Program) {
+    const isExpanded = expandedId === program.id;
+    const detail = details[program.id];
+    const progressData = progress[program.id];
+    const weeks = detail && progressData ? buildSchedule(detail, progressData) : null;
+    const isComplete = progressData ? progressData.completedCount >= detail!.totalWeeks * detail!.daysPerWeek : false;
+
+    return (
+      <div key={program.id} className="block">
+        <button
+          className="program-row"
+          onClick={() => toggleExpand(program)}
+          aria-expanded={isExpanded}
+        >
+          <span className="program-row-name">{program.name}</span>
+          {program.status === 'ARCHIVED' && <span className="badge grey">{program.status}</span>}
+        </button>
+
+        {isExpanded && (
+          <div className="program-expanded">
+            {detailLoadingId === program.id && (
+              <p style={{ color: 'var(--muted)', fontSize: 13 }}>Loading details…</p>
+            )}
+
+            {detail && weeks && (
+              <>
+                <p className="program-summary">
+                  {detail.totalWeeks} weeks · {detail.daysPerWeek} days/week
+                </p>
+
+                {isComplete && <p style={{ color: 'var(--muted)', fontSize: 13 }}>This program is complete.</p>}
+
+                {startError && expandedId === program.id && (
+                  <p style={{ color: 'var(--accent3)', fontSize: 12, marginBottom: 12 }}>{startError}</p>
+                )}
+
+                <div className="schedule">
+                  {weeks.map((weekSlots, weekIdx) => {
+                    const weekNumber = weekIdx + 1;
+                    const isWeekExpanded = expandedWeeks[program.id]?.has(weekNumber) ?? false;
+                    const doneCount = weekSlots.filter((s) => s.status === 'done').length;
+                    const isCurrentWeek = weekSlots.some(
+                      (s) => s.status === 'active' || s.status === 'next',
+                    );
+                    const isWeekComplete = doneCount === weekSlots.length;
+
+                    return (
+                      <div key={weekIdx} className="schedule-week">
+                        <button
+                          className="schedule-week-header"
+                          onClick={() => toggleWeek(program.id, weekNumber)}
+                          aria-expanded={isWeekExpanded}
+                        >
+                          <span className="schedule-week-label">
+                            Week {weekNumber}
+                            {isCurrentWeek && <span className="schedule-week-current-dot" />}
+                            {isWeekComplete && <span className="schedule-chip-check">✓</span>}
+                          </span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <span
+                              className={`schedule-week-summary${isWeekComplete ? ' complete' : ''}`}
+                            >
+                              {doneCount}/{weekSlots.length} done
+                            </span>
+                            <span className="schedule-chip-caret">{isWeekExpanded ? '▾' : '▸'}</span>
+                          </div>
+                        </button>
+
+                        {isWeekExpanded && (
+                          <div className="schedule-week-days">
+                            {weekSlots.map((slot, dayIdx) => {
+                              const slotKey = `${slot.week}-${slot.day.id}`;
+                              const isSlotExpanded = expandedSlots[program.id]?.has(slotKey) ?? false;
+
+                              return (
+                                <div
+                                  key={dayIdx}
+                                  className={`schedule-chip ${slot.status}`}
+                                  onClick={() => toggleSlot(program.id, slotKey)}
+                                >
+                                  <div className="schedule-chip-header">
+                                    <span className="schedule-chip-name">
+                                      {slot.status === 'done' && (
+                                        <span className="schedule-chip-check">✓</span>
+                                      )}
+                                      <span className="schedule-chip-name-text">{slot.day.name}</span>
+                                    </span>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                      {(slot.status === 'next' || slot.status === 'active') && (
+                                        <button
+                                          className="schedule-continue"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleStart(program);
+                                          }}
+                                          disabled={startingId === program.id}
+                                        >
+                                          {startingId === program.id
+                                            ? '…'
+                                            : slot.status === 'active'
+                                              ? 'Continue'
+                                              : 'Start'}
+                                        </button>
+                                      )}
+                                      <span className="schedule-chip-caret">
+                                        {isSlotExpanded ? '▾' : '▸'}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  {isSlotExpanded ? (
+                                    <div className="schedule-chip-detail">
+                                      {slot.day.sections.map((section) => (
+                                        <div key={section.id} className="schedule-chip-section">
+                                          <div className="schedule-chip-section-name">
+                                            {section.name}
+                                            {section.zone ? ` · ${section.zone}` : ''}
+                                          </div>
+                                          {section.exercises.map((exercise) => (
+                                            <div key={exercise.id} className="exercise">
+                                              <div>
+                                                <div className="ex-name">{exercise.exercise.name}</div>
+                                                {exercise.notes && (
+                                                  <div className="ex-note">{exercise.notes}</div>
+                                                )}
+                                              </div>
+                                              <div>
+                                                <div className="ex-reps-num">
+                                                  {exercise.targetSets ?? '–'}×{exercise.targetReps ?? '–'}
+                                                </div>
+                                                <div className="ex-reps-label">
+                                                  {exercise.exercise.trackedFields.length > 0
+                                                    ? exercise.exercise.trackedFields.join(' + ')
+                                                    : 'REPS'}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  ) : (
+                                    <p className="schedule-chip-exercises">{exerciseSummary(slot.day)}</p>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {renderStatusAction(program, progressData)}
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  function renderStatusAction(program: Program, progressData: ProgramProgress) {
+    const isUpdating = statusUpdatingId === program.id;
+
+    let action: ReactNode;
+    if (program.status === 'ACTIVE') {
+      // Can't archive mid-workout — the session would be orphaned on an archived program.
+      if (progressData.activeSession) {
+        action = <p className="program-status-hint">Finish your ongoing session to archive this program.</p>;
+      } else {
+        action = (
+          <button className="program-status-button" onClick={() => setArchiveTarget(program)} disabled={isUpdating}>
+            {isUpdating ? 'Archiving…' : 'Archive program'}
+          </button>
+        );
+      }
+    } else if (activePrograms.length > 0) {
+      // Only one active program at a time.
+      action = <p className="program-status-hint">Archive your active program to restore this one.</p>;
+    } else {
+      action = (
+        <button
+          className="program-status-button"
+          onClick={() => changeStatus(program, 'ACTIVE')}
+          disabled={isUpdating}
+        >
+          {isUpdating ? 'Restoring…' : 'Restore program'}
+        </button>
+      );
+    }
+
+    return (
+      <div className="program-status-action">
+        {statusError?.programId === program.id && (
+          <p style={{ color: 'var(--accent3)', fontSize: 12 }}>{statusError.message}</p>
+        )}
+        {action}
+      </div>
+    );
+  }
+
   return (
     <div>
       <InfoBanner />
@@ -153,169 +381,39 @@ export function Dashboard() {
       {error && <p style={{ color: 'var(--accent3)' }}>{error}</p>}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {programs.map((program) => {
-          const isExpanded = expandedId === program.id;
-          const detail = details[program.id];
-          const progressData = progress[program.id];
-          const weeks = detail && progressData ? buildSchedule(detail, progressData) : null;
-          const isComplete = progressData ? progressData.completedCount >= detail!.totalWeeks * detail!.daysPerWeek : false;
-
-          return (
-            <div key={program.id} className="block">
-              <button
-                className="program-row"
-                onClick={() => toggleExpand(program)}
-                aria-expanded={isExpanded}
-              >
-                <span className="program-row-name">{program.name}</span>
-                <span className={`badge ${program.status === 'ACTIVE' ? 'green' : 'grey'}`}>
-                  {program.status}
-                </span>
-              </button>
-
-              {isExpanded && (
-                <div className="program-expanded">
-                  {detailLoadingId === program.id && (
-                    <p style={{ color: 'var(--muted)', fontSize: 13 }}>Loading details…</p>
-                  )}
-
-                  {detail && weeks && (
-                    <>
-                      <p className="program-summary">
-                        {detail.totalWeeks} weeks · {detail.daysPerWeek} days/week
-                      </p>
-
-                      {isComplete && <p style={{ color: 'var(--muted)', fontSize: 13 }}>This program is complete.</p>}
-
-                      {startError && expandedId === program.id && (
-                        <p style={{ color: 'var(--accent3)', fontSize: 12, marginBottom: 12 }}>{startError}</p>
-                      )}
-
-                      <div className="schedule">
-                        {weeks.map((weekSlots, weekIdx) => {
-                          const weekNumber = weekIdx + 1;
-                          const isWeekExpanded = expandedWeeks[program.id]?.has(weekNumber) ?? false;
-                          const doneCount = weekSlots.filter((s) => s.status === 'done').length;
-                          const isCurrentWeek = weekSlots.some(
-                            (s) => s.status === 'active' || s.status === 'next',
-                          );
-                          const isWeekComplete = doneCount === weekSlots.length;
-
-                          return (
-                            <div key={weekIdx} className="schedule-week">
-                              <button
-                                className="schedule-week-header"
-                                onClick={() => toggleWeek(program.id, weekNumber)}
-                                aria-expanded={isWeekExpanded}
-                              >
-                                <span className="schedule-week-label">
-                                  Week {weekNumber}
-                                  {isCurrentWeek && <span className="schedule-week-current-dot" />}
-                                  {isWeekComplete && <span className="schedule-chip-check">✓</span>}
-                                </span>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                  <span
-                                    className={`schedule-week-summary${isWeekComplete ? ' complete' : ''}`}
-                                  >
-                                    {doneCount}/{weekSlots.length} done
-                                  </span>
-                                  <span className="schedule-chip-caret">{isWeekExpanded ? '▾' : '▸'}</span>
-                                </div>
-                              </button>
-
-                              {isWeekExpanded && (
-                                <div className="schedule-week-days">
-                                  {weekSlots.map((slot, dayIdx) => {
-                                    const slotKey = `${slot.week}-${slot.day.id}`;
-                                    const isSlotExpanded = expandedSlots[program.id]?.has(slotKey) ?? false;
-
-                                    return (
-                                      <div
-                                        key={dayIdx}
-                                        className={`schedule-chip ${slot.status}`}
-                                        onClick={() => toggleSlot(program.id, slotKey)}
-                                      >
-                                        <div className="schedule-chip-header">
-                                          <span className="schedule-chip-name">
-                                            {slot.status === 'done' && (
-                                              <span className="schedule-chip-check">✓</span>
-                                            )}
-                                            <span className="schedule-chip-name-text">{slot.day.name}</span>
-                                          </span>
-                                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                            {(slot.status === 'next' || slot.status === 'active') && (
-                                              <button
-                                                className="schedule-continue"
-                                                onClick={(e) => {
-                                                  e.stopPropagation();
-                                                  handleStart(program);
-                                                }}
-                                                disabled={startingId === program.id}
-                                              >
-                                                {startingId === program.id
-                                                  ? '…'
-                                                  : slot.status === 'active'
-                                                    ? 'Continue'
-                                                    : 'Start'}
-                                              </button>
-                                            )}
-                                            <span className="schedule-chip-caret">
-                                              {isSlotExpanded ? '▾' : '▸'}
-                                            </span>
-                                          </div>
-                                        </div>
-
-                                        {isSlotExpanded ? (
-                                          <div className="schedule-chip-detail">
-                                            {slot.day.sections.map((section) => (
-                                              <div key={section.id} className="schedule-chip-section">
-                                                <div className="schedule-chip-section-name">
-                                                  {section.name}
-                                                  {section.zone ? ` · ${section.zone}` : ''}
-                                                </div>
-                                                {section.exercises.map((exercise) => (
-                                                  <div key={exercise.id} className="exercise">
-                                                    <div>
-                                                      <div className="ex-name">{exercise.exercise.name}</div>
-                                                      {exercise.notes && (
-                                                        <div className="ex-note">{exercise.notes}</div>
-                                                      )}
-                                                    </div>
-                                                    <div>
-                                                      <div className="ex-reps-num">
-                                                        {exercise.targetSets ?? '–'}×{exercise.targetReps ?? '–'}
-                                                      </div>
-                                                      <div className="ex-reps-label">
-                                                        {exercise.exercise.trackedFields.length > 0
-                                                          ? exercise.exercise.trackedFields.join(' + ')
-                                                          : 'REPS'}
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                ))}
-                                              </div>
-                                            ))}
-                                          </div>
-                                        ) : (
-                                          <p className="schedule-chip-exercises">{exerciseSummary(slot.day)}</p>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {activePrograms.map(renderProgram)}
       </div>
+
+      {archivedPrograms.length > 0 && (
+        <div className="archived-programs">
+          <button
+            className="archived-toggle"
+            onClick={() => setShowArchived((prev) => !prev)}
+            aria-expanded={showArchived}
+          >
+            <span>Archived ({archivedPrograms.length})</span>
+            <span className="schedule-chip-caret">{showArchived ? '▾' : '▸'}</span>
+          </button>
+
+          {showArchived && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {archivedPrograms.map(renderProgram)}
+            </div>
+          )}
+        </div>
+      )}
+
+      <ConfirmDialog
+        open={archiveTarget !== null}
+        title="Archive program?"
+        message={`"${archiveTarget?.name}" will move to Archived. Your logged sessions are kept.`}
+        confirmLabel="Archive"
+        onConfirm={() => {
+          if (archiveTarget) changeStatus(archiveTarget, 'ARCHIVED');
+          setArchiveTarget(null);
+        }}
+        onCancel={() => setArchiveTarget(null)}
+      />
     </div>
   );
 }

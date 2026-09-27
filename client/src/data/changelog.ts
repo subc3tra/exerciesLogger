@@ -20,6 +20,15 @@ import editNotesGif from '../assets/changelog/0.3.1-edit-notes.gif';
 // bumping `version` here is what makes it pop up again for everyone.
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: '0.3.3',
+    date: '2026-09-27',
+    title: 'Update: 0.3.3',
+    changes: [
+      'Archived programs now live in their own "Archived" dropdown at the bottom of the dashboard, collapsed by default, so only your active programs are in view.',
+      'You can now archive a program yourself: open it on the dashboard and tap "Archive program" at the bottom. Archived programs can be restored from the Archived dropdown when you have no other active program.',
+    ],
+  },
+  {
     version: '0.3.2',
     date: '2026-08-23',
     title: 'Update: 0.3.2',
